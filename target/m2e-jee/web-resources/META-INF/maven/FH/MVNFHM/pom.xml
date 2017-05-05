@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>FH</groupId>
-	<artifactId>MVNFHM</artifactId>
+	<artifactId>pjty</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MVNFHM</name>
+	<name>pjty</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -532,6 +532,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>MVNFHM</finalName>
+		<finalName>pjty</finalName>
 	</build>
 </project>

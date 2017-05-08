@@ -75,7 +75,12 @@
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">地理坐标:</td>
-								<td><input type="text" name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}" maxlength="20" placeholder="这里输入地理坐标" title="地理坐标" style="width:98%;"/></td>
+								<td>
+									<input type="text" name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}" maxlength="20" placeholder="这里输入地理坐标" title="地理坐标" style="width:86%;"/>
+									<a class="btn btn-xs btn-success" title="编辑" onclick="openMap();" style="width:12%;">
+										<i class="ace-icon fa fa-globe bigger-120" title="打开地图"></i>
+									</a>
+								</td>
 								<td style="width:79px;text-align: right;padding-top: 13px;">备注:</td>
 								<td><input type="text" name="REMARK" id="REMARK" value="${pd.REMARK}" maxlength="500" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
 							</tr>
@@ -110,7 +115,10 @@
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
-		<script type="text/javascript">
+	<!--引入属于此页面的js -->
+	<script type="text/javascript" src="static/js/myjs/mapSelect.js"></script>
+	
+	<script type="text/javascript">
 		$(top.hangge());
 		//保存
 		function save(){

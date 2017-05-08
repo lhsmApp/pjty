@@ -231,6 +231,20 @@ public class ToolController extends BaseController {
 		return mv;
 	}
 	
+	/**获取地图坐标页面
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/mapSelect")
+	public ModelAndView mapSelect() throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		mv.setViewName("system/tools/mapSelect");
+		mv.addObject("pd", pd);
+		return mv;
+	}
+	
 	/**
 	 *	根据经纬度计算距离
 	 * @param args

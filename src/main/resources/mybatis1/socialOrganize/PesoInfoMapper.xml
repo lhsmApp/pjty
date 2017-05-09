@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PesoInfoMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		tb_peso_info
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		PESO_NAME,	
+		ESTA_TIME,	
+		BELONG_AREA,	
+		USCC,	
+		HEAD_NAME,	
+		HEAD_TEL,	
+		E_MAIL,	
+		OFFICE_TEL,	
+		OFFICE_ADDR,	
+		FAX,	
+		PESO_INTR,	
+		REGI_CAPI,	
+		STATE,	
+		GEOG_COOR,	
+		REMARK
+	</sql>
+	<sql id="SelectField">
+		PESO_NAME,	
+		ESTA_TIME,	
+		BELONG_AREA,	
+		USCC,	
+		HEAD_NAME,	
+		HEAD_TEL,	
+		E_MAIL,	
+		OFFICE_TEL,	
+		OFFICE_ADDR,	
+		FAX,	
+		PESO_INTR,	
+		REGI_CAPI,	
+		STATE,	
+		GEOG_COOR,	
+		REMARK,	
+		PESO_NAME as PESOINFO_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{PESO_NAME},	
+		#{ESTA_TIME},	
+		#{BELONG_AREA},	
+		#{USCC},	
+		#{HEAD_NAME},	
+		#{HEAD_TEL},	
+		#{E_MAIL},	
+		#{OFFICE_TEL},	
+		#{OFFICE_ADDR},	
+		#{FAX},	
+		#{PESO_INTR},	
+		#{REGI_CAPI},	
+		#{STATE},	
+		#{GEOG_COOR},	
+		#{REMARK}
+	</sql>
+	<sql id="SelectFieldValue">
+		#{PESO_NAME},	
+		#{ESTA_TIME},	
+		#{BELONG_AREA},	
+		#{USCC},	
+		#{HEAD_NAME},	
+		#{HEAD_TEL},	
+		#{E_MAIL},	
+		#{OFFICE_TEL},	
+		#{OFFICE_ADDR},	
+		#{FAX},	
+		#{PESO_INTR},	
+		#{REGI_CAPI},	
+		#{STATE},	
+		#{GEOG_COOR},	
+		#{REMARK},	
+		#{PESO_NAME}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			PESO_NAME = #{PESOINFO_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			PESO_NAME = #{PESO_NAME},
+			ESTA_TIME = #{ESTA_TIME},
+			BELONG_AREA = #{BELONG_AREA},
+			USCC = #{USCC},
+			HEAD_NAME = #{HEAD_NAME},
+			HEAD_TEL = #{HEAD_TEL},
+			E_MAIL = #{E_MAIL},
+			OFFICE_TEL = #{OFFICE_TEL},
+			OFFICE_ADDR = #{OFFICE_ADDR},
+			FAX = #{FAX},
+			PESO_INTR = #{PESO_INTR},
+			REGI_CAPI = #{REGI_CAPI},
+			STATE = #{STATE},
+			GEOG_COOR = #{GEOG_COOR},
+			REMARK = #{REMARK}
+		where 
+		PESO_NAME = #{PESOINFO_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="SelectField"></include>
+		from 
+		<include refid="tableName"></include>
+		where 
+			PESO_NAME = #{PESOINFO_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="SelectField"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+				PESO_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+				HEAD_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+				OFFICE_ADDR LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				)
+		</if>
+		<if test="pd.lastStart!=null and pd.lastStart!=''"><!-- 成立时间检索 -->
+			and ESTA_TIME &gt;= #{pd.lastStart} 
+		</if>
+		<if test="pd.lastEnd!=null and pd.lastEnd!=''"><!-- 成立时间检索 -->
+			and ESTA_TIME &lt;= #{pd.lastEnd} 
+		</if>
+		<if test="pd.STATUS != null and pd.STATUS != ''"><!-- 状态检索 -->
+			and STATE=#{pd.STATE} 
+		</if>
+		order by PESO_NAME
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="SelectField"></include>
+		from 
+		<include refid="tableName"></include>
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			PESO_NAME in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

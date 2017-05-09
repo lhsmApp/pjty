@@ -185,8 +185,8 @@ function fhsms(){
 	 jzts();
 	 var diag = new top.Dialog();
 	 diag.Drag=true;
-	 diag.Title ="站内信";
-	 diag.URL = locat+'/fhsms/list.do?STATUS=2';
+	 diag.Title ="政策法规";
+	 diag.URL = locat+'/policy/listCustom.do';
 	 diag.Width = 800;
 	 diag.Height = 500;
 	 diag.CancelEvent = function(){ //关闭事件

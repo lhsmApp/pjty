@@ -16,10 +16,12 @@ function openMap(){
 	 
 	 
 	 diag.CancelEvent = function(){ //关闭事件
-		 var x=diag.innerFrame.contentWindow.document.getElementById('ZUOBIAO_X').value;
-		 var y=diag.innerFrame.contentWindow.document.getElementById('ZUOBIAO_Y').value;
-		 if(x!=null&&x!="")
-			 document.getElementById("GEOG_COOR").value = x+","+y;
+		 if(diag.innerFrame.contentWindow.isClose){
+			 var x=diag.innerFrame.contentWindow.document.getElementById('ZUOBIAO_X').value;
+			 var y=diag.innerFrame.contentWindow.document.getElementById('ZUOBIAO_Y').value;
+			 if(x!=null&&x!="")
+				 document.getElementById("GEOG_COOR").value = x+","+y;
+		 }
 		diag.close();
 	 };
 	 diag.show();

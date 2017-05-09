@@ -55,7 +55,7 @@
 								<td style="width:79px;text-align: right;padding-top: 13px;">所属区域:</td>
 								<%-- <td><input type="text" name="BELONG_AREA" id="BELONG_AREA" value="${pd.BELONG_AREA}" maxlength="4" placeholder="这里输入所属区域" title="所属区域" style="width:98%;"/></td> --%>
 								<td id="ssqy">
-									<select class="chosen-select form-control" name="BELONG_AREA" id="BELONG_AREA" data-placeholder="请选择所属区域" style="vertical-align:top;"  title="所属区域" style="width:98%;" >
+									<select class="form-control" name="BELONG_AREA" id="BELONG_AREA" data-placeholder="请选择所属区域" style="vertical-align:top;"  title="所属区域" style="width:98%;" >
 										<option value=""></option>
 										<c:forEach items="${areaList}" var="area">
 											<option value="${area.AREA_ID }" <c:if test="${area.AREA_ID == pd.BELONG_AREA }">selected</c:if>>${area.AREA_NAME }</option>
@@ -75,14 +75,27 @@
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">地理坐标:</td>
-								<td>
-									<input type="text" name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}" maxlength="20" placeholder="这里输入地理坐标" title="地理坐标" style="width:86%;"/>
-									<a class="btn btn-xs btn-success" title="编辑" onclick="openMap();" style="width:12%;">
+								<td colspan="3">
+									<input type="text" readonly name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}" maxlength="20" placeholder="这里输入地理坐标" title="地理坐标" style="width:90%;"/>
+									<a class="btn btn-xs btn-success" title="编辑" onclick="openMap();" style="width:8%;margin-bottom:3px;">
 										<i class="ace-icon fa fa-globe bigger-120" title="打开地图"></i>
 									</a>
-								</td>
-								<td style="width:79px;text-align: right;padding-top: 13px;">备注:</td>
-								<td><input type="text" name="REMARK" id="REMARK" value="${pd.REMARK}" maxlength="500" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
+									
+									<%-- <div class="input-group" style="width: 100%;">
+										 <input id="GEOG_COOR" type="text" name="GEOG_COOR"  value="${pd.GEOG_COOR}" readonly 
+											 placeholder="这里输入地理坐标" title="地理坐标"/> 
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-success btn-xs"
+												onclick="openMap()">
+												<span class="ace-icon fa fa-globe icon-on-right bigger-120"></span>
+											</button>
+										</span>
+									</div> --%>
+								</td>							
+							</tr>
+							<tr>
+								<td  style="width:79px;text-align: right;padding-top: 13px;">备注:</td>
+								<td colspan="3"><input type="text" name="REMARK" id="REMARK" value="${pd.REMARK}" maxlength="500" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="4">
@@ -250,32 +263,6 @@
 		$(function() {
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
-			
-			//下拉框
-			if(!ace.vars['touch']) {
-				$('.chosen-select').chosen({allow_single_deselect:true}); 
-				$(window)
-				.off('resize.chosen')
-				.on('resize.chosen', function() {
-					$('.chosen-select').each(function() {
-						 var $this = $(this);
-						 $this.next().css({'width': $this.parent().width()});
-					});
-				}).trigger('resize.chosen');
-				$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-					if(event_name != 'sidebar_collapsed') return;
-					$('.chosen-select').each(function() {
-						 var $this = $(this);
-						 $this.next().css({'width': $this.parent().width()});
-					});
-				});
-				$('#chosen-multiple-style .btn').on('click', function(e){
-					var target = $(this).find('input[type=radio]');
-					var which = parseInt(target.val());
-					if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
-					 else $('#form-field-select-4').removeClass('tag-input-style');
-				});
-			}
 		});
 		</script>
 </body>

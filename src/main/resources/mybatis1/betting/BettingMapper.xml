@@ -120,7 +120,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			BETTING_ID in
+			ID_CODE in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>

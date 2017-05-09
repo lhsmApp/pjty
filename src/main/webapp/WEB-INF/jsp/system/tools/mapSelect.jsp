@@ -15,7 +15,7 @@
 <%@ include file="../../system/index/top.jsp"%>
 <script type="text/javascript" src="static/js/jquery-1.7.2.js"></script>
 <script type="text/javascript"
-	src="http://api.map.baidu.com/api?v=2.0&ak=40GWXiduhOft266lK4N1dopL"></script>
+	src="http://api.map.baidu.com/api?v=2.0&ak=CNIU569ktnYiEkGikBLGlgScEaopEgng"></script>
 
 
 <style type="text/css">
@@ -49,191 +49,170 @@ body, html {
 
 </head>
 <body>
-	<div style="margin-top:3px;">
+	<div style="margin-top: 3px;">
 		<table bgcolor="#E3E4D8" width="100%">
 			<tr>
-				<td>&nbsp;纬度：&nbsp;
-					<input id="ZUOBIAO_X" value="" type="text" />
-					&nbsp;
-					经度：&nbsp;
-					<input id="ZUOBIAO_Y" value="" type="text" />
-					&nbsp;
-					<input type="button" class="btn btn-mini btn-primary" value="确定" onclick="choose();"/>
+				<td>&nbsp;纬度：&nbsp; <input id="ZUOBIAO_X" value="" type="text" />
+					&nbsp; 经度：&nbsp; <input id="ZUOBIAO_Y" value="" type="text" />
+					&nbsp; <input type="button" class="btn btn-mini btn-primary"
+					value="确定" onclick="choose();" />
 				</td>
 				<td width="100">
 					<!-- <input type="text" id="suggestId" size="20"
-					value="" placeholder="这里输入搜索地址" style="width: 150px;" /> -->
-					<!-- <div id="searchResultPanel"
+					value="" placeholder="这里输入搜索地址" style="width: 150px;" /> --> <!-- <div id="searchResultPanel"
 						style="border: 1px solid #C0C0C0; width: 150px; height: auto;">
 					</div> -->
-					
-					<div class="input-group" style="width: 250px;">
-						<span class="input-group-addon">
-							<i class="ace-icon fa fa-check"></i>
-						</span>
 
-						<input id="suggestId" type="text" class="form-control search-query" placeholder="这里输入搜索地址" />
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-purple btn-sm">
+					<div class="input-group" style="width: 250px;">
+						<span class="input-group-addon"> <i
+							class="ace-icon fa fa-check"></i>
+						</span> <input id="suggestId" type="text" value=""
+							class="form-control search-query" placeholder="这里输入搜索地址" /> <span
+							class="input-group-btn">
+							<button type="button" class="btn btn-purple btn-sm"
+								onclick="search()">
 								<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-								
+
 							</button>
 						</span>
-				    </div>
+					</div>
 				</td>
 			</tr>
 		</table>
 	</div>
-	<div id="allmap" style="margin-top:3px;"></div>
+	<div id="allmap" style="margin-top: 3px;"></div>
 
+	<script type="text/javascript">
+		$(top.hangge());
+		
+
+		//var dg;
+		var isClose=false;
+		var map = new BMap.Map("allmap");
+		$(document).ready(
+				function() {
+					//dg = frameElement.lhgDG;
+
+					map.centerAndZoom("盘锦", 12); // 初始化地图,设置城市和地图级别。
+
+					map.addControl(new BMap.ScaleControl()); // 添加默认比例尺控件
+					map.addControl(new BMap.NavigationControl()); //添加默认缩放平移控件
+
+					map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
+					map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+
+					var ac = new BMap.Autocomplete( //建立一个自动完成的对象
+					{
+						"input" : "suggestId",
+						"location" : map
+					});
+
+					//var myValue;
+					ac.addEventListener("onconfirm", function(e) { //鼠标点击下拉列表后的事件
+						var _value = e.item.value;
+						myValue = _value.province + _value.city
+								+ _value.district + _value.street
+								+ _value.business;
+						//G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+						setPlace(myValue);
+					});
+					map.addEventListener("click", showInfo);
+
+					var addr = "${pd.addr}";
+					setTimeout(function() {
+						$("#suggestId").val(addr);
+						console.log($("#suggestId").val());
+					}, 1000);
+					
+					
+					var geogCode = "${pd.GEOG_COOR}";
+					if (geogCode != null && geogCode != "") {
+						var geogCodes = geogCode.split(',');
+						var x = geogCodes[0];
+						var y = geogCodes[1];
+						document.getElementById("ZUOBIAO_X").value = x;
+						document.getElementById("ZUOBIAO_Y").value = y;
+						map.clearOverlays(); //清除地图上所有覆盖物
+						var point = new BMap.Point(y, x);
+						//map.panTo(point);
+						window.setTimeout(function() {
+							map.setCenter(point)
+							//map.panTo(point); 
+							map.zoomTo(18);
+						}, 1000);
+						map.addOverlay(new BMap.Marker(point)); //添加标注
+					} else {
+						if (addr != null && addr != "")
+							setPlace(addr);
+					}
+
+					$("#suggestId").keydown(function(event) {
+						if (event.keyCode == 13) {
+							var addr = $("#suggestId").val();
+							if (addr != null && addr != "")
+								setPlace(addr);
+						}
+					});
+				});
+
+		function setPlace(myValue) {
+			map.clearOverlays(); //清除地图上所有覆盖物
+			function myFun() {
+				var point0 = local.getResults().getPoi(0);
+				if (point0 != null) {
+					var pp = point0.point; //获取第一个智能搜索的结果
+					map.centerAndZoom(pp, 18);
+					map.addOverlay(new BMap.Marker(pp)); //添加标注
+					document.getElementById("ZUOBIAO_X").value = pp.lat;
+					document.getElementById("ZUOBIAO_Y").value = pp.lng;
+				}
+			}
+			var local = new BMap.LocalSearch(map, { //智能搜索
+				onSearchComplete : myFun
+			});
+			local.search(myValue);
+		}
+
+		function showInfo(e) {
+
+			document.getElementById("ZUOBIAO_X").value = e.point.lat;
+			document.getElementById("ZUOBIAO_Y").value = e.point.lng;
+		}
+
+		// 百度地图API功能
+		function G(id) {
+			return document.getElementById(id);
+		}
+
+		function choose() {
+			var ZUOBIAO_X = document.getElementById("ZUOBIAO_X").value;
+			var ZUOBIAO_Y = document.getElementById("ZUOBIAO_Y").value;
+			if (ZUOBIAO_X == "" || ZUOBIAO_Y == "") {
+				alert("请先输入经纬度");
+			} else {
+				isClose=true;
+				top.Dialog.close();
+			}
+		}
+
+		function search() {
+			var addr = $("#suggestId").val();
+			if (addr != null && addr != "")
+				setPlace(addr);
+		}
+		
+		window.onload = function() {
+			var addr = "${pd.addr}";
+			
+			$("#suggestId").val(addr);
+			console.log($("#suggestId").val());
+		}
+	</script>
 </body>
 
 </html>
 
-<script type="text/javascript">
 
-	$(top.hangge());
-	//var dg;
-	$(document).ready(function() {
-		//dg = frameElement.lhgDG;
-		
-		var addr = "${pd.addr}";
-		document.getElementById("suggestId").value=addr;
-		var geogCode = "${pd.GEOG_COOR}";;
-		if(geogCode!=null&&geogCode!=""){
-			var geogCodes=geogCode.split(',');
-			var x=geogCodes[0];
-			var y=geogCodes[1];
-			document.getElementById("ZUOBIAO_X").value=x;
-			document.getElementById("ZUOBIAO_Y").value=y;
-			console.log(x+"|"+y);
-			map.centerAndZoom(new BMap.Point(x, y), 15);
-		}else{
-			map.centerAndZoom("盘锦", 12); // 初始化地图,设置城市和地图级别。
-			setPlace(addr);
-		}
-	});
-	
-	/* function success() {
-		if (dg.curWin.document.forms[0]) {
-			dg.curWin.document.forms[0].action = dg.curWin.location + "";
-			dg.curWin.document.forms[0].submit();
-		} else {
-			dg.curWin.location.reload();
-		}
-		dg.cancel();
-	} */
-	
-	function choose() {
-		var ZUOBIAO_X = document.getElementById("ZUOBIAO_X").value;
-		var ZUOBIAO_Y = document.getElementById("ZUOBIAO_Y").value;
-		if (ZUOBIAO_X == "" || ZUOBIAO_Y == "") {
-			alert("请先输入经纬度");
-		} else {
-			top.Dialog.close();
-		}
-	}
-	
-	
-	// 百度地图API功能
-	function G(id) {
-		return document.getElementById(id);
-	}
-
-	console.log("init");
-	var map = new BMap.Map("allmap");
-	map.centerAndZoom("盘锦", 12); // 初始化地图,设置城市和地图级别。
-
-	var ac = new BMap.Autocomplete( //建立一个自动完成的对象
-	{
-		"input" : "suggestId",
-		"location" : map
-	});
-
-	ac.addEventListener("onhighlight", function(e) { //鼠标放在下拉列表上的事件
-		var str = "";
-		var _value = e.fromitem.value;
-		var value = "";
-		if (e.fromitem.index > -1) {
-			value = _value.province + _value.city + _value.district
-					+ _value.street + _value.business;
-		}
-		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = "
-				+ value;
-
-		value = "";
-		if (e.toitem.index > -1) {
-			_value = e.toitem.value;
-			value = _value.province + _value.city + _value.district
-					+ _value.street + _value.business;
-		}
-		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = "
-				+ value;
-		//G("searchResultPanel").innerHTML = str;
-	});
-
-	//var myValue;
-	ac.addEventListener("onconfirm", function(e) { //鼠标点击下拉列表后的事件
-		var _value = e.item.value;
-		myValue = _value.province + _value.city + _value.district
-				+ _value.street + _value.business;
-		//G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
-		setPlace(myValue);
-	});
-
-	function setPlace(myValue) {
-		map.clearOverlays(); //清除地图上所有覆盖物
-		function myFun() {
-			var pp = local.getResults().getPoi(0).point; //获取第一个智能搜索的结果
-			map.centerAndZoom(pp, 18);
-			map.addOverlay(new BMap.Marker(pp)); //添加标注
-			document.getElementById("ZUOBIAO_X").value = pp.lat;
-			document.getElementById("ZUOBIAO_Y").value = pp.lng;
-		}
-		var local = new BMap.LocalSearch(map, { //智能搜索
-			onSearchComplete : myFun
-		});
-		local.search(myValue);
-	}
-
-	map.addControl(new BMap.ScaleControl()); // 添加默认比例尺控件
-	/* map.addControl(new BMap.ScaleControl({
-		anchor : BMAP_ANCHOR_TOP_LEFT
-	})); // 左上
-	map.addControl(new BMap.ScaleControl({
-		anchor : BMAP_ANCHOR_TOP_RIGHT
-	})); // 右上
-	map.addControl(new BMap.ScaleControl({
-		anchor : BMAP_ANCHOR_BOTTOM_LEFT
-	})); // 左下
-	map.addControl(new BMap.ScaleControl({
-		anchor : BMAP_ANCHOR_BOTTOM_RIGHT
-	})); // 右下  */
-
-	map.addControl(new BMap.NavigationControl()); //添加默认缩放平移控件
-	/* map.addControl(new BMap.NavigationControl({
-		anchor : BMAP_ANCHOR_TOP_RIGHT,
-		type : BMAP_NAVIGATION_CONTROL_SMALL
-	})); //右上角，仅包含平移和缩放按钮
-	map.addControl(new BMap.NavigationControl({
-		anchor : BMAP_ANCHOR_BOTTOM_LEFT,
-		type : BMAP_NAVIGATION_CONTROL_PAN
-	})); //左下角，仅包含平移按钮
-	map.addControl(new BMap.NavigationControl({
-		anchor : BMAP_ANCHOR_BOTTOM_RIGHT,
-		type : BMAP_NAVIGATION_CONTROL_ZOOM
-	})); //右下角，仅包含缩放按钮 */
-
-	map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
-	map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
-
-	function showInfo(e) {
-
-		document.getElementById("ZUOBIAO_X").value = e.point.lat;
-		document.getElementById("ZUOBIAO_Y").value = e.point.lng;
-	}
-	map.addEventListener("click", showInfo);
-</script>
 
 
 

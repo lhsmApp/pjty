@@ -42,6 +42,11 @@ public interface PesoorgInfoManager{
 	 */
 	public List<PageData> listAll(PageData pd)throws Exception;
 	
+	/**列表
+	 * @throws Exception
+	 */
+	public List<PageData> pesoNameList()throws Exception;
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception

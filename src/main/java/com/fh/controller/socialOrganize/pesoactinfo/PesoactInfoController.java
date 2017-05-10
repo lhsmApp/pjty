@@ -109,6 +109,9 @@ public class PesoactInfoController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+
+		mv.addObject("nameList", getNameList());
+		
 		return mv;
 	}
 	
@@ -124,6 +127,9 @@ public class PesoactInfoController extends BaseController {
 		mv.setViewName("socialOrganize/pesoactinfo/pesoactinfo_edit");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
+
+		mv.addObject("nameList", getNameList());
+		
 		return mv;
 	}	
 	
@@ -140,6 +146,9 @@ public class PesoactInfoController extends BaseController {
 		mv.setViewName("socialOrganize/pesoactinfo/pesoactinfo_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
+
+		mv.addObject("nameList", getNameList());
+		
 		return mv;
 	}	
 	
@@ -164,8 +173,8 @@ public class PesoactInfoController extends BaseController {
 		}else{
 			pd.put("msg", "no");
 		}
-		pdList.add(pd);*/
-		map.put("list", pdList);
+		pdList.add(pd);
+		map.put("list", pdList);*/
 		return AppUtil.returnObject(pd, map);
 	}
 	
@@ -209,5 +218,10 @@ public class PesoactInfoController extends BaseController {
 	public void initBinder(WebDataBinder binder){
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,true));
+	}
+	
+	private List<PageData> getNameList() throws Exception{
+		List<PageData> list=pesoactinfoService.pesoNameList();
+        return list;
 	}
 }

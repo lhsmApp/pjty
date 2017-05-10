@@ -42,14 +42,13 @@
 										</span>
 									</div>
 								</td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
 								<td style="vertical-align:top;padding-left:2px;">
-								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+								 	<select class="chosen-select form-control" name="PESO_NAME" id="PESO_NAME" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 									<option value=""></option>
 									<option value="">全部</option>
-									<option value="">1</option>
-									<option value="">2</option>
+									<c:forEach items="${nameList }" var="each">
+                                       <option value="${each.PESO_NAME }" <c:if test="${each.PESO_NAME== pd.PESO_NAME}">selected</c:if>>${each.PESO_NAME}</option>
+									</c:forEach>
 								  	</select>
 								</td>
 								<c:if test="${QX.cha == 1 }">
@@ -84,7 +83,7 @@
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr>
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.PESOACTINFO_ID}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input type='checkbox' name='ids' value="${var}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.PESO_NAME}</td>
@@ -98,12 +97,12 @@
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var}');">
+													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.PESOACT_PESO_NAME}','${var.PESOACT_ACT_NAME}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.PESOACTINFO_ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.PESOACT_PESO_NAME}','${var.PESOACT_ACT_NAME}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -117,7 +116,7 @@
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.edit == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="edit('${var}');" class="tooltip-success" data-rel="tooltip" title="修改">
+																<a style="cursor:pointer;" onclick="edit('${var.PESOACT_PESO_NAME}','${var.PESOACT_ACT_NAME}');" class="tooltip-success" data-rel="tooltip" title="修改">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
@@ -126,7 +125,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.PESOACTINFO_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.PESOACT_PESO_NAME}','${var.PESOACT_ACT_NAME}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
@@ -284,11 +283,11 @@
 		}
 		
 		//删除
-		function del(Id){
+		function del(PESOACT_PESO_NAME,PESOACT_ACT_NAME){
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>pesoactinfo/delete.do?PESOACTINFO_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>pesoactinfo/delete.do?PESOACT_PESO_NAME="+PESOACT_PESO_NAME+"&PESOACT_ACT_NAME="+PESOACT_ACT_NAME+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
@@ -297,12 +296,12 @@
 		}
 		
 		//修改
-		function edit(Item){
+		function edit(PESOACT_PESO_NAME,PESOACT_ACT_NAME){
 			 top.jzts();
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>pesoactinfo/goEdit.do';
+			 diag.URL = '<%=basePath%>pesoactinfo/goEdit.do?PESOACT_PESO_NAME='+PESOACT_PESO_NAME+'&PESOACT_ACT_NAME='+PESOACT_ACT_NAME;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.Modal = true;				//有无遮罩窗口
@@ -324,8 +323,8 @@
 					var str = '';
 					for(var i=0;i < document.getElementsByName('ids').length;i++){
 					  if(document.getElementsByName('ids')[i].checked){
-					  	if(str=='') str += document.getElementsByName('ids')[i].value;
-					  	else str += ',' + document.getElementsByName('ids')[i].value;
+					  	if(str=='') str += document.getElementsByName('ids')[i].value.PESO_NAME;
+					  	else str += ',' + document.getElementsByName('ids')[i].value.PESO_NAME;
 					  }
 					}
 					if(str==''){

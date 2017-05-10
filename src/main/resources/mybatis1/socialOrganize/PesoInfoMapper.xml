@@ -97,7 +97,9 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOINFO_ID}
+			PESO_NAME = #{PESOINFO_ID};
+		delete from tb_pesoact_info where PESO_NAME = #{PESOINFO_ID};
+		delete from tb_pesoorg_info where PESO_NAME = #{PESOINFO_ID};
 	</delete>
 	
 	<!-- 修改 -->
@@ -120,8 +122,9 @@
 			STATE = #{STATE},
 			GEOG_COOR = #{GEOG_COOR},
 			REMARK = #{REMARK}
-		where 
-		PESO_NAME = #{PESOINFO_ID}
+		where PESO_NAME = #{PESOINFO_ID};
+		update tb_pesoact_info set PESO_NAME = #{PESO_NAME} where PESO_NAME = #{PESOINFO_ID};
+		update tb_pesoorg_info set PESO_NAME = #{PESO_NAME} where PESO_NAME = #{PESOINFO_ID};
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -179,7 +182,15 @@
 			PESO_NAME in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
-		</foreach>
+		</foreach>;
+		delete from tb_pesoact_info where PESO_NAME in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>;
+		delete from tb_pesoorg_info where PESO_NAME in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>;
 	</delete>
 	
 	<!-- fh313596790qq(青苔) -->

@@ -62,6 +62,14 @@ public class PesoactInfoService implements PesoactInfoManager{
 		return (List<PageData>)dao.findForList("PesoactInfoMapper.listAll", pd);
 	}
 	
+	/**列表
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public List<PageData> pesoNameList()throws Exception{
+		return (List<PageData>)dao.findForList("PesoactInfoMapper.pesoNameList", null);
+	}
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception
@@ -71,11 +79,11 @@ public class PesoactInfoService implements PesoactInfoManager{
 	}
 	
 	/**批量删除
-	 * @param list
+	 * @param ArrayDATA_IDS
 	 * @throws Exception
 	 */
-	public void deleteAll(List<PageData> list)throws Exception{
-		dao.delete("PesoactInfoMapper.deleteAll", list);
+	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
+		dao.delete("PesoactInfoMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
 }

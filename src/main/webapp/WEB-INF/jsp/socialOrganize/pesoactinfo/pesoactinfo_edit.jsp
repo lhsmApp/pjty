@@ -28,11 +28,21 @@
 					<div class="col-xs-12">
 					
 					<form action="pesoactinfo/${msg }.do" name="Form" id="Form" method="post">
+						<input type="hidden" name="PESOACT_PESO_NAME" id="PESOACT_PESO_NAME" value="${pd.PESOACT_PESO_NAME}"/>
+						<input type="hidden" name="PESOACT_ACT_NAME" id="PESOACT_ACT_NAME" value="${pd.PESOACT_ACT_NAME}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">社会组织名称:</td>
-								<td><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td>
+								<!-- <td><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td> -->
+								<td>
+								    <select class="chosen-select form-control" name="PESO_NAME" id="PESO_NAME" data-placeholder="请选择社会组织名称" style="vertical-align:top;"  title="所属区域" style="width:98%;" >
+								        <option value=""></option>
+								        <c:forEach items="${nameList }" var="each">
+								            <option value="${each.PESO_NAME}" <c:if test="${each.PESO_NAME==pd.PESO_NAME }">selected</c:if>>${each.PESO_NAME}</option>
+								        </c:forEach>
+								    </select>
+								</td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">活动名称:</td>

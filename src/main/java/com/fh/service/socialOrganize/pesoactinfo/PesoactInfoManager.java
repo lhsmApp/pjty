@@ -42,6 +42,11 @@ public interface PesoactInfoManager{
 	 */
 	public List<PageData> listAll(PageData pd)throws Exception;
 	
+	/**列表
+	 * @throws Exception
+	 */
+	public List<PageData> pesoNameList()throws Exception;
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception
@@ -49,10 +54,10 @@ public interface PesoactInfoManager{
 	public PageData findById(PageData pd)throws Exception;
 	
 	/**批量删除
-	 * @param list
+	 * @param ArrayDATA_IDS
 	 * @throws Exception
 	 */
-	public void deleteAll(List<PageData> list)throws Exception;
+	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
 	
 }
 

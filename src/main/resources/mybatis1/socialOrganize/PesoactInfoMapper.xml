@@ -21,7 +21,8 @@
 		CAPI_SITU,	
 		EFFECT,	
 		REMARK,	
-		PESOACTINFO_ID
+		PESO_NAME as PESOACT_PESO_NAME,	
+		ACT_NAME as PESOACT_ACT_NAME
 	</sql>
 	
 	<!-- 字段值 -->
@@ -38,7 +39,8 @@
 		#{CAPI_SITU},	
 		#{EFFECT},	
 		#{REMARK},	
-		#{PESO_NAME}
+		#{PESO_NAME},	
+		#{ACT_NAME}
 	</sql>
 	
 	<!-- 新增-->
@@ -57,7 +59,9 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOACTINFO_ID}
+			PESO_NAME = #{PESOACT_PESO_NAME}
+		and 
+		    ACT_NAME = #{PESOACT_ACT_NAME}
 	</delete>
 	
 	<!-- 修改 -->
@@ -71,7 +75,9 @@
 			EFFECT = #{EFFECT},
 			REMARK = #{REMARK}
 		where 
-		PESO_NAME = #{PESOACTINFO_ID}
+			PESO_NAME = #{PESOACT_PESO_NAME}
+		and 
+		    ACT_NAME = #{PESOACT_ACT_NAME}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -81,7 +87,9 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOACTINFO_ID}
+			PESO_NAME = #{PESOACT_PESO_NAME}
+		and 
+		    ACT_NAME = #{PESOACT_ACT_NAME}
 	</select>
 	
 	<!-- 列表 -->
@@ -94,13 +102,21 @@
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
-				<!--	根据需求自己加检索条件
-					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					PESO_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 
-					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
-				-->
+					ACT_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+					 or 
+					CAPI_SITU LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+					 or 
+					EFFECT LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+					 or 
+					REMARK LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
 				)
 		</if>
+		<if test="pd.PESO_NAME!=null and pd.PESO_NAME!=''">
+		    and PESO_NAME = #{pd.PESO_NAME}
+		</if>
+		order by PESO_NAME, ACT_NAME
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -111,16 +127,29 @@
 		<include refid="tableName"></include>
 	</select>
 	
+	<!-- 获取tb_peso_info社会组织名称(PESO_NAME)作为下拉列表选项 -->
+	<select id="pesoNameList" resultType="pd">
+	    select PESO_NAME from tb_peso_info
+	</select>
+	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME in
+			PESOACTINFO_ID in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>
 	</delete>
+	<!-- <delete id="deleteAll" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+        <foreach collection="list" item="item" open="" close="" separator="OR">  
+            (PESO_NAME = #{item.PESOACT_PESO_NAME} and ACT_NAME = #{item.PESOACT_ACT_NAME})
+        </foreach> 
+	</delete> -->
 	
 	<!-- fh313596790qq(青苔) -->
 </mapper>

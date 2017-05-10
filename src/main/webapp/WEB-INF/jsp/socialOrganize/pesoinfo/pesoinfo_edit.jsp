@@ -41,7 +41,7 @@
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">所属区域:</td>
 								<!--<td><input type="text" name="BELONG_AREA" id="BELONG_AREA" value="${pd.BELONG_AREA}" maxlength="4" placeholder="这里输入所属区域" title="所属区域" style="width:98%;"/></td>-->
-								<td id="ssqy">
+								<td>
 									<select class="chosen-select form-control" name="BELONG_AREA" id="BELONG_AREA" data-placeholder="请选择所属区域" style="vertical-align:top;"  title="所属区域" style="width:98%;" >
 										<option value=""></option>
 										<c:forEach items="${areaList}" var="area">
@@ -74,12 +74,12 @@
 								<td style="width:79px;text-align: right;padding-top: 13px;">职能简介:</td>
 								<td><input type="text" name="PESO_INTR" id="PESO_INTR" value="${pd.PESO_INTR}" maxlength="1000" placeholder="这里输入职能简介" title="职能简介" style="width:98%;"/></td>
 								<td style="width:79px;text-align: right;padding-top: 13px;">注册资金:</td>
-								<td><input type="number" name="REGI_CAPI" id="REGI_CAPI" value="${pd.REGI_CAPI}" maxlength="32" placeholder="这里输入注册资金" title="注册资金" style="width:98%;"/></td>
+								<td><input type="number" name="REGI_CAPI" id="REGI_CAPI" value="${pd.REGI_CAPI}" maxlength="13" placeholder="这里输入注册资金" title="注册资金" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">状态:</td>
 								<!-- <td><input type="text" name="STATE" id="STATE" value="${pd.STATE}" maxlength="1" placeholder="这里输入状态" title="状态" style="width:98%;"/></td> -->
-								<td id="zt">
+								<td>
 									<select class="chosen-select form-control" name="STATE" id="STATE" data-placeholder="请选择状态" style="vertical-align:top;"  title="状态" style="width:98%;" >
 										<option value=""></option>
 										<c:forEach items="${stateList}" var="sta">

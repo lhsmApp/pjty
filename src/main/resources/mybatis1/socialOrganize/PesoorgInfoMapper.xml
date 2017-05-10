@@ -23,7 +23,9 @@
 		STAFF_SEX,	
 		MOBILE_TEL,	
 		REMARK,	
-		PESO_NAME as PESOORGINFO_ID
+		PESO_NAME as PESOORG_PESO_NAME,
+		STAFF_JOB as PESOORG_STAFF_JOB,
+		LEADER_NAME as PESOORG_LEADER_NAME
 	</sql>
 	
 	<!-- 字段值 -->
@@ -42,7 +44,9 @@
 		#{STAFF_SEX},	
 		#{MOBILE_TEL},	
 		#{REMARK},	
-		#{PESO_NAME}
+		#{PESO_NAME},	
+		#{STAFF_JOB},	
+		#{LEADER_NAME}
 	</sql>
 	
 	<!-- 新增-->
@@ -61,7 +65,11 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOORGINFO_ID}
+			PESO_NAME = #{PESOORG_PESO_NAME}
+	    and
+			STAFF_JOB = #{PESOORG_STAFF_JOB}
+		and
+			LEADER_NAME = #{PESOORG_LEADER_NAME}
 	</delete>
 	
 	<!-- 修改 -->
@@ -76,7 +84,11 @@
 			MOBILE_TEL = #{MOBILE_TEL},
 			REMARK = #{REMARK}
 		where 
-		PESO_NAME = #{PESOORGINFO_ID}
+			PESO_NAME = #{PESOORG_PESO_NAME}
+	    and
+			STAFF_JOB = #{PESOORG_STAFF_JOB}
+		and
+			LEADER_NAME = #{PESOORG_LEADER_NAME}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -86,7 +98,11 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOORGINFO_ID}
+			PESO_NAME = #{PESOORG_PESO_NAME}
+	    and
+			STAFF_JOB = #{PESOORG_STAFF_JOB}
+		and
+			LEADER_NAME = #{PESOORG_LEADER_NAME}
 	</select>
 	
 	<!-- 列表 -->
@@ -99,13 +115,22 @@
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
-				<!--	根据需求自己加检索条件
-					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					PESO_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 
-					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
-				-->
+					STAFF_JOB LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+					 or 
+					LEADER_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+					 or 
+					STAFF_SEX LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+					 or 
+					MOBILE_TEL LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+					 or 
+					REMARK LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
 				)
 		</if>
+        <if test="pd.PESO_NAME!=null and pd.PESO_NAME!=''">
+            and PESO_NAME = #{pd.PESO_NAME}
+        </if>
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -114,6 +139,11 @@
 		<include refid="SelectField"></include>
 		from 
 		<include refid="tableName"></include>
+	</select>
+	
+	<!-- 获取tb_peso_info社会组织名称(PESO_NAME)作为下拉列表选项 -->
+	<select id="pesoNameList" resultType="pd">
+	    select PESO_NAME from tb_peso_info
 	</select>
 	
 	<!-- 批量删除 -->

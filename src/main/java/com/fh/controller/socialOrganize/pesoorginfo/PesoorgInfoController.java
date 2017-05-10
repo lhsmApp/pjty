@@ -112,6 +112,7 @@ public class PesoorgInfoController extends BaseController {
 		
 		mv.addObject("sexList", getSexList());
 		mv.addObject("postList", getPostList());
+		mv.addObject("nameList", getNameList());
 		
 		return mv;
 	}
@@ -131,6 +132,7 @@ public class PesoorgInfoController extends BaseController {
 
 		mv.addObject("sexList", getSexList());
 		mv.addObject("postList", getPostList());
+		mv.addObject("nameList", getNameList());
 		
 		return mv;
 	}	
@@ -151,6 +153,7 @@ public class PesoorgInfoController extends BaseController {
 
 		mv.addObject("sexList", getSexList());
 		mv.addObject("postList", getPostList());
+		mv.addObject("nameList", getNameList());
 		
 		return mv;
 	}	
@@ -256,6 +259,11 @@ public class PesoorgInfoController extends BaseController {
 		pd3.put("POST_ID", "4");
 		pd3.put("POST_NAME", "副秘书长");
 		list.add(pd3);
+        return list;
+	}
+	
+	private List<PageData> getNameList() throws Exception{
+		List<PageData> list=pesoorginfoService.pesoNameList();
         return list;
 	}
 }

@@ -92,7 +92,7 @@
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr>
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.BETTING_ID}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.ID_CODE}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.ID_CODE}</td>
@@ -280,17 +280,21 @@
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>betting/goAdd.do';
 			 diag.Width = 600;
-			 diag.Height = 400;
+			 diag.Height = 450;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮
 			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 if('${page.currentPage}' == '0'){
+				 console.log("cancel");
+		    	 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+		    		 console.log('${page.currentPage}');
+		    		 if('${page.currentPage}' == '0'){
+						 console.log("zhongxin none");
 						 top.jzts();
 						 setTimeout("self.location=self.location",100);
 					 }else{
 						 nextPage(${page.currentPage});
+						 console.log("zhongxin display");
 					 }
 				}
 				diag.close();
@@ -319,7 +323,7 @@
 			 diag.Title ="编辑";
 			 diag.URL = '<%=basePath%>betting/goEdit.do?BETTING_ID='+Id;
 			 diag.Width = 600;
-			 diag.Height = 400;
+			 diag.Height = 450;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮 

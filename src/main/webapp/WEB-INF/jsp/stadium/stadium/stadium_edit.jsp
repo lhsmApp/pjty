@@ -68,16 +68,16 @@
 											<%-- <td><input type="text" name="BELONG_AREA"
 												id="BELONG_AREA" value="${pd.BELONG_AREA}" maxlength="4"
 												placeholder="这里输入所属区域" title="所属区域" style="width: 98%;" /></td> --%>
-											<td id="ssqy"><select class="chosen-select form-control"
-												name="BELONG_AREA" id="BELONG_AREA"
-												data-placeholder="请选择所属区域" style="vertical-align: top;"
-												title="所属区域" style="width:98%;">
-													<option value=""></option>
-													<c:forEach items="${areaList}" var="area">
-														<option value="${area.AREA_ID }"
-															<c:if test="${area.AREA_ID == pd.BELONG_AREA }">selected</c:if>>${area.AREA_NAME }</option>
-													</c:forEach>
-											</select></td>
+											<td id="ssqy">
+									<select class="chosen-select form-control" name="BELONG_AREA" id="BELONG_AREA" data-placeholder="请选择所属区域" style="vertical-align:top;" title="所属区域" style="width:98%;">
+									<option value=""></option>
+									<c:forEach items="${areaList}" var="area">
+										<option value="${area.AREA_NAME }" <c:if test="${pd.BELONG_AREA==area.AREA_ID}">selected</c:if>>${area.AREA_NAME }</option>
+									</c:forEach>
+								  	</select>
+								  	
+							
+								</td>
 											<td
 												style="width: 75px; text-align: right; padding-top: 13px;">运营性质:</td>
 											<td><input type="text" name="OPER_NATURE"
@@ -233,9 +233,13 @@
 				$("#REMARK").focus();
 				return false;
 			}
+			if($("#STADIUM_ID").val()==""){
+				hasStaName();
+			}else{
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
+			}
 		}
 
 		$(function() {
@@ -245,6 +249,28 @@
 				todayHighlight : true
 			});
 		});
+		
+		//判断场馆名是否存在
+		function hasStaName(){
+			var STAD_NAME = $.trim($("#STAD_NAME").val());
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>stadium/hasStaName.do',
+		    	data: {STAD_NAME:STAD_NAME,tm:new Date().getTime()},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					 if("success" == data.result){
+						 $("#Form").submit();
+							$("#zhongxin").hide();
+							$("#zhongxin2").show();
+					 }else{
+						$("#STAD_NAME").css("background-color","#D16E6C");
+						setTimeout("$('#STAD_NAME').val('此用户名已存在!')",500);
+					 }
+				}
+			});
+		}
 	</script>
 </body>
 </html>

@@ -42,6 +42,12 @@ public interface BettingManager{
 	 */
 	public List<PageData> listAll(PageData pd)throws Exception;
 	
+	/**列表(全部)根据条件搜索
+	 * @param pd
+	 * @throws Exception
+	 */
+	public List<PageData> listAllByCondition(PageData pd)throws Exception;
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception

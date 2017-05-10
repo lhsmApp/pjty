@@ -62,6 +62,15 @@ public class BettingService implements BettingManager{
 		return (List<PageData>)dao.findForList("BettingMapper.listAll", pd);
 	}
 	
+	/**列表(全部)根据条件搜索
+	 * @param pd
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public List<PageData> listAllByCondition(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("BettingMapper.listAllByCondition", pd);
+	}
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception

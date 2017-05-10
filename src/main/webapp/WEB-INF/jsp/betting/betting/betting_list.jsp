@@ -49,7 +49,7 @@
 									<option value=""></option>
 									<option value="">全部</option>
 									<c:forEach items="${areaList}" var="area">
-										<option value="${area.AREA_ID }" <c:if test="${pd.BELONG_AREA==area.AREA_ID}">selected</c:if>>${area.AREA_NAME }</option>
+										<option value="${area.BIANMA }" <c:if test="${pd.BELONG_AREA==area.BIANMA}">selected</c:if>>${area.NAME }</option>
 									</c:forEach>
 								  	</select>
 								</td>
@@ -113,12 +113,12 @@
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.BETTING_ID}');">
+													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.ID_CODE}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.BETTING_ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.ID_CODE}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -132,7 +132,7 @@
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.edit == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="edit('${var.BETTING_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
+																<a style="cursor:pointer;" onclick="edit('${var.ID_CODE}');" class="tooltip-success" data-rel="tooltip" title="修改">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
@@ -141,7 +141,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.BETTING_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.ID_CODE}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
@@ -307,7 +307,7 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>betting/delete.do?BETTING_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>betting/delete.do?ID_CODE="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
@@ -321,7 +321,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>betting/goEdit.do?BETTING_ID='+Id;
+			 diag.URL = '<%=basePath%>betting/goEdit.do?ID_CODE='+Id;
 			 diag.Width = 600;
 			 diag.Height = 450;
 			 diag.Modal = true;				//有无遮罩窗口

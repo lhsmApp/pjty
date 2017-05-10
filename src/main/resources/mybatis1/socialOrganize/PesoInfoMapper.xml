@@ -157,8 +157,8 @@
 		<if test="pd.lastEnd!=null and pd.lastEnd!=''"><!-- 成立时间检索 -->
 			and ESTA_TIME &lt;= #{pd.lastEnd} 
 		</if>
-		<if test="pd.STATUS != null and pd.STATUS != ''"><!-- 状态检索 -->
-			and STATE=#{pd.STATE} 
+		<if test="pd.STATE != null and pd.STATE != ''"><!-- 状态检索 -->
+			and STATE = #{pd.STATE} 
 		</if>
 		order by PESO_NAME
 	</select>

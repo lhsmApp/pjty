@@ -49,10 +49,10 @@ public interface PesoactInfoManager{
 	public PageData findById(PageData pd)throws Exception;
 	
 	/**批量删除
-	 * @param ArrayDATA_IDS
+	 * @param list
 	 * @throws Exception
 	 */
-	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
+	public void deleteAll(List<PageData> list)throws Exception;
 	
 }
 

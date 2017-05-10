@@ -156,7 +156,7 @@ public class PesoactInfoController extends BaseController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		pd = this.getPageData();
 		List<PageData> pdList = new ArrayList<PageData>();
-		String DATA_IDS = pd.getString("DATA_IDS");
+		/*String DATA_IDS = pd.getString("DATA_IDS");
 		if(null != DATA_IDS && !"".equals(DATA_IDS)){
 			String ArrayDATA_IDS[] = DATA_IDS.split(",");
 			pesoactinfoService.deleteAll(ArrayDATA_IDS);
@@ -164,7 +164,7 @@ public class PesoactInfoController extends BaseController {
 		}else{
 			pd.put("msg", "no");
 		}
-		pdList.add(pd);
+		pdList.add(pd);*/
 		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
 	}

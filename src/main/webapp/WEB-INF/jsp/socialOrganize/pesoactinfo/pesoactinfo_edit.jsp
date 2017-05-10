@@ -28,7 +28,6 @@
 					<div class="col-xs-12">
 					
 					<form action="pesoactinfo/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="PESOACTINFO_ID" id="PESOACTINFO_ID" value="${pd.PESOACTINFO_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
@@ -104,36 +103,6 @@
 		            time:2
 		        });
 				$("#ACT_NAME").focus();
-			return false;
-			}
-			if($("#CAPI_SITU").val()==""){
-				$("#CAPI_SITU").tips({
-					side:3,
-		            msg:'请输入资金落实情况',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#CAPI_SITU").focus();
-			return false;
-			}
-			if($("#EFFECT").val()==""){
-				$("#EFFECT").tips({
-					side:3,
-		            msg:'请输入成效评价',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#EFFECT").focus();
-			return false;
-			}
-			if($("#REMARK").val()==""){
-				$("#REMARK").tips({
-					side:3,
-		            msg:'请输入备注',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#REMARK").focus();
 			return false;
 			}
 			$("#Form").submit();

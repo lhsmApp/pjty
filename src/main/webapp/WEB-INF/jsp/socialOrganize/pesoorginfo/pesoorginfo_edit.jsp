@@ -28,7 +28,6 @@
 					<div class="col-xs-12">
 					
 					<form action="pesoorginfo/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="PESOORGINFO_ID" id="PESOORGINFO_ID" value="${pd.PESOORGINFO_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>

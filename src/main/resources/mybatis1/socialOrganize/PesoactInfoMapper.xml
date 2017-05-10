@@ -21,7 +21,8 @@
 		CAPI_SITU,	
 		EFFECT,	
 		REMARK,	
-		PESOACTINFO_ID
+		PESO_NAME as PESOACT_PESO_NAME,	
+		ACT_NAME as PESOACT_ACT_NAME
 	</sql>
 	
 	<!-- 字段值 -->
@@ -38,7 +39,8 @@
 		#{CAPI_SITU},	
 		#{EFFECT},	
 		#{REMARK},	
-		#{PESO_NAME}
+		#{PESO_NAME},	
+		#{ACT_NAME}
 	</sql>
 	
 	<!-- 新增-->
@@ -57,7 +59,9 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOACTINFO_ID}
+			PESO_NAME = #{PESOACT_PESO_NAME}
+		and 
+		    ACT_NAME = #{PESOACT_ACT_NAME}
 	</delete>
 	
 	<!-- 修改 -->
@@ -71,7 +75,9 @@
 			EFFECT = #{EFFECT},
 			REMARK = #{REMARK}
 		where 
-		PESO_NAME = #{PESOACTINFO_ID}
+		    PESO_NAME = #{PESOACT_PESO_NAME}
+		and 
+		    ACT_NAME = #{PESOACT_ACT_NAME}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -81,7 +87,9 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOACTINFO_ID}
+			PESO_NAME = #{PESOACT_PESO_NAME}
+		and 
+		    ACT_NAME = #{PESOACT_ACT_NAME}
 	</select>
 	
 	<!-- 列表 -->
@@ -112,14 +120,13 @@
 	</select>
 	
 	<!-- 批量删除 -->
-	<delete id="deleteAll" parameterType="String">
+	<delete id="deleteAll" parameterType="pd">
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME in
-		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-                 #{item}
-		</foreach>
+        <foreach collection="list" item="item" open="" close="" separator="OR">  
+            (PESO_NAME = #{item.PESOACT_PESO_NAME} and ACT_NAME = #{item.PESOACT_ACT_NAME})
+        </foreach> 
 	</delete>
 	
 	<!-- fh313596790qq(青苔) -->

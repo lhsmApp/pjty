@@ -71,11 +71,11 @@ public class PesoactInfoService implements PesoactInfoManager{
 	}
 	
 	/**批量删除
-	 * @param ArrayDATA_IDS
+	 * @param list
 	 * @throws Exception
 	 */
-	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
-		dao.delete("PesoactInfoMapper.deleteAll", ArrayDATA_IDS);
+	public void deleteAll(List<PageData> list)throws Exception{
+		dao.delete("PesoactInfoMapper.deleteAll", list);
 	}
 	
 }

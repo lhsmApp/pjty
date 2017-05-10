@@ -23,7 +23,9 @@
 		STAFF_SEX,	
 		MOBILE_TEL,	
 		REMARK,	
-		PESO_NAME as PESOORGINFO_ID
+		PESO_NAME as PESOORG_PESO_NAME,
+		STAFF_JOB as PESOORG_STAFF_JOB,
+		LEADER_NAME as PESOORG_LEADER_NAME
 	</sql>
 	
 	<!-- 字段值 -->
@@ -42,7 +44,9 @@
 		#{STAFF_SEX},	
 		#{MOBILE_TEL},	
 		#{REMARK},	
-		#{PESO_NAME}
+		#{PESO_NAME},	
+		#{STAFF_JOB},	
+		#{LEADER_NAME}
 	</sql>
 	
 	<!-- 新增-->
@@ -61,7 +65,11 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOORGINFO_ID}
+			PESO_NAME = #{PESOORG_PESO_NAME}
+	    and
+			STAFF_JOB = #{PESOORG_STAFF_JOB}
+		and
+			LEADER_NAME = #{PESOORG_LEADER_NAME}
 	</delete>
 	
 	<!-- 修改 -->
@@ -76,7 +84,11 @@
 			MOBILE_TEL = #{MOBILE_TEL},
 			REMARK = #{REMARK}
 		where 
-		PESO_NAME = #{PESOORGINFO_ID}
+			PESO_NAME = #{PESOORG_PESO_NAME}
+	    and
+			STAFF_JOB = #{PESOORG_STAFF_JOB}
+		and
+			LEADER_NAME = #{PESOORG_LEADER_NAME}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -86,7 +98,11 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOORGINFO_ID}
+			PESO_NAME = #{PESOORG_PESO_NAME}
+	    and
+			STAFF_JOB = #{PESOORG_STAFF_JOB}
+		and
+			LEADER_NAME = #{PESOORG_LEADER_NAME}
 	</select>
 	
 	<!-- 列表 -->

@@ -18,6 +18,7 @@
 <%@ include file="../../system/index/top.jsp"%>
 <!-- 日期框 -->
 <link rel="stylesheet" href="static/ace/css/datepicker.css" />
+
 </head>
 <body class="no-skin">
 	<!-- /section:basics/navbar.layout -->
@@ -72,7 +73,7 @@
 									<select class="chosen-select form-control" name="BELONG_AREA" id="BELONG_AREA" data-placeholder="请选择所属区域" style="vertical-align:top;" title="所属区域" style="width:98%;">
 									<option value=""></option>
 									<c:forEach items="${areaList}" var="area">
-										<option value="${area.AREA_NAME }" <c:if test="${pd.BELONG_AREA==area.AREA_ID}">selected</c:if>>${area.AREA_NAME }</option>
+											<option value="${area.BIANMA }" <c:if test="${area.BIANMA == pd.BELONG_AREA }">selected</c:if>>${area.NAME }</option>
 									</c:forEach>
 								  	</select>
 								  	
@@ -88,22 +89,23 @@
 										<tr>
 											<td
 												style="width: 75px; text-align: right; padding-top: 13px;">场馆基本情况:</td>
-											<td><input type="text" name="STADI_INTR" id="STADI_INTR"
+											<td colspan="3"><input type="text" name="STADI_INTR" id="STADI_INTR"
 												value="${pd.STADI_INTR}" maxlength="2000"
 												placeholder="这里输入场馆基本情况" title="场馆基本情况" style="width: 98%;" /></td>
+											</tr>
+											<tr>
 											<td
 												style="width: 75px; text-align: right; padding-top: 13px;">地理坐标:</td>
-											<td><input type="text" name="GEOG_COOR" id="GEOG_COOR"
-												value="${pd.GEOG_COOR}" maxlength="20"
-												placeholder="这里输入地理坐标" title="地理坐标" style="width: 98%;" /></td>
+											<td colspan="3">
+									<input type="text" readonly name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}" maxlength="20" placeholder="这里输入地理坐标" title="地理坐标" style="width:90%;"/>
+									<a class="btn btn-xs btn-success" title="编辑" onclick="openStadiumMap();" style="width:8%;margin-bottom:3px;">
+										<i class="ace-icon fa fa-globe bigger-120" title="打开地图"></i>
+									</a>
 										</tr>
 										<tr>
-											<td
-												style="width: 75px; text-align: right; padding-top: 13px;">备注:</td>
-											<td><input type="text" name="REMARK" id="REMARK"
-												value="${pd.REMARK}" maxlength="500" placeholder="这里输入备注"
-												title="备注" style="width: 98%;" /></td>
-										</tr>
+								<td  style="width:79px;text-align: right;padding-top: 13px;">备注:</td>
+								<td colspan="3"><input type="text" name="REMARK" id="REMARK" value="${pd.REMARK}" maxlength="500" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
+							</tr>
 										<tr>
 											<td style="text-align: center;" colspan="10"><a
 												class="btn btn-mini btn-primary" onclick="save();">保存</a> <a
@@ -139,6 +141,8 @@
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+	<!--引入属于此页面的js -->
+	<script type="text/javascript" src="static/js/myjs/mapSelect.js"></script>
 	<script type="text/javascript">
 		$(top.hangge());
 		//保存

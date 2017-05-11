@@ -109,6 +109,29 @@
 		<include refid="tableName"></include>
 	</select>
 	
+	<!-- 列表(全部)根据条件搜索 -->
+	<select id="listAllByCondition" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		<where >
+			<if test="keywords!= null and keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+					stadi_addr LIKE CONCAT(CONCAT('%', #{keywords}),'%')
+				)
+				
+			</if>
+			<if test="BELONG_AREA != null and BELONG_AREA != ''"><!-- 所在区域 -->
+				and BELONG_AREA=#{BELONG_AREA} 
+			</if>
+			<if test="STAD_NAME != null and STAD_NAME != ''"><!-- 体育馆名字 -->
+				and STAD_NAME=#{STAD_NAME} 
+			</if>
+		</where>
+	</select>
+	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
 		delete from

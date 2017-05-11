@@ -27,6 +27,30 @@ function openMap(){
 	 diag.show();
 }
 
+function openStadiumMap(){
+	var addr=document.getElementById('STADI_ADDR').value;
+	var geogCode=document.getElementById('GEOG_COOR').value;
+	 top.jzts();
+	 var diag = new top.Dialog();
+	 diag.Drag=true;
+	 diag.Title ="地图";
+	 diag.URL =locat+"/tool/mapSelect.do?addr="+addr+"&GEOG_COOR="+geogCode;
+	 diag.Width = 800;
+	 diag.Height = 500;
+	 
+	 
+	 diag.CancelEvent = function(){ //关闭事件
+		 if(diag.innerFrame.contentWindow.isClose){
+			 var x=diag.innerFrame.contentWindow.document.getElementById('ZUOBIAO_X').value;
+			 var y=diag.innerFrame.contentWindow.document.getElementById('ZUOBIAO_Y').value;
+			 if(x!=null&&x!="")
+				 document.getElementById("GEOG_COOR").value = x+","+y;
+		 }
+		diag.close();
+	 };
+	 diag.show();
+}
+
 
 //去后计算
 function getDistance(){

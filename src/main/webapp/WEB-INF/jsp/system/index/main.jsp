@@ -6,6 +6,12 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	/* String username="cc";
+	if(session.getAttribute("SESSION_USERNAME")!=null){
+		username=session.getAttribute("SESSION_USERNAME").toString();
+		out.println("ssss"+username);
+	}
+	out.println("kkkkk"+session.getAttribute("SESSION_USERNAME")); */
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,16 +65,38 @@
 			} catch (e) {
 			}
 		</script>
-
 		<!-- #section:basics/sidebar -->
-		<!-- 左侧菜单 -->
-		<%@ include file="left.jsp"%>
-
+		<c:if test="${pd.USERNAME!='Guest'}">
+			<!-- 左侧菜单 -->
+			<%@ include file="left.jsp"%>
+		</c:if>
 		<!-- /section:basics/sidebar -->
 		<div class="main-content">
 			<div class="main-content-inner">
-
-				<!-- /section:basics/content.breadcrumbs -->
+				
+				<c:if test="${pd.USERNAME=='Guest'}">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+	
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="main/index">首页</a>
+							</li>
+	
+							<!-- <li>
+								<a href="#">Tables</a>
+							</li> -->
+							<li class="active">工作面板</li>
+						</ul><!-- /.breadcrumb -->
+					</div>
+	
+					<!-- /section:basics/content.breadcrumbs -->
+				</c:if>
+				
 				<div class="page-content">
 					<!-- #section:settings.box -->
 					<div class="ace-settings-container" id="ace-settings-container">
@@ -137,10 +165,16 @@
 										for="ace-settings-compact">压缩菜单</label>
 								</div>
 
-								<div class="ace-settings-item">
+								<!-- <div class="ace-settings-item">
 									<input type="checkbox" class="ace ace-checkbox-2"
 										id="ace-settings-highlight" /> <label class="lbl"
 										for="ace-settings-highlight">弹出风格</label>
+								</div> -->
+								<div class="ace-settings-item">
+									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+									<label class="lbl" for="ace-settings-add-container">
+										居中风格
+									</label>
 								</div>
 
 								<!-- /section:basics/sidebar.options -->
@@ -149,24 +183,48 @@
 						</div>
 						<!-- /.ace-settings-box -->
 					</div>
-					<!-- /.ace-settings-container -->
+					<!-- /section:settings.box -->
+					
+					<c:if test="${pd.USERNAME=='Guest'}">
+						<div class="page-header">
+							<h1>
+								工作面板
+								<small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									静态  &amp; 首页信息
+								</small>
+							</h1>
+						</div>
+						<!-- /.page-header -->
+					</c:if>
+					
 					<div class="row">
-						<div id="jzts"
-							style="display: none; width: 100%; position: fixed; z-index: 99999999;">
-							<div class="commitopacity" id="bkbgjz"></div>
-							<div style="padding-left: 70%; padding-top: 1px;">
-								<div style="float: left; margin-top: 3px;">
-									<img src="static/images/loadingi.gif" />
+						<c:choose>
+							<c:when test="${pd.USERNAME=='Guest'}">
+								<div>
+									<iframe name="mainFrame" id="mainFrame" frameborder="0"
+										src="login_default.do" style="margin: 0 auto; width: 100%; height: 100%;"></iframe>
 								</div>
-								<div style="margin-top: 6px;">
-									<h4 class="lighter block red">&nbsp;加载中 ...</h4>
+							</c:when>
+							<c:otherwise>
+								<div id="jzts"
+									style="display: none; width: 100%; position: fixed; z-index: 99999999;">
+									<div class="commitopacity" id="bkbgjz"></div>
+									<div style="padding-left: 70%; padding-top: 1px;">
+										<div style="float: left; margin-top: 3px;">
+											<img src="static/images/loadingi.gif" />
+										</div>
+										<div style="margin-top: 6px;">
+											<h4 class="lighter block red">&nbsp;加载中 ...</h4>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div>
-							<iframe name="mainFrame" id="mainFrame" frameborder="0"
-								src="tab.do" style="margin: 0 auto; width: 100%; height: 100%;"></iframe>
-						</div>
+								<div>
+									<iframe name="mainFrame" id="mainFrame" frameborder="0"
+										src="tab.do" style="margin: 0 auto; width: 100%; height: 100%;"></iframe>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<!-- /.row -->
 				</div>

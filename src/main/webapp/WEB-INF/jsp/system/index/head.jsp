@@ -19,7 +19,10 @@
 				<div class="navbar-header pull-left">
 					<!-- #section:basics/navbar.layout.brand -->
 					<a class="navbar-brand">
-						<small> <i class="fa fa-leaf"></i> ${pd.SYSNAME} </small>
+						<small> 
+							<i class="fa fa-leaf"></i> 
+							<span style="font-family:'微软雅黑';color: #fff;font-weight: bold;font-size: 20px;">${pd.SYSNAME}</span> 
+						</small>
 					</a>
 
 					<!-- /section:basics/navbar.layout.brand -->

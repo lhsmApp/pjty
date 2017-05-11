@@ -28,16 +28,34 @@
 					<div class="col-xs-12">
 					
 					<form action="pesoorginfo/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="PESOORGINFO_ID" id="PESOORGINFO_ID" value="${pd.PESOORGINFO_ID}"/>
+						<input type="hidden" name="PESOORG_PESO_NAME" id="PESOORG_PESO_NAME" value="${pd.PESOORG_PESO_NAME}"/>
+						<input type="hidden" name="PESOORG_STAFF_JOB" id="PESOORG_STAFF_JOB" value="${pd.PESOORG_STAFF_JOB}"/>
+						<input type="hidden" name="PESOORG_LEADER_NAME" id="PESOORG_LEADER_NAME" value="${pd.PESOORG_LEADER_NAME}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">社会组织名称:</td>
-								<td><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td>
+								<!-- <td><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td> -->
+								<td>
+								    <select class="chosen-select form-control" name="PESO_NAME" id="PESO_NAME" data-placeholder="请选择社会组织名称" style="vertical-align:top;" title="社会组织名称" style="width:98%;">
+								        <option value=""></option>
+									    <c:forEach items="${nameList }" var="each">
+                                           <option value="${each.PESO_NAME }" <c:if test="${each.PESO_NAME== pd.PESO_NAME}">selected</c:if>>${each.PESO_NAME}</option>
+									    </c:forEach>
+								    </select>
+								</td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">社会组织领导职务:</td>
-								<td><input type="text" name="STAFF_JOB" id="STAFF_JOB" value="${pd.STAFF_JOB}" maxlength="4" placeholder="这里输入社会组织领导职务" title="社会组织领导职务" style="width:98%;"/></td>
+								<!-- <td><input type="text" name="STAFF_JOB" id="STAFF_JOB" value="${pd.STAFF_JOB}" maxlength="4" placeholder="这里输入社会组织领导职务" title="社会组织领导职务" style="width:98%;"/></td> -->
+							    <td>
+								    <select class="chosen-select form-control" name="STAFF_JOB" id="STAFF_JOB" data-placeholder="请选择社会组织领导职务" style="vertical-align:top;" title="社会组织领导职务" style="width:98%;">
+								        <option value=""></option>
+									    <c:forEach items="${postList }" var="each">
+                                           <option value="${each.POST_ID }" <c:if test="${each.POST_ID== pd.STAFF_JOB}">selected</c:if>>${each.POST_NAME}</option>
+									    </c:forEach>
+								    </select>
+								</td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">姓名:</td>
@@ -45,7 +63,15 @@
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">性别:</td>
-								<td><input type="text" name="STAFF_SEX" id="STAFF_SEX" value="${pd.STAFF_SEX}" maxlength="1" placeholder="这里输入性别" title="性别" style="width:98%;"/></td>
+								<!-- <td><input type="text" name="STAFF_SEX" id="STAFF_SEX" value="${pd.STAFF_SEX}" maxlength="1" placeholder="这里输入性别" title="性别" style="width:98%;"/></td> -->
+							    <td>
+								    <select class="chosen-select form-control" name="STAFF_SEX" id="STAFF_SEX" data-placeholder="请选择性别" style="vertical-align:top;" title="性别" style="width:98%;">
+								        <option value=""></option>
+									    <c:forEach items="${sexList }" var="each">
+                                           <option value="${each.SEX_ID }" <c:if test="${each.SEX_ID== pd.STAFF_SEX}">selected</c:if>>${each.SEX_NAME}</option>
+									    </c:forEach>
+								    </select>
+								</td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">联系电话:</td>
@@ -118,36 +144,6 @@
 		            time:2
 		        });
 				$("#LEADER_NAME").focus();
-			return false;
-			}
-			if($("#STAFF_SEX").val()==""){
-				$("#STAFF_SEX").tips({
-					side:3,
-		            msg:'请输入性别',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#STAFF_SEX").focus();
-			return false;
-			}
-			if($("#MOBILE_TEL").val()==""){
-				$("#MOBILE_TEL").tips({
-					side:3,
-		            msg:'请输入联系电话',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#MOBILE_TEL").focus();
-			return false;
-			}
-			if($("#REMARK").val()==""){
-				$("#REMARK").tips({
-					side:3,
-		            msg:'请输入备注',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#REMARK").focus();
 			return false;
 			}
 			$("#Form").submit();

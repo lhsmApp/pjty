@@ -62,6 +62,14 @@ public class PesoactInfoService implements PesoactInfoManager{
 		return (List<PageData>)dao.findForList("PesoactInfoMapper.listAll", pd);
 	}
 	
+	/**列表
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public List<PageData> pesoNameList()throws Exception{
+		return (List<PageData>)dao.findForList("PesoactInfoMapper.pesoNameList", null);
+	}
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception

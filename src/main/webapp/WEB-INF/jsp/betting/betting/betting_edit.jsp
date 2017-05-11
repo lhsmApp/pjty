@@ -53,12 +53,12 @@
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">所属区域:</td>
-								<%-- <td><input type="text" name="BELONG_AREA" id="BELONG_AREA" value="${pd.BELONG_AREA}" maxlength="4" placeholder="这里输入所属区域" title="所属区域" style="width:98%;"/></td> --%>
+								<%-- <td><input type="text" name="BELONG_AREA" id="BELONG_AREA" value="${pd.BELONG_AREA}" maxlength="10" placeholder="这里输入所属区域" title="所属区域" style="width:98%;"/></td> --%>
 								<td id="ssqy">
 									<select class="form-control" name="BELONG_AREA" id="BELONG_AREA" data-placeholder="请选择所属区域" style="vertical-align:top;"  title="所属区域" style="width:98%;" >
 										<option value=""></option>
 										<c:forEach items="${areaList}" var="area">
-											<option value="${area.AREA_ID }" <c:if test="${area.AREA_ID == pd.BELONG_AREA }">selected</c:if>>${area.AREA_NAME }</option>
+											<option value="${area.BIANMA }" <c:if test="${area.BIANMA == pd.BELONG_AREA }">selected</c:if>>${area.NAME }</option>
 										</c:forEach>
 									</select>
 								</td>

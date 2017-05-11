@@ -14,7 +14,7 @@
 <!-- 下拉框 -->
 <link rel="stylesheet" href="static/ace/css/chosen.css" />
 <!-- jsp文件头和头部 -->
-<%@ include file="../system/index/top.jsp"%>
+<%@ include file="../../system/index/top.jsp"%>
 
 <style type="text/css">
 body, html, #allmap {
@@ -114,71 +114,76 @@ body, html, #allmap {
 		</div>
 		<div class="bottom">
 			<div class="bottom-form">
-				<form action="betting/list.do" method="post" name="Form" id="Form">
-					<div id="detail" style="margin-bottom:20px;">
+				<form action="betting/mapQuery.do" method="post" name="Form"
+					id="Form">
+					<div id="detail" style="margin-bottom: 20px;">
 						<p class="text-info">
-							<strong>营业执照注册号：ZC001</strong>
+							<strong>营业执照注册号：<c:if
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].LICENSE_NO}</c:if></strong>
 						</p>
 						<p>
-							<span class="muted">所属区域：</span><span class="text-info">兴隆台区</span>
+							<span class="muted">所属区域：</span><span class="text-info"><c:if
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BELONG_AREA}</c:if></span>
 						</p>
 						<p>
-							<span class="muted">投注站地址：</span><span class="text-info">石油大街</span>
+							<span class="muted">投注站地址：</span><span class="text-info"><c:if
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BETT_ADDR}</c:if></span>
 						</p>
 						<p>
 							<abbr title="Phone" class="muted">手机号：</abbr><span
-								class="text-info">13999999999</span>
+								class="text-info"><c:if
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].MOBILE_TEL}</c:if></span>
 						</p>
 						<p>
-							<span class="muted">简介：</span><span class="text-info">石油大街3平方米</span>
+							<span class="muted">简介：</span><span class="text-info"><c:if
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BETT_INTR}</c:if></span>
 						</p>
 					</div>
 					<div class="form-inline has-feedback">
 						<select class="chosen-select form-control" name="BELONG_AREA"
 							id="belong_area" data-placeholder="请选择所属区域"
-							style="vertical-align: top; width: 120px;">
+							style="vertical-align: top; width: 120px;" onchange="change(this.value)">
 							<option value=""></option>
 							<option value="">全部</option>
 							<c:forEach items="${areaList}" var="area">
-								<option value="${area.AREA_ID }"
-									<c:if test="${pd.BELONG_AREA==area.AREA_ID}">selected</c:if>>${area.AREA_NAME }</option>
+								<option value="${area.BIANMA }"
+									<c:if test="${pd.BELONG_AREA==area.BIANMA}">selected</c:if>>${area.NAME }</option>
 							</c:forEach>
 						</select>
 					</div>
 					<div class="form-inline has-feedback">
-						<select class="chosen-select form-control" name="BELONG_AREA"
-							id="belong_area" data-placeholder="请选择投注站"
+						<select class="chosen-select form-control" name="ID_CODE"
+							id="id_code" data-placeholder="请选择投注站"
 							style="vertical-align: top; width: 120px;">
 							<option value=""></option>
 							<option value="">全部</option>
-							<c:forEach items="${areaList}" var="area">
-								<option value="${area.AREA_ID }"
-									<c:if test="${pd.BELONG_AREA==area.AREA_ID}">selected</c:if>>${area.AREA_NAME }</option>
+							<c:forEach items="${varList}" var="bet">
+								<option value="${bet.ID_CODE}" <c:if test="${pd.ID_CODE==bet.ID_CODE}">selected</c:if>>${bet.LICENSE_NO }</option>
 							</c:forEach>
 						</select>
 					</div>
 					<div class="input-group has-feedback">
 						<span class="input-group-addon"> <i
 							class="ace-icon fa fa-check"></i>
-						</span> <input id="suggestId" type="text" value=""
+						</span> <input id="suggestId" type="text" name="keywords" value="${pd.keywords }"
 							class="form-control search-query" placeholder="这里输入搜索地址" /> <span
-							class="input-group-btn">
-						</span>
+							class="input-group-btn"> </span>
 					</div>
 					<button type="submit"
-						class="btn btn-block btn-danger btn-sm has-feedback" onclick="search()">搜索</button>
+						class="btn btn-block btn-danger btn-sm has-feedback"
+						onclick="search()">搜索</button>
 				</form>
 			</div>
 		</div>
 	</div>
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
-	<%@ include file="../system/index/foot.jsp"%>
+	<%@ include file="../../system/index/foot.jsp"%>
 	<!-- 下拉框 -->
 	<script src="static/ace/js/chosen.jquery.js"></script>
 	<script type="text/javascript">
 		$(top.hangge());
-		
+
 		/**
 		 * 控件及数据初始化
 		 */
@@ -220,15 +225,22 @@ body, html, #allmap {
 										'tag-input-style');
 						});
 			}
+
+			initPlases();
+
 		});
-		
+
 		var map = new BMap.Map("allmap");
 		map.centerAndZoom("盘锦", 12); // 初始化地图,设置城市和地图级别。
 
 		//map.addControl(new BMap.ScaleControl()); // 添加默认比例尺控件
-		map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT}));
+		map.addControl(new BMap.ScaleControl({
+			anchor : BMAP_ANCHOR_BOTTOM_RIGHT
+		}));
 		//map.addControl(new BMap.NavigationControl()); //添加默认缩放平移控件
-		map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT}));  //右上角，仅包含平移和缩放按钮
+		map.addControl(new BMap.NavigationControl({
+			anchor : BMAP_ANCHOR_TOP_RIGHT
+		})); //右上角，仅包含平移和缩放按钮
 
 		map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 		map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
@@ -254,7 +266,41 @@ body, html, #allmap {
 			}
 		}); */
 
-		
+		/**
+		 * 根据搜索的条件设置地图坐标
+		 */
+		function initPlases() {
+			//var bettingList=eval("("+bettingStr+")");
+			//var bettingList=$.parseJSON(bettingStr);
+			//var bettingStr = JSON.stringify("${varList}") 
+
+			var bettingList = ${searchJson};
+			map.clearOverlays(); //清除地图上所有覆盖物
+			for (var i = 0; i < bettingList.length; i++) {
+				var addr = bettingList[i].GEOG_COOR;
+				setPlaceByGeog(addr);
+			}
+		}
+
+		/**
+		 * 根据坐标定位地图坐标
+		 */
+		function setPlaceByGeog(geogCode) {
+			if (geogCode != null && geogCode != "") {
+				var geogCodes = geogCode.split(',');
+				var x = geogCodes[0];
+				var y = geogCodes[1];
+				var point = new BMap.Point(y, x);
+				//map.panTo(point);
+				window.setTimeout(function() {
+					//map.setCenter(point);
+					//map.panTo(point); 
+					//map.zoomTo(18);
+					map.addOverlay(new BMap.Marker(point)); //添加标注
+				}, 1000);
+			}
+		}
+
 		/**
 		 * 根据地址定位地图坐标
 		 */
@@ -280,9 +326,38 @@ body, html, #allmap {
 		 * 根据指定搜索条件定位地图坐标
 		 */
 		function search() {
-			var addr = $("#suggestId").val();
+			top.jzts();
+			$("#Form").submit();
+
+			/* var addr = $("#suggestId").val();
 			if (addr != null && addr != "")
-				setPlace(addr);
+				setPlace(addr); */
+		}
+		
+		/**
+		 * 第一级值改变事件(初始第二级)
+		 */
+		function change(value){
+			console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
+			console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
+			$('#id_code_chosen ul.chosen-results li').remove();
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>betting/getBettingByBelongarea.do',
+		    	data: {BELONG_AREA:value},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					$(".chosen-results").html();
+					//console.log($('#id_code_chosen');
+					
+					$("#id_code").html("<option value=''></option><option>全部</option>");
+					 $.each(data.list, function(i, bet){
+							$("#id_code").append("<option value="+bet.ID_CODE+">"+bet.LICENSE_NO+"</option>");
+					 });
+
+				}
+			});
 		}
 	</script>
 </body>

@@ -201,12 +201,6 @@ body, html {
 				setPlace(addr);
 		}
 		
-		window.onload = function() {
-			var addr = "${pd.addr}";
-			
-			$("#suggestId").val(addr);
-			console.log($("#suggestId").val());
-		}
 	</script>
 </body>
 

@@ -272,13 +272,17 @@ public class PesoInfoController extends BaseController {
 	private List<PageData> getStateList(){
 		List<PageData> areaList=new ArrayList<PageData>();
 		PageData pd0 = new PageData();
-		pd0.put("STATE_ID", "0");
-		pd0.put("STATE_NAME", "注销/解散");
+		pd0.put("STATE_ID", "1");
+		pd0.put("STATE_NAME", "正常");
 		areaList.add(pd0);
 		PageData pd1 = new PageData();
-		pd1.put("STATE_ID", "1");
-		pd1.put("STATE_NAME", "正常");
+		pd1.put("STATE_ID", "2");
+		pd1.put("STATE_NAME", "注销");
 		areaList.add(pd1);
+		PageData pd2 = new PageData();
+		pd2.put("STATE_ID", "3");
+		pd2.put("STATE_NAME", "解散");
+		areaList.add(pd2);
         return areaList;
 	}
 }

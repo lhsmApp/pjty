@@ -42,14 +42,13 @@
 										</span>
 									</div>
 								</td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
 								<td style="vertical-align:top;padding-left:2px;">
-								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+								 	<select class="chosen-select form-control" name="PESO_NAME" id="PESO_NAME" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 									<option value=""></option>
 									<option value="">全部</option>
-									<option value="">1</option>
-									<option value="">2</option>
+									<c:forEach items="${nameList }" var="each">
+                                       <option value="${each.PESO_NAME }" <c:if test="${each.PESO_NAME== pd.PESO_NAME}">selected</c:if>>${each.PESO_NAME}</option>
+									</c:forEach>
 								  	</select>
 								</td>
 								<c:if test="${QX.cha == 1 }">
@@ -89,9 +88,19 @@
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.PESO_NAME}</td>
-											<td class='center'>${var.STAFF_JOB}</td>
+											<!-- <td class='center'>${var.STAFF_JOB}</td> -->
+											<td class='center'>
+										        <c:forEach items="${postList}" var="each">
+										        	<c:if test="${each.POST_ID == var.STAFF_JOB}">${each.POST_NAME}</c:if>
+										        </c:forEach>
+										    </td>
 											<td class='center'>${var.LEADER_NAME}</td>
-											<td class='center'>${var.STAFF_SEX}</td>
+											<!-- <td class='center'>${var.STAFF_SEX}</td> -->
+											<td class='center'>
+										        <c:forEach items="${sexList}" var="each">
+										        	<c:if test="${each.SEX_ID == var.STAFF_SEX}">${each.SEX_NAME}</c:if>
+										        </c:forEach>
+										    </td>
 											<td class='center'>${var.MOBILE_TEL}</td>
 											<td class='center'>${var.REMARK}</td>
 											<td class="center">
@@ -100,12 +109,12 @@
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.PESOORGINFO_ID}');">
+													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.PESOORG_PESO_NAME}','${var.PESOORG_STAFF_JOB}','${var.PESOORG_LEADER_NAME}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.PESOORGINFO_ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.PESOORG_PESO_NAME}','${var.PESOORG_STAFF_JOB}','${var.PESOORG_LEADER_NAME}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -119,7 +128,7 @@
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.edit == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="edit('${var.PESOORGINFO_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
+																<a style="cursor:pointer;" onclick="edit('${var.PESOORG_PESO_NAME}','${var.PESOORG_STAFF_JOB}','${var.PESOORG_LEADER_NAME}');" class="tooltip-success" data-rel="tooltip" title="修改">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
@@ -128,7 +137,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.PESOORGINFO_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.PESOORG_PESO_NAME}','${var.PESOORG_STAFF_JOB}','${var.PESOORG_LEADER_NAME}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
@@ -286,11 +295,11 @@
 		}
 		
 		//删除
-		function del(Id){
+		function del(PESOORG_PESO_NAME,PESOORG_STAFF_JOB,PESOORG_LEADER_NAME){
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>pesoorginfo/delete.do?PESOORGINFO_ID="+Id+"&tm="+new Date().getTime();
+					var url = '<%=basePath%>pesoorginfo/delete.do?PESOORG_PESO_NAME='+PESOORG_PESO_NAME+'&PESOORG_STAFF_JOB='+PESOORG_STAFF_JOB+'&PESOORG_LEADER_NAME='+PESOORG_LEADER_NAME+'&tm='+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
@@ -299,12 +308,12 @@
 		}
 		
 		//修改
-		function edit(Id){
+		function edit(PESOORG_PESO_NAME,PESOORG_STAFF_JOB,PESOORG_LEADER_NAME){
 			 top.jzts();
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>pesoorginfo/goEdit.do?PESOORGINFO_ID='+Id;
+			 diag.URL = '<%=basePath%>pesoorginfo/goEdit.do?PESOORG_PESO_NAME='+PESOORG_PESO_NAME+'&PESOORG_STAFF_JOB='+PESOORG_STAFF_JOB+'&PESOORG_LEADER_NAME='+PESOORG_LEADER_NAME;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.Modal = true;				//有无遮罩窗口

@@ -186,9 +186,9 @@ function fhsms(){
 	 var diag = new top.Dialog();
 	 diag.Drag=true;
 	 diag.Title ="政策法规";
-	 diag.URL = locat+'/policy/listCustom.do';
-	 diag.Width = 800;
-	 diag.Height = 500;
+	 diag.URL = locat+'/policyCustom/listCustom.do';
+	 diag.Width = 1000;
+	 diag.Height = 800;
 	 diag.CancelEvent = function(){ //关闭事件
 		diag.close();
 	 };

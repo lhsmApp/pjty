@@ -182,7 +182,7 @@ function editSys(){
 
 //站内信
 function fhsms(){
-	 jzts();
+	 /*jzts();
 	 var diag = new top.Dialog();
 	 diag.Drag=true;
 	 diag.Title ="政策法规";
@@ -192,7 +192,12 @@ function fhsms(){
 	 diag.CancelEvent = function(){ //关闭事件
 		diag.close();
 	 };
-	 diag.show();
+	 diag.show();*/
+	 //if("${pd.USERNAME"=='Guest'})
+		 //$("#mainFrame").attr("src",locat+"/policyCustom/listCustom.do");
+	 /*else
+		 siMenu('z${menu2.MENU_ID }','lm${menu1.MENU_ID }','${menu2.MENU_NAME }','${menu2.MENU_URL }')*/
+		 //<c:if test="${not empty menu2.MENU_URL && '#' != menu2.MENU_URL}">target="mainFrame" onclick="siMenu('z${menu2.MENU_ID }','lm${menu1.MENU_ID }','${menu2.MENU_NAME }','${menu2.MENU_URL }')"</c:if>
 }
 
 //切换菜单

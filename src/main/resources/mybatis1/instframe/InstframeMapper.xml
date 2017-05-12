@@ -35,9 +35,9 @@
 		FUNCTION,	
 		ADDRESS,	
 		REMARK,	
-		INSTFRAME_ID,
-		PARENT_ID,
-		NAME
+		INST_CODE as INSTFRAME_ID,
+		INST_FATHER_CODE as PARENT_ID,
+		INST_NAME as NAME
 	</sql>
 	
 	<!-- 字段值 -->
@@ -50,10 +50,7 @@
 		#{MOBILE_TEL},	
 		#{FUNCTION},	
 		#{ADDRESS},	
-		#{REMARK},	
-		#{INSTFRAME_ID},
-		#{PARENT_ID},
-		#{NAME}
+		#{REMARK}
 	</sql>
 	
 	<!-- 新增-->
@@ -72,7 +69,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			INSTFRAME_ID = #{INSTFRAME_ID}
+			INST_CODE = #{INSTFRAME_ID}
 	</delete>
 	
 	<!-- 修改 -->
@@ -88,32 +85,30 @@
 			MOBILE_TEL = #{MOBILE_TEL},
 			FUNCTION = #{FUNCTION},
 			ADDRESS = #{ADDRESS},
-			REMARK = #{REMARK},
-		NAME = #{NAME},
-		INSTFRAME_ID = INSTFRAME_ID
+			REMARK = #{REMARK}
 		where 
-		INSTFRAME_ID = #{INSTFRAME_ID}
+		INST_CODE = #{INSTFRAME_ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
 	<select id="findById" parameterType="pd" resultType="pd">
 		select 
-		<include refid="Field"></include>
+		<include refid="SelectField"></include>
 		from 
 		<include refid="tableName"></include>
 		where 
-			INSTFRAME_ID = #{INSTFRAME_ID}
+			INST_CODE = #{INSTFRAME_ID}
 	</select>
 	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
-		<include refid="Field"></include>
+		<include refid="SelectField"></include>
 		from 
 		<include refid="tableName"></include>
 		where 1=1
 		<if test="pd.INSTFRAME_ID!= null and pd.INSTFRAME_ID != ''"><!-- 检索 -->
-		and PARENT_ID = #{pd.INSTFRAME_ID}
+		and INST_FATHER_CODE = #{pd.INSTFRAME_ID}
 		</if>
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
@@ -130,17 +125,17 @@
 	<!-- 通过ID获取其子级列表 -->
 	<select id="listByParentId" parameterType="String" resultMap="instframeResultMap">
 		select 
-		<include refid="Field"></include>
+		<include refid="SelectField"></include>
 		from 
 		<include refid="tableName"></include>
 		where 
-			PARENT_ID = #{parentId} order by NAME 
+			INST_FATHER_CODE = #{parentId} order by INST_NAME 
 	</select>
 	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
-		<include refid="Field"></include>
+		<include refid="SelectField"></include>
 		from 
 		<include refid="tableName"></include>
 	</select>

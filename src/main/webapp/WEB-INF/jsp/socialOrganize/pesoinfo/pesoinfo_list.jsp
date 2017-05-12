@@ -103,7 +103,7 @@
 											<!-- <td class='center'>${var.BELONG_AREA}</td> -->
 											<td class='center'>
 										        <c:forEach items="${areaList}" var="area">
-										        	<c:if test="${area.AREA_ID == var.BELONG_AREA}">${area.AREA_NAME}</c:if>
+										        	<c:if test="${area.BIANMA == var.BELONG_AREA}">${area.NAME}</c:if>
 										        </c:forEach>
 										    </td>
 											<td class='center'>${var.USCC}</td>
@@ -295,8 +295,8 @@
 			 diag.Drag=true;
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>pesoinfo/goAdd.do';
-			 diag.Width = 550;
-			 diag.Height = 355;
+			 diag.Width = 750;
+			 diag.Height = 455;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮

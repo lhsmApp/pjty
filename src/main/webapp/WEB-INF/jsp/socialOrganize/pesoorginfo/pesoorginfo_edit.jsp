@@ -52,7 +52,7 @@
 								    <select class="chosen-select form-control" name="STAFF_JOB" id="STAFF_JOB" data-placeholder="请选择社会组织领导职务" style="vertical-align:top;" title="社会组织领导职务" style="width:98%;">
 								        <option value=""></option>
 									    <c:forEach items="${postList }" var="each">
-                                           <option value="${each.POST_ID }" <c:if test="${each.POST_ID== pd.STAFF_JOB}">selected</c:if>>${each.POST_NAME}</option>
+                                           <option value="${each.BIANMA }" <c:if test="${each.BIANMA== pd.STAFF_JOB}">selected</c:if>>${each.NAME}</option>
 									    </c:forEach>
 								    </select>
 								</td>

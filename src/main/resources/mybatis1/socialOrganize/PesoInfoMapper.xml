@@ -54,31 +54,13 @@
 		#{HEAD_TEL},	
 		#{E_MAIL},	
 		#{OFFICE_TEL},	
-		#{OFFICE_ADDR},	
+		#{BETT_ADDR},	
 		#{FAX},	
 		#{PESO_INTR},	
 		#{REGI_CAPI},	
 		#{STATE},	
 		#{GEOG_COOR},	
 		#{REMARK}
-	</sql>
-	<sql id="SelectFieldValue">
-		#{PESO_NAME},	
-		#{ESTA_TIME},	
-		#{BELONG_AREA},	
-		#{USCC},	
-		#{HEAD_NAME},	
-		#{HEAD_TEL},	
-		#{E_MAIL},	
-		#{OFFICE_TEL},	
-		#{OFFICE_ADDR},	
-		#{FAX},	
-		#{PESO_INTR},	
-		#{REGI_CAPI},	
-		#{STATE},	
-		#{GEOG_COOR},	
-		#{REMARK},	
-		#{PESO_NAME}
 	</sql>
 	
 	<!-- 新增-->
@@ -115,7 +97,7 @@
 			HEAD_TEL = #{HEAD_TEL},
 			E_MAIL = #{E_MAIL},
 			OFFICE_TEL = #{OFFICE_TEL},
-			OFFICE_ADDR = #{OFFICE_ADDR},
+			OFFICE_ADDR = #{BETT_ADDR},
 			FAX = #{FAX},
 			PESO_INTR = #{PESO_INTR},
 			REGI_CAPI = #{REGI_CAPI},
@@ -172,6 +154,29 @@
 		<include refid="SelectField"></include>
 		from 
 		<include refid="tableName"></include>
+	</select>
+	
+	<!-- 列表(全部)根据条件搜索 -->
+	<select id="queryListByCondition" parameterType="pd" resultType="pd">
+		select
+		<include refid="SelectField"></include>
+		from 
+		<include refid="tableName"></include>
+		<where >
+			<if test="keywords!= null and keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+					OFFICE_ADDR LIKE CONCAT(CONCAT('%', #{keywords}),'%')
+				)
+				
+			</if>
+			<if test="BELONG_AREA != null and BELONG_AREA != ''"><!-- 所在区域 -->
+				and BELONG_AREA=#{BELONG_AREA} 
+			</if>
+			<if test="ID_CODE != null and ID_CODE != ''"><!-- 投注站编码 -->
+				and PESO_NAME=#{PESO_NAME} 
+			</if>
+		</where>
 	</select>
 	
 	<!-- 批量删除 -->

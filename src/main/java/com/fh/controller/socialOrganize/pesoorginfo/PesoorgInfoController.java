@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.fh.controller.base.BaseController;
+import com.fh.controller.common.DictsUtil;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
 import com.fh.util.ObjectExcelView;
@@ -24,6 +25,7 @@ import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.util.Tools;
 import com.fh.service.socialOrganize.pesoorginfo.PesoorgInfoManager;
+import com.fh.service.system.dictionaries.DictionariesManager;
 
 /** 
  * 说明：体育社会组织领导机构信息
@@ -37,6 +39,8 @@ public class PesoorgInfoController extends BaseController {
 	String menuUrl = "pesoorginfo/list.do"; //菜单地址(权限用)
 	@Resource(name="pesoorginfoService")
 	private PesoorgInfoManager pesoorginfoService;
+	@Resource(name="dictionariesService")
+	private DictionariesManager dictionariesService;
 	
 	/**保存
 	 * @param
@@ -109,9 +113,10 @@ public class PesoorgInfoController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		
+
+		DictsUtil dictUtil=new DictsUtil(dictionariesService);
 		mv.addObject("sexList", getSexList());
-		mv.addObject("postList", getPostList());
+		mv.addObject("postList", dictUtil.getDictsByParentBianma("002"));
 		mv.addObject("nameList", getNameList());
 		
 		return mv;
@@ -130,8 +135,9 @@ public class PesoorgInfoController extends BaseController {
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
 
+		DictsUtil dictUtil=new DictsUtil(dictionariesService);
 		mv.addObject("sexList", getSexList());
-		mv.addObject("postList", getPostList());
+		mv.addObject("postList", dictUtil.getDictsByParentBianma("002"));
 		mv.addObject("nameList", getNameList());
 		
 		return mv;
@@ -151,8 +157,9 @@ public class PesoorgInfoController extends BaseController {
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
 
+		DictsUtil dictUtil=new DictsUtil(dictionariesService);
 		mv.addObject("sexList", getSexList());
-		mv.addObject("postList", getPostList());
+		mv.addObject("postList", dictUtil.getDictsByParentBianma("002"));
 		mv.addObject("nameList", getNameList());
 		
 		return mv;
@@ -239,27 +246,6 @@ public class PesoorgInfoController extends BaseController {
 		pd1.put("SEX_NAME","女");
 		list.add(pd1);
 		return list;
-	}
-	
-	private List<PageData> getPostList(){
-		List<PageData> list=new ArrayList<PageData>();
-		PageData pd0 = new PageData();
-		pd0.put("POST_ID", "1");
-		pd0.put("POST_NAME", "会长");
-		list.add(pd0);
-		PageData pd1 = new PageData();
-		pd1.put("POST_ID", "2");
-		pd1.put("POST_NAME", "副会长");
-		list.add(pd1);
-		PageData pd2 = new PageData();
-		pd2.put("POST_ID", "3");
-		pd2.put("POST_NAME", "秘书长");
-		list.add(pd2);
-		PageData pd3 = new PageData();
-		pd3.put("POST_ID", "4");
-		pd3.put("POST_NAME", "副秘书长");
-		list.add(pd3);
-        return list;
 	}
 	
 	private List<PageData> getNameList() throws Exception{

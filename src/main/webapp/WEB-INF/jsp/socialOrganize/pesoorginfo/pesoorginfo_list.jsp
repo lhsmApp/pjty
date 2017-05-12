@@ -91,7 +91,7 @@
 											<!-- <td class='center'>${var.STAFF_JOB}</td> -->
 											<td class='center'>
 										        <c:forEach items="${postList}" var="each">
-										        	<c:if test="${each.POST_ID == var.STAFF_JOB}">${each.POST_NAME}</c:if>
+										        	<c:if test="${each.BIANMA == var.STAFF_JOB}">${each.NAME}</c:if>
 										        </c:forEach>
 										    </td>
 											<td class='center'>${var.LEADER_NAME}</td>

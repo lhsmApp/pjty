@@ -37,17 +37,6 @@
 		#{MOBILE_TEL},	
 		#{REMARK}
 	</sql>
-	<sql id="SelectFieldValue">
-		#{PESO_NAME},	
-		#{STAFF_JOB},	
-		#{LEADER_NAME},	
-		#{STAFF_SEX},	
-		#{MOBILE_TEL},	
-		#{REMARK},	
-		#{PESO_NAME},	
-		#{STAFF_JOB},	
-		#{LEADER_NAME}
-	</sql>
 	
 	<!-- 新增-->
 	<insert id="save" parameterType="pd">

@@ -33,50 +33,51 @@
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">社会组织名称:</td>
-								<td><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td>
-								<td style="width:79px;text-align: right;padding-top: 13px;">成立时间:</td>
-								<td><input class="span10 date-picker" name="ESTA_TIME" id="ESTA_TIME" value="${pd.ESTA_TIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="成立时间" title="成立时间" style="width:98%;"/></td>
-							
+								<td colspan="3"><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td>
 							</tr>
 							<tr>
+							    <td style="width:79px;text-align: right;padding-top: 13px;">成立时间:</td>
+								<td><input class="span10 date-picker" name="ESTA_TIME" id="ESTA_TIME" value="${pd.ESTA_TIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="成立时间" title="成立时间" style="width:98%;"/></td>
 								<td style="width:79px;text-align: right;padding-top: 13px;">所属区域:</td>
 								<!--<td><input type="text" name="BELONG_AREA" id="BELONG_AREA" value="${pd.BELONG_AREA}" maxlength="4" placeholder="这里输入所属区域" title="所属区域" style="width:98%;"/></td>-->
 								<td>
 									<select class="chosen-select form-control" name="BELONG_AREA" id="BELONG_AREA" data-placeholder="请选择所属区域" style="vertical-align:top;"  title="所属区域" style="width:98%;" >
 										<option value=""></option>
 										<c:forEach items="${areaList}" var="area">
-											<option value="${area.AREA_ID}" <c:if test="${area.AREA_ID == pd.BELONG_AREA}">selected</c:if>>${area.AREA_NAME}</option>
+											<option value="${area.BIANMA}" <c:if test="${area.BIANMA == pd.BELONG_AREA}">selected</c:if>>${area.NAME}</option>
 										</c:forEach>
 									</select>
 								</td>
+							</tr>
+							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">统一社会信用代码:</td>
 								<td><input type="text" name="USCC" id="USCC" value="${pd.USCC}" maxlength="18" placeholder="这里输入统一社会信用代码" title="统一社会信用代码" style="width:98%;"/></td>
-							</tr>
-							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">负责人:</td>
 								<td><input type="text" name="HEAD_NAME" id="HEAD_NAME" value="${pd.HEAD_NAME}" maxlength="20" placeholder="这里输入负责人" title="负责人" style="width:98%;"/></td>
+							</tr>
+							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">负责人手机:</td>
 								<td><input type="text" name="HEAD_TEL" id="HEAD_TEL" value="${pd.HEAD_TEL}" maxlength="11" placeholder="这里输入负责人手机" title="负责人手机" style="width:98%;"/></td>
-							</tr>
-							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">电子邮箱:</td>
 								<td><input type="text" name="E_MAIL" id="E_MAIL" value="${pd.E_MAIL}" maxlength="50" placeholder="这里输入电子邮箱" title="电子邮箱" style="width:98%;"/></td>
-								<td style="width:79px;text-align: right;padding-top: 13px;">办公电话:</td>
-								<td><input type="text" name="OFFICE_TEL" id="OFFICE_TEL" value="${pd.OFFICE_TEL}" maxlength="15" placeholder="这里输入办公电话" title="办公电话" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:79px;text-align: right;padding-top: 13px;">办公地址:</td>
-								<td><input type="text" name="OFFICE_ADDR" id="OFFICE_ADDR" value="${pd.OFFICE_ADDR}" maxlength="300" placeholder="这里输入办公地址" title="办公地址" style="width:98%;"/></td>
-								<td style="width:79px;text-align: right;padding-top: 13px;">传真:</td>
+								<td style="width:79px;text-align: right;padding-top: 13px;">办公电话:</td>
+								<td><input type="text" name="OFFICE_TEL" id="OFFICE_TEL" value="${pd.OFFICE_TEL}" maxlength="15" placeholder="这里输入办公电话" title="办公电话" style="width:98%;"/></td>
+							    <td style="width:79px;text-align: right;padding-top: 13px;">传真:</td>
 								<td><input type="text" name="FAX" id="FAX" value="${pd.FAX}" maxlength="15" placeholder="这里输入传真" title="传真" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:79px;text-align: right;padding-top: 13px;">职能简介:</td>
-								<td><input type="text" name="PESO_INTR" id="PESO_INTR" value="${pd.PESO_INTR}" maxlength="1000" placeholder="这里输入职能简介" title="职能简介" style="width:98%;"/></td>
-								<td style="width:79px;text-align: right;padding-top: 13px;">注册资金:</td>
-								<td><input type="number" name="REGI_CAPI" id="REGI_CAPI" value="${pd.REGI_CAPI}" maxlength="13" placeholder="这里输入注册资金" title="注册资金" style="width:98%;"/></td>
+								<td style="width:79px;text-align: right;padding-top: 13px;">办公地址:</td>
+								<td colspan="3"><input type="text" name="BETT_ADDR" id="BETT_ADDR" value="${pd.OFFICE_ADDR}" maxlength="300" placeholder="这里输入办公地址" title="办公地址" style="width:98%;"/></td>
 							</tr>
 							<tr>
+								<td style="width:79px;text-align: right;padding-top: 13px;">职能简介:</td>
+								<td colspan=3><input type="text" name="PESO_INTR" id="PESO_INTR" value="${pd.PESO_INTR}" maxlength="1000" placeholder="这里输入职能简介" title="职能简介" style="width:98%;"/></td>
+							</tr>
+							<tr>
+								<td style="width:79px;text-align: right;padding-top: 13px;">注册资金:</td>
+								<td><input type="number" name="REGI_CAPI" id="REGI_CAPI" value="${pd.REGI_CAPI}" maxlength="13" placeholder="这里输入注册资金" title="注册资金" style="width:98%;"/></td>
 								<td style="width:79px;text-align: right;padding-top: 13px;">状态:</td>
 								<!-- <td><input type="text" name="STATE" id="STATE" value="${pd.STATE}" maxlength="1" placeholder="这里输入状态" title="状态" style="width:98%;"/></td> -->
 								<td>
@@ -87,8 +88,15 @@
 										</c:forEach>
 									</select>
 								</td>
+							</tr>
+							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">地理坐标:</td>
-								<td><input type="text" name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}" maxlength="20" placeholder="这里输入地理坐标" title="地理坐标" style="width:98%;"/></td>
+								<td colspan="3">
+								    <input type="text" readonly name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}" maxlength="20" placeholder="这里输入地理坐标" title="地理坐标" style="width:90%;"/>
+								    <a class="btn btn-xs btn-success" title="编辑" onclick="openMap();" style="width:8%;margin-bottom:3px;">
+										<i class="ace-icon fa fa-globe bigger-120" title="打开地图"></i>
+									</a>
+								</td>
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">备注:</td>
@@ -125,7 +133,10 @@
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
-		<script type="text/javascript">
+	<!--引入属于此页面的js -->
+	<script type="text/javascript" src="static/js/myjs/mapSelect.js"></script>
+	
+	<script type="text/javascript">
 		$(top.hangge());
 		//保存
 		function save(){

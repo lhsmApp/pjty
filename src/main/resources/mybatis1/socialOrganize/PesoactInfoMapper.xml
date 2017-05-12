@@ -33,15 +33,6 @@
 		#{EFFECT},	
 		#{REMARK}
 	</sql>
-	<sql id="SelectFieldValue">
-		#{PESO_NAME},	
-		#{ACT_NAME},	
-		#{CAPI_SITU},	
-		#{EFFECT},	
-		#{REMARK},	
-		#{PESO_NAME},	
-		#{ACT_NAME}
-	</sql>
 	
 	<!-- 新增-->
 	<insert id="save" parameterType="pd">

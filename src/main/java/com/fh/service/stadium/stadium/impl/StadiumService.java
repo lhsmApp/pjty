@@ -77,6 +77,17 @@ public class StadiumService implements StadiumManager{
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
 		dao.delete("StadiumMapper.deleteAll", ArrayDATA_IDS);
 	}
+
+	/**列表(全部)根据条件搜索
+	 * @param pd
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PageData> listAllByCondition(PageData pd) throws Exception {
+		// TODO Auto-generated method stub
+		return (List<PageData>)dao.findForList("StadiumMapper.listAllByCondition", pd);
+	}
 	
 }
 

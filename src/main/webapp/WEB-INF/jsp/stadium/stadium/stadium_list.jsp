@@ -49,7 +49,7 @@
 									<option value=""></option>
 									<option value="">全部</option>
 									<c:forEach items="${areaList}" var="area">
-										<option value="${area.AREA_NAME }" <c:if test="${pd.BELONG_AREA==area.AREA_ID}">selected</c:if>>${area.AREA_NAME }</option>
+										<option value="${area.BIANMA }" <c:if test="${pd.BELONG_AREA==area.BIANMA}">selected</c:if>>${area.NAME }</option>
 									</c:forEach>
 								  	</select>
 								</td>
@@ -274,7 +274,7 @@
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>stadium/goAdd.do';
 			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.Height = 400;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮

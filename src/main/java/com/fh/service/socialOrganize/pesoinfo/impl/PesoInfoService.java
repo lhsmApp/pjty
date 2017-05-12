@@ -61,6 +61,10 @@ public class PesoInfoService implements PesoInfoManager{
 	public List<PageData> listAll(PageData pd)throws Exception{
 		return (List<PageData>)dao.findForList("PesoInfoMapper.listAll", pd);
 	}
+	@SuppressWarnings("unchecked")
+	public List<PageData> listDic(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("PesoInfoMapper.listDic", pd);
+	}
 	
 	/**列表(全部)根据条件搜索
 	 * @param pd

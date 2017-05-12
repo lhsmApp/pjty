@@ -1,16 +1,17 @@
-package com.fh.service.socialOrganize.pesoinfo;
+package com.fh.service.instframe.instframe;
 
 import java.util.List;
 import com.fh.entity.Page;
+import com.fh.entity.instframe.Instframe;
 import com.fh.util.PageData;
 
 /** 
- * 说明： 社会组织接口
+ * 说明： 组织机构接口
  * 创建人：FH Q313596790
- * 创建时间：2017-05-08
+ * 创建时间：2017-05-12
  * @version
  */
-public interface PesoInfoManager{
+public interface InstframeManager{
 
 	/**新增
 	 * @param pd
@@ -41,13 +42,6 @@ public interface PesoInfoManager{
 	 * @throws Exception
 	 */
 	public List<PageData> listAll(PageData pd)throws Exception;
-	public List<PageData> listDic(PageData pd)throws Exception;
-	
-	/**列表(全部)根据条件搜索
-	 * @param pd
-	 * @throws Exception
-	 */
-	public List<PageData> queryListByCondition(PageData pd)throws Exception;
 	
 	/**通过id获取数据
 	 * @param pd
@@ -55,11 +49,21 @@ public interface PesoInfoManager{
 	 */
 	public PageData findById(PageData pd)throws Exception;
 	
-	/**批量删除
-	 * @param ArrayDATA_IDS
+	/**
+	 * 通过ID获取其子级列表
+	 * @param parentId
+	 * @return
 	 * @throws Exception
 	 */
-	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
+	public List<Instframe> listByParentId(String parentId) throws Exception;
+	
+	/**
+	 * 获取所有数据并填充每条数据的子级列表(递归处理)
+	 * @param MENU_ID
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Instframe> listTree(String parentId) throws Exception;
 	
 }
 

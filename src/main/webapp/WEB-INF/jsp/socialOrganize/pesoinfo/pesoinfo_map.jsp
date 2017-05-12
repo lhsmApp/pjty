@@ -99,23 +99,23 @@ body, html, #allmap {
 					<div id="detail" style="margin-bottom: 20px;">
 						<p class="text-info">
 							<strong>社会组织名称：<c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].PESO_NAME}</c:if></strong>
+									test="${getList!=null&&getList.size()>0}">${getList[0].PESO_NAME}</c:if></strong>
 						</p>
 						<p>
 							<span class="muted">所属区域：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BELONG_AREA}</c:if></span>
+									test="${getList!=null&&getList.size()>0}">${getList[0].BELONG_AREA}</c:if></span>
 						</p>
 						<p>
 							<span class="muted">办公地址：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].OFFICE_ADDR}</c:if></span>
+									test="${getList!=null&&getList.size()>0}">${getList[0].OFFICE_ADDR}</c:if></span>
 						</p>
 						<p>
 							<span class="muted">统一社会信用代码：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].USCC}</c:if></span>
+									test="${getList!=null&&getList.size()>0}">${getList[0].USCC}</c:if></span>
 						</p>
 						<p>
 							<span class="muted">职能简介：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].PESO_INTR}</c:if></span>
+									test="${getList!=null&&getList.size()>0}">${getList[0].PESO_INTR}</c:if></span>
 						</p>
 					</div>
 					<div class="form-inline has-feedback">
@@ -135,7 +135,7 @@ body, html, #allmap {
 							style="vertical-align: top; width: 120px;">
 							<option value=""></option>
 							<option value="">全部</option>
-							<c:forEach items="${varList }" var="each">
+							<c:forEach items="${dicList }" var="each">
                                   <option value="${each.PESO_NAME }" <c:if test="${each.PESO_NAME== pd.PESO_NAME}">selected</c:if>>${each.PESO_NAME}</option>
 							</c:forEach>
 						</select>
@@ -203,7 +203,7 @@ body, html, #allmap {
 										'tag-input-style');
 						});
 			}
-			//initPlases();
+			initPlases();
 
 		});
 
@@ -221,6 +221,82 @@ body, html, #allmap {
 
 		map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 		map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+
+		/**
+		 * 根据搜索的条件设置地图坐标
+		 */
+		function initPlases() {
+			var list = ${searchJson};
+			map.clearOverlays(); //清除地图上所有覆盖物
+			for (var i = 0; i < list.length; i++) {
+				var addr = list[i].GEOG_COOR;
+				setPlaceByGeog(addr);
+			}
+		}
+
+		/**
+		 * 根据坐标定位地图坐标
+		 */
+		function setPlaceByGeog(geogCode) {
+			if (geogCode != null && geogCode != "") {
+				var geogCodes = geogCode.split(',');
+				var x = geogCodes[0];
+				var y = geogCodes[1];
+				var point = new BMap.Point(y, x);
+				window.setTimeout(function() {
+					map.addOverlay(new BMap.Marker(point)); //添加标注
+				}, 1000);
+			}
+		}
+
+		/**
+		 * 根据地址定位地图坐标
+		 */
+		function setPlace(myValue) {
+			map.clearOverlays(); //清除地图上所有覆盖物
+			function myFun() {
+				var point0 = local.getResults().getPoi(0);
+				if (point0 != null) {
+					var pp = point0.point; //获取第一个智能搜索的结果
+					map.centerAndZoom(pp, 18);
+					map.addOverlay(new BMap.Marker(pp)); //添加标注
+					document.getElementById("ZUOBIAO_X").value = pp.lat;
+					document.getElementById("ZUOBIAO_Y").value = pp.lng;
+				}
+			}
+			var local = new BMap.LocalSearch(map, { //智能搜索
+				onSearchComplete : myFun
+			});
+			local.search(myValue);
+		}
+
+		/**
+		 * 根据指定搜索条件定位地图坐标
+		 */
+		function search() {
+			top.jzts();
+			$("#Form").submit();
+		}
+		
+		/**
+		 * 第一级值改变事件(初始第二级)
+		 */
+		function change(value){
+			
+			console.log("deleteCom");
+		    $.ajax({
+				type: "POST",
+				url: '<%=basePath%>pesoinfo/getListByCondition.do',
+		    	data: {BELONG_AREA:value},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					//console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
+					//console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
+					//$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
+				}
+			}); 
+		}
 	</script>
 </body>
 

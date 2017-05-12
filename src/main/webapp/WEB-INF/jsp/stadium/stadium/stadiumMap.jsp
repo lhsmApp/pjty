@@ -107,8 +107,9 @@ body, html, #allmap {
 
 		<div class="top">
 			<div class="header">
-				<img src="static/images/东方雨虹-图.png" style="margin-right: 5px" /><img
-					src="static/images/东方雨虹-字.png" />
+				<img src="static/images/东方雨虹-图.png" style="margin-right: 5px" />
+				<!-- <img src="static/images/东方雨虹-字.png" /> -->
+				<span style="font-family:'微软雅黑';color: #F10000;font-weight: bold;font-size: 16px;margin-top:5px;">体育场所信息</span>
 				<hr />
 			</div>
 		</div>

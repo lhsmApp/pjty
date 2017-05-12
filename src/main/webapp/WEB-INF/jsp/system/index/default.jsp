@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 
-							<div class="alert alert-block alert-success">
+							<div class="alert alert-block alert-success" style="margin-top:5px;">
 								<button type="button" class="close" data-dismiss="alert">
 									<i class="ace-icon fa fa-times"></i>
 								</button>
@@ -51,7 +51,7 @@
 						        // 指定图表的配置项和数据
 								var option = {
 						            title: {
-						                text: 'FH Admin用户统计'
+						                text: '体育局综合管理平台用户统计'
 						            },
 						            tooltip: {},
 						            xAxis: {

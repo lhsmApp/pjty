@@ -75,7 +75,7 @@
 									<th class="center">所属区域</th>
 									<th class="center">运营性质</th>
 									<th class="center">场馆基本情况</th>
-									<th class="center">地理坐标</th>
+									<!-- <th class="center">地理坐标</th> -->
 									<th class="center">备注</th>
 									<th class="center">操作</th>
 								</tr>
@@ -99,7 +99,7 @@
 											<td class='center'>${var.BELONG_AREA}</td>
 											<td class='center'>${var.OPER_NATURE}</td>
 											<td class='center'>${var.STADI_INTR}</td>
-											<td class='center'>${var.GEOG_COOR}</td>
+											<%-- <td class='center'>${var.GEOG_COOR}</td> --%>
 											<td class='center'>${var.REMARK}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
@@ -273,7 +273,7 @@
 			 diag.Drag=true;
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>stadium/goAdd.do';
-			 diag.Width = 450;
+			 diag.Width = 600;
 			 diag.Height = 400;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
@@ -312,8 +312,8 @@
 			 diag.Drag=true;
 			 diag.Title ="编辑";
 			 diag.URL = '<%=basePath%>stadium/goEdit.do?STAD_NAME='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.Width = 600;
+			 diag.Height = 400;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮 

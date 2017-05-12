@@ -78,7 +78,7 @@
 									<th class="center">投注站地址</th>
 									<th class="center">投注站面积</th>
 									<th class="center">简介</th>
-									<th class="center">地理坐标</th>
+									<!-- <th class="center">地理坐标</th> -->
 									<th class="center">备注</th>
 									<th class="center">操作</th>
 								</tr>
@@ -105,7 +105,7 @@
 											<td class='center'>${var.BETT_ADDR}</td>
 											<td class='center'>${var.BETT_AREA}</td>
 											<td class='center'>${var.BETT_INTR}</td>
-											<td class='center'>${var.GEOG_COOR}</td>
+											<%-- <td class='center'>${var.GEOG_COOR}</td> --%>
 											<td class='center'>${var.REMARK}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">

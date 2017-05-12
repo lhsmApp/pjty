@@ -270,7 +270,7 @@
 							$("#zhongxin2").show();
 					 }else{
 						$("#STAD_NAME").css("background-color","#D16E6C");
-						setTimeout("$('#STAD_NAME').val('此用户名已存在!')",500);
+						setTimeout("$('#STAD_NAME').val('此场馆名称已存在!')",500);
 					 }
 				}
 			});

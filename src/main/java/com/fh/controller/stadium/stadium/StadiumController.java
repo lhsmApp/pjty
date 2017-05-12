@@ -176,6 +176,9 @@ public class StadiumController extends BaseController {
 		mv.setViewName("stadium/stadium/stadium_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
+		
+		DictsUtil dictUtil=new DictsUtil(dictionariesService);
+		mv.addObject("areaList", dictUtil.getDictsByParentBianma("001"));
 		return mv;
 	}	
 	

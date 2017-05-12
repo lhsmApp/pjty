@@ -30,6 +30,7 @@
 					<form action="instframe/${msg }.do" name="Form" id="Form" method="post">
 						<input type="hidden" name="INSTFRAME_ID" id="INSTFRAME_ID" value="${pd.INSTFRAME_ID}"/>
 						<input type="hidden" name="PARENT_ID" id="PARENT_ID" value="${null == pd.PARENT_ID ? INSTFRAME_ID:pd.PARENT_ID}"/>
+						<input type="hidden" name="INST_FATHER_CODE" id="INST_FATHER_CODE" value="${null == pd.PARENT_ID ? INSTFRAME_ID:pd.PARENT_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
@@ -41,20 +42,14 @@
 								</td>
 							</tr>
 							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">编码:</td>
+								<td>
+								    <input type="text" name="INST_CODE" id="INST_CODE" value="${pd.INST_CODE}" maxlength="4" placeholder="这里输入组织机构编码" title="组织机构编码" style="width:98%;" onblur="hasInstCode();" <c:if test="${null != pd.INST_CODE}">readonly="readonly"</c:if>/>
+								</td>
+							</tr>
+							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">名称:</td>
-								<td><input type="text" name="NAME" id="NAME" value="${pd.NAME}"  placeholder="这里输入名称" title="名称" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">组织机构编码:</td>
-								<td><input type="text" name="INST_CODE" id="INST_CODE" value="${pd.INST_CODE}" maxlength="4" placeholder="这里输入组织机构编码" title="组织机构编码" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">组织机构名称:</td>
 								<td><input type="text" name="INST_NAME" id="INST_NAME" value="${pd.INST_NAME}" maxlength="80" placeholder="这里输入组织机构名称" title="组织机构名称" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">组织机构父编码:</td>
-								<td><input type="text" name="INST_FATHER_CODE" id="INST_FATHER_CODE" value="${pd.INST_FATHER_CODE}" maxlength="4" placeholder="这里输入组织机构父编码" title="组织机构父编码" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">姓名:</td>
@@ -115,16 +110,6 @@
 		$(top.hangge());
 		//保存
 		function save(){
-			if($("#NAME").val()==""){
-				$("#NAME").tips({
-					side:3,
-		            msg:'请输入名称',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#NAME").focus();
-				return false;
-			}
 			if($("#INST_CODE").val()==""){
 				$("#INST_CODE").tips({
 					side:3,
@@ -145,79 +130,34 @@
 				$("#INST_NAME").focus();
 			return false;
 			}
-			if($("#INST_FATHER_CODE").val()==""){
-				$("#INST_FATHER_CODE").tips({
-					side:3,
-		            msg:'请输入组织机构父编码',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#INST_FATHER_CODE").focus();
-			return false;
-			}
-			if($("#LEADER_NAME").val()==""){
-				$("#LEADER_NAME").tips({
-					side:3,
-		            msg:'请输入姓名',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#LEADER_NAME").focus();
-			return false;
-			}
-			if($("#STAFF_JOB").val()==""){
-				$("#STAFF_JOB").tips({
-					side:3,
-		            msg:'请输入职务',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#STAFF_JOB").focus();
-			return false;
-			}
-			if($("#MOBILE_TEL").val()==""){
-				$("#MOBILE_TEL").tips({
-					side:3,
-		            msg:'请输入电话',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#MOBILE_TEL").focus();
-			return false;
-			}
-			if($("#FUNCTION").val()==""){
-				$("#FUNCTION").tips({
-					side:3,
-		            msg:'请输入职能',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FUNCTION").focus();
-			return false;
-			}
-			if($("#ADDRESS").val()==""){
-				$("#ADDRESS").tips({
-					side:3,
-		            msg:'请输入地址',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#ADDRESS").focus();
-			return false;
-			}
-			if($("#REMARK").val()==""){
-				$("#REMARK").tips({
-					side:3,
-		            msg:'请输入备注',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#REMARK").focus();
-			return false;
-			}
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
+		}
+		
+		//判断编码是否存在
+		function hasInstCode(){
+			var INST_CODE = $.trim($("#INST_CODE").val());
+			if("" == INST_CODE)return;
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>department/hasInstCode.do',
+		    	data: {INST_CODE:INST_CODE,tm:new Date().getTime()},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					 if("success" == data.result){
+					 }else{
+						$("#INST_CODE").tips({
+							side:1,
+				            msg:'编码'+INST_CODE+'已存在,重新输入',
+				            bg:'#AE81FF',
+				            time:5
+				        });
+						$('#INST_CODE').val('');
+					 }
+				}
+			});
 		}
 		
 		$(function() {

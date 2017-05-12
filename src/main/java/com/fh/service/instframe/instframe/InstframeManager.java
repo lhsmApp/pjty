@@ -48,6 +48,7 @@ public interface InstframeManager{
 	 * @throws Exception
 	 */
 	public PageData findById(PageData pd)throws Exception;
+	public PageData findByInstCode(PageData pd)throws Exception;
 	
 	/**
 	 * 通过ID获取其子级列表

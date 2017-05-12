@@ -189,7 +189,7 @@ public class InstframeController extends BaseController {
 		mv.setViewName("instframe/instframe/instframe_edit");
 		mv.addObject("msg", "edit");
 		return mv;
-	}	
+	}		
 	
 	 /**导出到excel
 	 * @param
@@ -233,6 +233,27 @@ public class InstframeController extends BaseController {
 		ObjectExcelView erv = new ObjectExcelView();
 		mv = new ModelAndView(erv,dataMap);
 		return mv;
+	}
+
+	/**判断编码是否存在
+	 * @return
+	 */
+	@RequestMapping(value="/hasInstCode")
+	@ResponseBody
+	public Object hasInstCode(){
+		Map<String,String> map = new HashMap<String,String>();
+		String errInfo = "success";
+		PageData pd = new PageData();
+		try{
+			pd = this.getPageData();
+			if(instframeService.findByInstCode(pd) != null){
+				errInfo = "error";
+			}
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		map.put("result", errInfo);				//返回结果
+		return AppUtil.returnObject(new PageData(), map);
 	}
 	
 	@InitBinder

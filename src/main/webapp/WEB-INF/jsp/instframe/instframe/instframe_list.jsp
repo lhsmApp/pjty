@@ -37,20 +37,16 @@
 								<td>
 									<div class="nav-search">
 										<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
+											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${page.pd.keywords }" placeholder="这里输入关键词" style="width:150px;"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
 									</div>
 								</td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
 								<td style="vertical-align:top;padding-left:2px;">
-								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-									<option value=""></option>
-									<option value="">全部</option>
-									<option value="">1</option>
-									<option value="">2</option>
-								  	</select>
+									<select class="chosen-select form-control" name="INSTFRAME_ID" id="INSTFRAME_ID" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+										<option value="${INSTFRAME_ID}" <c:if test="${INSTFRAME_ID != ''}">selected</c:if>>本级</option>
+										<option value="" <c:if test="${INSTFRAME_ID == ''}">selected</c:if>>全部</option>
+									</select>
 								</td>
 								<c:if test="${QX.cha == 1 }">
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
@@ -64,10 +60,8 @@
 							<thead>
 								<tr>
 									<th class="center" style="width:50px;">序号</th>
+									<th class="center">编码</th>
 									<th class="center">名称</th>
-									<th class="center">组织机构编码</th>
-									<th class="center">组织机构名称</th>
-									<th class="center">组织机构父编码</th>
 									<th class="center">姓名</th>
 									<th class="center">职务</th>
 									<th class="center">电话</th>
@@ -86,10 +80,8 @@
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'><a href="javascript:goSondict('${var.INSTFRAME_ID}')"><i class="ace-icon fa fa-share bigger-100"></i>&nbsp;${var.NAME}</a></td>
-											<td class='center'>${var.INST_CODE}</td>
-											<td class='center'>${var.INST_NAME}</td>
-											<td class='center'>${var.INST_FATHER_CODE}</td>
+											<td class='center'><a href="javascript:goSondict('${var.INST_CODE }')"><i class="ace-icon fa fa-share bigger-100"></i>&nbsp;${var.INST_CODE}</a></td>
+											<td class='center'><a href="javascript:goSondict('${var.INST_CODE }')">${var.INST_NAME}</a></td>
 											<td class='center'>${var.LEADER_NAME}</td>
 											<td class='center'>${var.STAFF_JOB}</td>
 											<td class='center'>${var.MOBILE_TEL}</td>

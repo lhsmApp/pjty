@@ -100,6 +100,16 @@
 			INST_CODE = #{INSTFRAME_ID}
 	</select>
 	
+	<!-- 通过编码获取数据 -->
+	<select id="findByInstCode" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 
+			INST_CODE = #{INST_CODE}
+	</select>
+	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select

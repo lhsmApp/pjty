@@ -272,8 +272,6 @@ public class PesoInfoController extends BaseController {
 		mv.setViewName("socialOrganize/pesoinfo/pesoinfo_map");
 		mv.addObject("varList", varList);
 		mv.addObject("searchList", searchList);
-		JSONArray jsonArray=JSONArray.fromObject(searchList);
-		mv.addObject("searchJson",jsonArray);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		DictsUtil dictUtil=new DictsUtil(dictionariesService);

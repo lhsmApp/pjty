@@ -110,8 +110,7 @@ body, html, #allmap {
 									test="${searchList!=null&&searchList.size()>0}">${searchList[0].OFFICE_ADDR}</c:if></span>
 						</p>
 						<p>
-							<abbr title="Phone" class="muted">统一社会信用代码：</abbr><span
-								class="text-info"><c:if
+							<span class="muted">统一社会信用代码：</span><span class="text-info"><c:if
 									test="${searchList!=null&&searchList.size()>0}">${searchList[0].USCC}</c:if></span>
 						</p>
 						<p>
@@ -204,8 +203,7 @@ body, html, #allmap {
 										'tag-input-style');
 						});
 			}
-
-			initPlases();
+			//initPlases();
 
 		});
 
@@ -223,100 +221,6 @@ body, html, #allmap {
 
 		map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 		map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
-
-		/**
-		 * 根据搜索的条件设置地图坐标
-		 */
-		function initPlases() {
-			//var bettingList=eval("("+bettingStr+")");
-			//var bettingList=$.parseJSON(bettingStr);
-			//var bettingStr = JSON.stringify("${varList}") 
-
-			var list = ${searchJson};
-			map.clearOverlays(); //清除地图上所有覆盖物
-			for (var i = 0; i < list.length; i++) {
-				var addr = list[i].GEOG_COOR;
-				setPlaceByGeog(addr);
-			}
-		}
-
-		/**
-		 * 根据坐标定位地图坐标
-		 */
-		function setPlaceByGeog(geogCode) {
-			if (geogCode != null && geogCode != "") {
-				var geogCodes = geogCode.split(',');
-				var x = geogCodes[0];
-				var y = geogCodes[1];
-				var point = new BMap.Point(y, x);
-				//map.panTo(point);
-				window.setTimeout(function() {
-					//map.setCenter(point);
-					//map.panTo(point); 
-					//map.zoomTo(18);
-					map.addOverlay(new BMap.Marker(point)); //添加标注
-				}, 1000);
-			}
-		}
-
-		/**
-		 * 根据地址定位地图坐标
-		 */
-		function setPlace(myValue) {
-			map.clearOverlays(); //清除地图上所有覆盖物
-			function myFun() {
-				var point0 = local.getResults().getPoi(0);
-				if (point0 != null) {
-					var pp = point0.point; //获取第一个智能搜索的结果
-					map.centerAndZoom(pp, 18);
-					map.addOverlay(new BMap.Marker(pp)); //添加标注
-					document.getElementById("ZUOBIAO_X").value = pp.lat;
-					document.getElementById("ZUOBIAO_Y").value = pp.lng;
-				}
-			}
-			var local = new BMap.LocalSearch(map, { //智能搜索
-				onSearchComplete : myFun
-			});
-			local.search(myValue);
-		}
-
-		/**
-		 * 根据指定搜索条件定位地图坐标
-		 */
-		function search() {
-			top.jzts();
-			$("#Form").submit();
-
-			/* var addr = $("#suggestId").val();
-			if (addr != null && addr != "")
-				setPlace(addr); */
-		}
-		
-		/**
-		 * 第一级值改变事件(初始第二级)
-		 */
-		function change(value){
-			console.log($("#PESO_NAME_chosen .chosen-drop ul.chosen-results"));
-			console.log($("#PESO_NAME_chosen .chosen-drop ul.chosen-results").children());
-			$('#PESO_NAME_chosen ul.chosen-results li').remove();
-			$.ajax({
-				type: "POST",
-				url: '<%=basePath%>pesoinfo/getListByCondition.do',
-		    	data: {BELONG_AREA:value},
-				dataType:'json',
-				cache: false,
-				success: function(data){
-					$(".chosen-results").html();
-					//console.log($('#PESO_NAME_chosen');
-					
-					$("#PESO_NAME").html("<option value=''></option><option>全部</option>");
-					 $.each(data.list, function(i, bet){
-							$("#PESO_NAME").append("<option value="+bet.PESO_NAME+">"+bet.PESO_NAME+"</option>");
-					 });
-
-				}
-			});
-		}
 	</script>
 </body>
 

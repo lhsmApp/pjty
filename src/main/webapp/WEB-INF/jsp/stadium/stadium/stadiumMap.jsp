@@ -114,29 +114,29 @@ body, html, #allmap {
 		</div>
 		<div class="bottom">
 			<div class="bottom-form">
-				<form action="betting/mapQuery.do" method="post" name="Form"
+				<form action="stadium/mapQuery.do" method="post" name="Form"
 					id="Form">
 					<div id="detail" style="margin-bottom: 20px;">
-						<p class="text-info">
+						<%-- <p class="text-info">
 							<strong>营业执照注册号：<c:if
 									test="${searchList!=null&&searchList.size()>0}">${searchList[0].LICENSE_NO}</c:if></strong>
-						</p>
+						</p> --%>
 						<p>
 							<span class="muted">所属区域：</span><span class="text-info"><c:if
 									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BELONG_AREA}</c:if></span>
 						</p>
 						<p>
-							<span class="muted">投注站地址：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BETT_ADDR}</c:if></span>
+							<span class="muted">场馆地址：</span><span class="text-info"><c:if
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].STADI_ADDR}</c:if></span>
 						</p>
 						<p>
 							<abbr title="Phone" class="muted">手机号：</abbr><span
 								class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].MOBILE_TEL}</c:if></span>
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].HEAD_TEL}</c:if></span>
 						</p>
 						<p>
-							<span class="muted">简介：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BETT_INTR}</c:if></span>
+							<span class="muted">场馆基本情况：</span><span class="text-info"><c:if
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].STADI_INTR}</c:if></span>
 						</p>
 					</div>
 					<div class="form-inline has-feedback">
@@ -152,13 +152,13 @@ body, html, #allmap {
 						</select>
 					</div>
 					<div class="form-inline has-feedback">
-						<select class="chosen-select form-control" name="ID_CODE"
-							id="id_code" data-placeholder="请选择投注站"
+						<select class="chosen-select form-control" name="STAD_NAME"
+							id="STAD_NAME" data-placeholder="请选择体育场馆"
 							style="vertical-align: top; width: 120px;">
 							<option value=""></option>
 							<option value="">全部</option>
-							<c:forEach items="${varList}" var="bet">
-								<option value="${bet.ID_CODE}" <c:if test="${pd.ID_CODE==bet.ID_CODE}">selected</c:if>>${bet.LICENSE_NO }</option>
+							<c:forEach items="${varList}" var="stadium">
+								<option value="${stadium.STAD_NAME}" <c:if test="${pd.STAD_NAME==stadium.STAD_NAME}">selected</c:if>>${stadium.STAD_NAME }</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -227,6 +227,7 @@ body, html, #allmap {
 			}
 
 			initPlases();
+
 		});
 
 		var map = new BMap.Map("allmap");
@@ -273,10 +274,10 @@ body, html, #allmap {
 			//var bettingList=$.parseJSON(bettingStr);
 			//var bettingStr = JSON.stringify("${varList}") 
 
-			var bettingList = ${searchJson};
+			var stadiumList = ${searchJson};
 			map.clearOverlays(); //清除地图上所有覆盖物
-			for (var i = 0; i < bettingList.length; i++) {
-				var addr = bettingList[i].GEOG_COOR;
+			for (var i = 0; i < stadiumList.length; i++) {
+				var addr = stadiumList[i].GEOG_COOR;
 				setPlaceByGeog(addr);
 			}
 		}
@@ -337,32 +338,26 @@ body, html, #allmap {
 		 * 第一级值改变事件(初始第二级)
 		 */
 		function change(value){
-			
-			console.log("deleteCom");
+			console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
+			console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
+			$('#id_code_chosen ul.chosen-results li').remove();
 			$.ajax({
 				type: "POST",
-				url: '<%=basePath%>betting/getBettingByBelongarea.do',
+				url: '<%=basePath%>stadium/getStadiumByBelongarea.do',
 		    	data: {BELONG_AREA:value},
 				dataType:'json',
 				cache: false,
 				success: function(data){
-					console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
-					console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
-					$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
+					$(".chosen-results").html();
+					//console.log($('#id_code_chosen');
 					
-					/* $("#id_code").html("<option value=''></option><option>全部</option>");
+					$("#STAD_NAME").html("<option value=''></option><option>全部</option>");
 					 $.each(data.list, function(i, bet){
-							$("#id_code").append("<option value="+bet.ID_CODE+">"+bet.LICENSE_NO+"</option>");
-					 }); */
+							$("#STAD_NAME").append("<option value="+stadium.STAD_NAME+">"+stadium.STAD_NAME+"</option>");
+					 });
+
 				}
 			});
-		}
-		
-		function changeEmpty(){
-			console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
-			console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
-			console.log($("#id_code_chosen .chosen-drop ul.chosen-results li"));
-			$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
 		}
 	</script>
 </body>

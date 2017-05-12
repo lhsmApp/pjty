@@ -26,7 +26,7 @@
 		<div class="main-content">
 			<div class="main-content-inner">
 				<div class="page-content">
-					<div class="hr hr-18 dotted hr-double"></div>
+					<!-- <div class="hr hr-18 dotted hr-double"></div> -->
 					<div class="row">
 						<div class="col-xs-12">
 

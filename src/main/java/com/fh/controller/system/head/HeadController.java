@@ -73,12 +73,16 @@ public class HeadController extends BaseController {
 			List<PageData> pdList = new ArrayList<PageData>();
 			Session session = Jurisdiction.getSession();
 			PageData pds = new PageData();
-			pds = (PageData)session.getAttribute(Const.SESSION_userpds);
+			/*pds = (PageData)session.getAttribute(Const.SESSION_userpds);
 			if(null == pds){
 				pd.put("USERNAME", Jurisdiction.getUsername());//当前登录者用户名
 				pds = userService.findByUsername(pd);
 				session.setAttribute(Const.SESSION_userpds, pds);
-			}
+			}*/
+			pd.put("USERNAME", Jurisdiction.getUsername());//当前登录者用户名
+			pds = userService.findByUsername(pd);
+			session.setAttribute(Const.SESSION_userpds, pds);
+			
 			pdList.add(pds);
 			map.put("list", pdList);
 			PageData pdPhoto = userphotoService.findById(pds);

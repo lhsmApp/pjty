@@ -193,11 +193,14 @@ function fhsms(){
 		diag.close();
 	 };
 	 diag.show();*/
-	 //if("${pd.USERNAME"=='Guest'})
-		 //$("#mainFrame").attr("src",locat+"/policyCustom/listCustom.do");
-	 /*else
-		 siMenu('z${menu2.MENU_ID }','lm${menu1.MENU_ID }','${menu2.MENU_NAME }','${menu2.MENU_URL }')*/
-		 //<c:if test="${not empty menu2.MENU_URL && '#' != menu2.MENU_URL}">target="mainFrame" onclick="siMenu('z${menu2.MENU_ID }','lm${menu1.MENU_ID }','${menu2.MENU_NAME }','${menu2.MENU_URL }')"</c:if>
+	console.log(user);
+	 if(user=="Guest"){
+		 $("#mainFrame").attr("src",locat+"/policyCustom/listCustom.do");
+		 $("#subTitle").text("政策法规浏览");
+	 }
+	 else
+		 //siMenu('118','117','政策法规','policy/list.do');
+		 siMenu('10000','1000','政策法规浏览','policyCustom/listCustom.do');
 }
 
 //切换菜单

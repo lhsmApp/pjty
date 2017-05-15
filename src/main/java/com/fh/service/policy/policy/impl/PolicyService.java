@@ -2,6 +2,8 @@ package com.fh.service.policy.policy.impl;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import org.apache.commons.lang.ObjectUtils.Null;
 import org.springframework.stereotype.Service;
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
@@ -76,6 +78,15 @@ public class PolicyService implements PolicyManager{
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
 		dao.delete("PolicyMapper.deleteAll", ArrayDATA_IDS);
+	}
+
+	/**
+	 * 列表（政策分类）
+	 */
+	@SuppressWarnings("unchecked")
+	public List<PageData> poliyTypeList(Page page) throws Exception {
+		return (List<PageData>)dao.findForList("PolicyMapper.policyTypeList", page);
+		
 	}
 	
 }

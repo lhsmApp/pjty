@@ -169,6 +169,25 @@ public class PolicyController extends BaseController {
 		return AppUtil.returnObject(pd, map);
 	}
 	
+	/**列表（政策分类）
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/policyTypeList")
+	@ResponseBody
+	public Object policyTypeList(Page page) throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"获取所有政策分类列表");
+		PageData pd = new PageData();
+		Map<String,Object> map = new HashMap<String,Object>();
+		pd = this.getPageData();
+		
+		
+		page.setPd(pd);
+		List<PageData>	policyTypeList = policyService.poliyTypeList(page);
+		map.put("list", policyTypeList);
+		return AppUtil.returnObject(pd, map);
+	}
+	
 	 /**导出到excel
 	 * @param
 	 * @throws Exception

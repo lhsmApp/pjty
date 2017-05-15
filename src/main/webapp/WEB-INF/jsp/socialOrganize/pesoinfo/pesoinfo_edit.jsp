@@ -240,6 +240,19 @@
 				$("#REGI_CAPI").focus();
 			return false;
 			}
+            if($("#E_MAIL").val()!=null&&$("#E_MAIL").val().trim()!=""){
+    			var filterEmail  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    			if(!(filterEmail.test($("#E_MAIL").val()))){
+    				$("#E_MAIL").tips({
+    					side:3,
+    		            msg:'电子邮箱格式不正确',
+    		            bg:'#AE81FF',
+    		            time:2
+    		        });
+    				$("#E_MAIL").focus();
+    			return false;
+    			}
+            }
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();

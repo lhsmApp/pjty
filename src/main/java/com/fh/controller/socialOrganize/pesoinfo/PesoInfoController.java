@@ -26,6 +26,8 @@ import com.fh.util.Jurisdiction;
 import com.fh.util.Tools;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 
 import com.fh.service.socialOrganize.pesoinfo.PesoInfoManager;
 import com.fh.service.system.dictionaries.DictionariesManager;
@@ -259,19 +261,22 @@ public class PesoInfoController extends BaseController {
 		logBefore(logger, Jurisdiction.getUsername()+"查询投注站地图");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
+		mv.setViewName("socialOrganize/pesoinfo/pesoinfo_map");
 		PageData pd=new PageData();
 	    pd = this.getPageData();
 		String keywords = pd.getString("keywords");				//关键词检索条件
 		if(null != keywords && !"".equals(keywords)){
 			pd.put("keywords", keywords.trim());
 		}
+
+		List<PageData> dicList = pesoinfoService.listDic(pd);	//搜索地图列表
+		mv.addObject("dicList", dicList);
 		
-		PageData pdAll =new PageData();
-		List<PageData>	varList = pesoinfoService.listAll(pdAll);	//列出地图列表
-		List<PageData> searchList = pesoinfoService.queryListByCondition(pd);	//搜索地图列表
-		mv.setViewName("socialOrganize/pesoinfo/pesoinfo_map");
-		mv.addObject("varList", varList);
-		mv.addObject("searchList", searchList);
+		List<PageData>	getList = pesoinfoService.queryListByCondition(pd);	//列出地图列表
+		mv.addObject("getList", getList);
+
+		JSONArray jsonArray=JSONArray.fromObject(getList);
+		mv.addObject("searchJson",jsonArray);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		DictsUtil dictUtil=new DictsUtil(dictionariesService);
@@ -285,7 +290,7 @@ public class PesoInfoController extends BaseController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		String errInfo = "success";
 	    PageData pd = this.getPageData();
-		List<PageData> searchList = pesoinfoService.queryListByCondition(pd);	//搜索地图列表
+		List<PageData> searchList = pesoinfoService.listDic(pd);	//搜索地图列表
 		map.put("list", searchList);
 		map.put("result", errInfo);				//返回结果
 		return AppUtil.returnObject(new PageData(), map);

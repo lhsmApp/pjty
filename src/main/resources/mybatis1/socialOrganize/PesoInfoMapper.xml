@@ -43,6 +43,24 @@
 		REMARK,	
 		PESO_NAME as PESOINFO_ID
 	</sql>
+	<sql id="SelectQueryField">
+		PESO_NAME,	
+		DATE_FORMAT(esta_time, '%Y-%m-%d') ESTA_TIME,	
+		BELONG_AREA,	
+		USCC,	
+		HEAD_NAME,	
+		HEAD_TEL,	
+		E_MAIL,	
+		OFFICE_TEL,	
+		OFFICE_ADDR,	
+		FAX,	
+		PESO_INTR,	
+		REGI_CAPI,	
+		STATE,	
+		GEOG_COOR,	
+		REMARK,	
+		PESO_NAME as PESOINFO_ID
+	</sql>
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
@@ -155,28 +173,38 @@
 		from 
 		<include refid="tableName"></include>
 	</select>
+	<select id="listDic" parameterType="pd" resultType="pd">
+		select PESO_NAME
+		from 
+		<include refid="tableName"></include>
+		<where>
+		    <if test="BELONG_AREA!=null and BELONG_AREA!=''">
+		        and BELONG_AREA=#{BELONG_AREA}
+		    </if>
+		</where>
+	</select>
 	
-	<!-- 列表(全部)根据条件搜索 -->
+	<!-- 列表(第一条)根据条件搜索 -->
 	<select id="queryListByCondition" parameterType="pd" resultType="pd">
 		select
-		<include refid="SelectField"></include>
+		<include refid="SelectQueryField"></include>
 		from 
 		<include refid="tableName"></include>
 		<where >
 			<if test="keywords!= null and keywords != ''"><!-- 关键词检索 -->
-			and
-				(
-					OFFICE_ADDR LIKE CONCAT(CONCAT('%', #{keywords}),'%')
-				)
-				
+			    and
+				    (
+				    	OFFICE_ADDR LIKE CONCAT(CONCAT('%', #{keywords}),'%')
+			    	)
 			</if>
 			<if test="BELONG_AREA != null and BELONG_AREA != ''"><!-- 所在区域 -->
 				and BELONG_AREA=#{BELONG_AREA} 
 			</if>
-			<if test="ID_CODE != null and ID_CODE != ''"><!-- 投注站编码 -->
+			<if test="PESO_NAME != null and PESO_NAME != ''"><!-- 投注站编码 -->
 				and PESO_NAME=#{PESO_NAME} 
 			</if>
 		</where>
+	    <!-- LIMIT 1 -->
 	</select>
 	
 	<!-- 批量删除 -->

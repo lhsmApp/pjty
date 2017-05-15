@@ -188,10 +188,10 @@
 					<c:if test="${pd.USERNAME=='Guest'}">
 						<div class="page-header">
 							<h1>
-								工作面板
+								首页
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									静态  &amp; 首页信息
+									静态  &amp; <span id="subTitle">工作面板</span>
 								</small>
 							</h1>
 						</div>

@@ -44,7 +44,7 @@
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">编码:</td>
 								<td>
-								    <input type="text" name="INST_CODE" id="INST_CODE" value="${pd.INST_CODE}" maxlength="4" placeholder="这里输入组织机构编码" title="组织机构编码" style="width:98%;" onblur="hasInstCode();" <c:if test="${null != pd.INST_CODE}">readonly="readonly"</c:if>/>
+								    <input type="text" name="INST_CODE" id="INST_CODE" value="${pd.INST_CODE}" maxlength="10" placeholder="这里输入组织机构编码" title="组织机构编码" style="width:98%;" onblur="hasInstCode();" <c:if test="${null != pd.INST_CODE}">readonly="readonly"</c:if>/>
 								</td>
 							</tr>
 							<tr>
@@ -129,6 +129,18 @@
 		        });
 				$("#INST_NAME").focus();
 			return false;
+			}
+			if($("#MOBILE_TEL").val()!=null&&$("#MOBILE_TEL").val().trim()!=""){
+				if(!(/^1[34578]\d{9}$/.test($("#MOBILE_TEL").val()))){
+					$("#MOBILE_TEL").tips({
+						side:3,
+			            msg:'负责人手机有误，请重填',
+			            bg:'#AE81FF',
+			            time:2
+			        });
+			        $("#MOBILE_TEL").focus();
+				return false;
+				}
 			}
 			$("#Form").submit();
 			$("#zhongxin").hide();

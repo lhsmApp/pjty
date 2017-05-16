@@ -106,6 +106,15 @@
                  #{item}
 		</foreach>
 	</delete>
+	<!-- 列表（政策分类） -->
+	<select id="policyTypeList" parameterType="String" resultType="pd">
+		select
+		POLI_TYPE
+		from
+		<include refid="tableName"></include>
+		group by
+		POLI_TYPE
+	</select>
 	
 	<!-- fh313596790qq(青苔) -->
 </mapper>

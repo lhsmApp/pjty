@@ -54,5 +54,12 @@ public interface PolicyManager{
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
 	
+	/**
+	 * 列表（政策分类）
+	 * @param string 
+	 * @throws Exception
+	 */
+	public List<PageData> poliyTypeList(Page page) throws Exception;
+	
 }
 

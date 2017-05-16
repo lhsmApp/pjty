@@ -48,6 +48,18 @@
 								<td><input type="text" name="PUB_USER" id="PUB_USER" value="${pd.PUB_USER}" maxlength="30" placeholder="这里输入发布人" title="发布人" style="width:98%;"/></td>
 							</tr>
 							<tr>
+							<td>
+							
+																			<label class="col-sm-3 control-label no-padding-right" for="form-field-1">政策内容:</label>
+											                               </td>
+											                               <td>
+											                                <div class="col-sm-9">
+											                                	<div class="ueQ313596790Que"></div>
+											                                   <script id="editor" type="text/plain" style="width:96%;height:50px;"></script>
+											                                    <div class="ueQ313596790Que"></div>
+											                                </div>
+											                          
+											                            </td>
 								<td style="width:75px;text-align: right;padding-top: 13px;">政策内容:</td>
 								<td><input type="text" name="TITL_CONT" id="TITL_CONT" value="${pd.TITL_CONT}" maxlength="715827882" placeholder="这里输入政策内容" title="政策内容" style="width:98%;"/></td>
 							</tr>
@@ -74,6 +86,11 @@
 <!-- /.main-container -->
 
 
+	<!-- 百度富文本编辑框-->
+	<script type="text/javascript" charset="utf-8">window.UEDITOR_HOME_URL = "<%=path%>/plugins/ueditor/";</script>
+	<script type="text/javascript" charset="utf-8" src="plugins/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="plugins/ueditor/ueditor.all.js"></script>
+	<!-- 百度富文本编辑框-->
 	<!-- 页面底部js¨ -->
 	<%@ include file="../../system/index/foot.jsp"%>
 	<!-- 下拉框 -->
@@ -145,6 +162,12 @@
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
 		});
+		
+		//百度富文本
+		setTimeout("ueditor()",500);
+		function ueditor(){
+			UE.getEditor('editor');
+		}
 		</script>
 </body>
 </html>

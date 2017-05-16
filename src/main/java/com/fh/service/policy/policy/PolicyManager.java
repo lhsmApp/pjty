@@ -61,5 +61,13 @@ public interface PolicyManager{
 	 */
 	public List<PageData> poliyTypeList(Page page) throws Exception;
 	
+	/**
+	 * 根据政策分类获取政策标题
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PageData> policyTitlelistPage(String str) throws Exception;
+	
 }
 

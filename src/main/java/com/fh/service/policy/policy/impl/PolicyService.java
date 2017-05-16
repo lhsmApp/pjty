@@ -88,6 +88,17 @@ public class PolicyService implements PolicyManager{
 		return (List<PageData>)dao.findForList("PolicyMapper.policyTypeList", page);
 		
 	}
+
+	/**
+	 * 根据政策分类获取政策标题
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public List<PageData> policyTitlelistPage(String str) throws Exception {
+		return (List<PageData>)dao.findForList("PolicyMapper.policyTitleList", str);
+	}
 	
 }
 

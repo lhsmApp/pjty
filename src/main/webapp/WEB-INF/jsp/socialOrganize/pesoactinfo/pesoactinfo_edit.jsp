@@ -28,18 +28,17 @@
 					<div class="col-xs-12">
 					
 					<form action="pesoactinfo/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="PESOACT_PESO_NAME" id="PESOACT_PESO_NAME" value="${pd.PESOACT_PESO_NAME}"/>
-						<input type="hidden" name="PESOACT_ACT_NAME" id="PESOACT_ACT_NAME" value="${pd.PESOACT_ACT_NAME}"/>
+						<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">社会组织名称:</td>
 								<!-- <td><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td> -->
 								<td>
-								    <select class="chosen-select form-control" name="PESO_NAME" id="PESO_NAME" data-placeholder="请选择社会组织名称" style="vertical-align:top;"  title="所属区域" style="width:98%;" >
+								    <select class="chosen-select form-control" name="PESO_NAME" id="PESO_NAME" data-placeholder="请选择社会组织名称" style="vertical-align:top;"  title="社会组织名称" style="width:98%;" >
 								        <option value=""></option>
 								        <c:forEach items="${nameList }" var="each">
-								            <option value="${each.PESO_NAME}" <c:if test="${each.PESO_NAME==pd.PESO_NAME }">selected</c:if>>${each.PESO_NAME}</option>
+								            <option value="${each.ID}" <c:if test="${each.ID==pd.PESO_NAME }">selected</c:if>>${each.PESO_NAME}</option>
 								        </c:forEach>
 								    </select>
 								</td>
@@ -115,6 +114,30 @@
 				$("#ACT_NAME").focus();
 			return false;
 			}
+			var ID = $("#ID").val();
+			var PESO_NAME = $("#PESO_NAME").val();
+			var PESO_NAME_SHOW = $("#PESO_NAME").find("option:selected").text();
+			var ACT_NAME = $("#ACT_NAME").val();
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>department/hasDuplicateRecord.do',
+		    	data: {ID:ID,PESO_NAME:PESO_NAME,ACT_NAME:ACT_NAME,tm:new Date().getTime()},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					 if("success" == data.result){
+					 }else{
+						$("#ACT_NAME").tips({
+							side:1,
+				            msg:'组织名称:'+PESO_NAME_SHOW+'\n活动名称:'+ACT_NAME+'\n 已存在,重新输入',
+				            bg:'#AE81FF',
+				            time:5
+				        });
+						$("#ACT_NAME").focus();
+		    			return false;
+					 }
+				}
+			});
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();

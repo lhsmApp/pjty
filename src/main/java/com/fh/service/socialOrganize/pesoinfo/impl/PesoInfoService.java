@@ -82,6 +82,9 @@ public class PesoInfoService implements PesoInfoManager{
 	public PageData findById(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("PesoInfoMapper.findById", pd);
 	}
+	public PageData hasDuplicateRecord(PageData pd)throws Exception{
+		return (PageData)dao.findForObject("PesoInfoMapper.hasDuplicateRecord", pd);
+	}
 	
 	/**批量删除
 	 * @param ArrayDATA_IDS

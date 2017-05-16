@@ -77,6 +77,9 @@ public class PesoactInfoService implements PesoactInfoManager{
 	public PageData findById(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("PesoactInfoMapper.findById", pd);
 	}
+	public PageData hasDuplicateRecord(PageData pd)throws Exception{
+		return (PageData)dao.findForObject("PesoactInfoMapper.hasDuplicateRecord", pd);
+	}
 	
 	/**批量删除
 	 * @param ArrayDATA_IDS

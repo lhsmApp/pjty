@@ -26,6 +26,7 @@
 		REMARK
 	</sql>
 	<sql id="SelectField">
+	    ID,
 		PESO_NAME,	
 		ESTA_TIME,	
 		BELONG_AREA,	
@@ -40,10 +41,10 @@
 		REGI_CAPI,	
 		STATE,	
 		GEOG_COOR,	
-		REMARK,	
-		PESO_NAME as PESOINFO_ID
+		REMARK
 	</sql>
 	<sql id="SelectQueryField">
+	    ID,
 		PESO_NAME,	
 		DATE_FORMAT(esta_time, '%Y-%m-%d') ESTA_TIME,	
 		BELONG_AREA,	
@@ -58,8 +59,7 @@
 		REGI_CAPI,	
 		STATE,	
 		GEOG_COOR,	
-		REMARK,	
-		PESO_NAME as PESOINFO_ID
+		REMARK
 	</sql>
 	
 	<!-- 字段值 -->
@@ -97,9 +97,9 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOINFO_ID};
-		delete from tb_pesoact_info where PESO_NAME = #{PESOINFO_ID};
-		delete from tb_pesoorg_info where PESO_NAME = #{PESOINFO_ID};
+			ID = #{ID};
+		<!-- delete from tb_pesoact_info where PESO_NAME = #{ID};
+		delete from tb_pesoorg_info where PESO_NAME = #{ID}; -->
 	</delete>
 	
 	<!-- 修改 -->
@@ -122,9 +122,9 @@
 			STATE = #{STATE},
 			GEOG_COOR = #{GEOG_COOR},
 			REMARK = #{REMARK}
-		where PESO_NAME = #{PESOINFO_ID};
-		update tb_pesoact_info set PESO_NAME = #{PESO_NAME} where PESO_NAME = #{PESOINFO_ID};
-		update tb_pesoorg_info set PESO_NAME = #{PESO_NAME} where PESO_NAME = #{PESOINFO_ID};
+		where ID = #{ID};
+		<!-- update tb_pesoact_info set PESO_NAME = #{PESO_NAME} where PESO_NAME = #{ID};
+		update tb_pesoorg_info set PESO_NAME = #{PESO_NAME} where PESO_NAME = #{ID}; -->
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -134,7 +134,7 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOINFO_ID}
+			ID = #{ID}
 	</select>
 	
 	<!-- 列表 -->
@@ -147,6 +147,8 @@
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
+				ID LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
 				PESO_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				or
 				HEAD_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
@@ -163,7 +165,7 @@
 		<if test="pd.STATE != null and pd.STATE != ''"><!-- 状态检索 -->
 			and STATE = #{pd.STATE} 
 		</if>
-		order by PESO_NAME
+		order by ID DESC
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -172,9 +174,23 @@
 		<include refid="SelectField"></include>
 		from 
 		<include refid="tableName"></include>
+		order by ID DESC
 	</select>
+	
+	<!-- 通过编码获取数据 -->
+	<select id="hasDuplicateRecord" parameterType="pd" resultType="pd">
+		select 
+		<include refid="SelectField"></include>
+		from 
+		<include refid="tableName"></include>
+		where 
+			ID != #{ID}
+	    and 
+			PESO_NAME = #{PESO_NAME}
+	</select>
+	
 	<select id="listDic" parameterType="pd" resultType="pd">
-		select PESO_NAME
+		select ID, PESO_NAME
 		from 
 		<include refid="tableName"></include>
 		<where>
@@ -182,6 +198,7 @@
 		        and BELONG_AREA=#{BELONG_AREA}
 		    </if>
 		</where>
+		order by ID DESC
 	</select>
 	
 	<!-- 列表(第一条)根据条件搜索 -->
@@ -200,10 +217,11 @@
 			<if test="BELONG_AREA != null and BELONG_AREA != ''"><!-- 所在区域 -->
 				and BELONG_AREA=#{BELONG_AREA} 
 			</if>
-			<if test="PESO_NAME != null and PESO_NAME != ''"><!-- 投注站编码 -->
-				and PESO_NAME=#{PESO_NAME} 
+			<if test="ID != null and ID != ''"><!-- 投注站编码 -->
+				and ID=#{ID} 
 			</if>
 		</where>
+		order by ID DESC
 	    <!-- LIMIT 1 -->
 	</select>
 	
@@ -212,18 +230,18 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME in
+			ID in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>;
-		delete from tb_pesoact_info where PESO_NAME in
+		<!-- delete from tb_pesoact_info where PESO_NAME in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
-		</foreach>;
-		delete from tb_pesoorg_info where PESO_NAME in
+		</foreach>; -->
+		<!-- delete from tb_pesoorg_info where PESO_NAME in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
-		</foreach>;
+		</foreach>; -->
 	</delete>
 	
 	<!-- fh313596790qq(青苔) -->

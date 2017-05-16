@@ -152,7 +152,7 @@
 			var LEADER_NAME = $("#LEADER_NAME").val();
 			$.ajax({
 				type: "POST",
-				url: '<%=basePath%>department/hasDuplicateRecord.do',
+				url: '<%=basePath%>pesoorginfo/hasDuplicateRecord.do',
 		    	data: {ID:ID,PESO_NAME:PESO_NAME,STAFF_JOB:STAFF_JOB,LEADER_NAME:LEADER_NAME,tm:new Date().getTime()},
 				dataType:'json',
 				cache: false,

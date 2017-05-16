@@ -120,7 +120,7 @@
 			var ACT_NAME = $("#ACT_NAME").val();
 			$.ajax({
 				type: "POST",
-				url: '<%=basePath%>department/hasDuplicateRecord.do',
+				url: '<%=basePath%>pesoactinfo/hasDuplicateRecord.do',
 		    	data: {ID:ID,PESO_NAME:PESO_NAME,ACT_NAME:ACT_NAME,tm:new Date().getTime()},
 				dataType:'json',
 				cache: false,

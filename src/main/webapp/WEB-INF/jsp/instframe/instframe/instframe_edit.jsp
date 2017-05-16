@@ -130,6 +130,18 @@
 				$("#INST_NAME").focus();
 			return false;
 			}
+			if($("#MOBILE_TEL").val()!=null&&$("#MOBILE_TEL").val().trim()!=""){
+				if(!(/^1[34578]\d{9}$/.test($("#MOBILE_TEL").val()))){
+					$("#MOBILE_TEL").tips({
+						side:3,
+			            msg:'负责人手机有误，请重填',
+			            bg:'#AE81FF',
+			            time:2
+			        });
+			        $("#MOBILE_TEL").focus();
+				return false;
+				}
+			}
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();

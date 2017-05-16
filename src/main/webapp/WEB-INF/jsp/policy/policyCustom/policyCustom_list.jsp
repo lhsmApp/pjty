@@ -24,29 +24,43 @@
 	<table style="width: 100%;" border="0">
 		<tr>
 			<td style="width: 25%;" valign="top" bgcolor="blue">
-				
-					<div class="col-sm-6" style="width: 300px">
-						
-							<div class="widget-box widget-color-green2">
-								<div class="widget-header">
-									<h6 class="widget-title lighter smaller">政策分类</h6>
-									
-								</div>
 
-								<div class="widget-body">
-									<div class="widget-main padding-8">
-										<ul id="tree2"></ul>
+				<div class="col-sm-6" style="width: 300px">
+
+					<div class="widget-box widget-color-green2">
+						<div class="widget-header">
+							<h6 class="widget-title lighter smaller">政策分类</h6>
+							<div class="row">
+								<div class="col-xs-12">
+									<!-- PAGE CONTENT BEGINS -->
+									<div class="row">
+										<div class="col-sm-12"> 
+											<div class="dd" id="nestable">
+												<ol class="dd-list">
+													<li class="dd-item" data-id="1">
+														<c:choose>
+															<c:when test="${not empty policyTypeList}">
+																<c:forEach items="${policyTypeList}" var="policyType" varStatus="vs">
+																	<div class="dd-handle" onclick="policyDetail('${policyType.POLI_TYPE}')">${policyType.POLI_TYPE}</div>
+																</c:forEach>
+															</c:when>
+														</c:choose>
+													</li>
+												</ol>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
+
+					
 						</div>
-				
-			
+					</div>
 			</td>
 			<td style="width: 75%;" valign="top">
 
 
-				<div class="col-xs-12 col-sm-6 widget-container-col">
+				<div class="col-xs-12 col-sm-12 widget-container-col">
 					<div class="widget-box widget-color-blue">
 						<!-- #section:custom/widget-box.options -->
 						<div class="widget-header">
@@ -64,9 +78,9 @@
 
 										<!-- 开始循环 -->
 										<c:choose>
-											<c:when test="${not empty varList}">
+											<c:when test="${not empty policyTitleList}">
 												<c:if test="${QX.cha == 1 }">
-													<c:forEach items="${varList}" var="var" varStatus="vs">
+													<c:forEach items="${policyTitleList}" var="var" varStatus="vs">
 														<tr>
 
 															<td class='center'><a
@@ -110,9 +124,9 @@
 										<table id="simple-table"
 											class="table table-striped table-bordered table-hover"
 											style="margin-top: 5px;">
-											
 
-											
+
+
 										</table>
 										<div class="page-header position-relative">
 											<table style="width: 100%;">
@@ -164,6 +178,8 @@
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
 	<script type="text/javascript">
+	
+		console.log("${policyTypeList}");
 		$(top.hangge());//关闭加载状态
 		//检索
 		function tosearch(){
@@ -248,12 +264,39 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>policy/delete.do?TITLE="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>policy/delete.do?POLICY_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
 				}
 			});
+		}
+		
+		//根据分类确定政策
+		function policyDetail(str) {
+			/* top.jzts(); */
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>policyCustom/policyTitlelistPage.do',
+		    	data: {POLI_TYPE:str}, 
+				dataType:'json',
+				//beforeSend: validateData,
+				cache: false,
+				success: function(data){
+					console.log("fdsfsf"); 
+					
+					console.log(data); 
+					 $.each(data.list, function(i, list){
+						 
+					 console.log(list.list[i].TITLE);
+						 console.log(i); 
+						 
+					 
+					 
+						/* 	nextPage(${page.currentPage}); */
+					 }); 
+				}
+			}); 
 		}
 		
 		//修改
@@ -262,7 +305,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>policy/goEdit.do?TITLE='+Id;
+			 diag.URL = '<%=basePath%>policy/goEdit.do?POLICY_ID='+Id;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.Modal = true;				//有无遮罩窗口
@@ -327,7 +370,6 @@
 		function toExcel(){
 			window.location.href='<%=basePath%>policy/excel.do';
 		}
-		
 	</script>
 
 

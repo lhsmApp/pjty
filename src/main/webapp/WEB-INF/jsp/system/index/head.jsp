@@ -69,13 +69,20 @@
 							</ul>
 						</li> -->
 
-						<li title="法律法规" class="green" onclick="fhsms();" id="fhsmstss"><!-- fhsms()在 WebRoot\static\js\myjs\head.js中 -->
+						<li title="组织机构" class="purple" onclick="instframe();" id="instframe">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-								<span class="badge badge-success" id="fhsmsCount"></span>
+								<i class="ace-icon fa fa-users icon-animated-vertical"></i>
+		
 							</a>
 						</li>
-
+						
+						<li title="法律法规" class="green" onclick="fhsms();" id="fhsmstss"><!-- fhsms()在 WebRoot\static\js\myjs\head.js中 -->
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="ace-icon fa fa-briefcase icon-animated-vertical"></i>
+								<!-- <span class="badge badge-success" id="fhsmsCount"></span> -->
+							</a>
+						</li>
+						
 						<!-- #section:basics/navbar.user_menu -->
 						<li class="light-blue">
 							<a data-toggle="dropdown"  class="dropdown-toggle" href="#">

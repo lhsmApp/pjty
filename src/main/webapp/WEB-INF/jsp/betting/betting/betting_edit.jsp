@@ -29,12 +29,12 @@
 					<div class="col-xs-12">
 					
 					<form action="betting/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="BETTING_ID" id="BETTING_ID" value="${pd.BETTING_ID}"/>
+						<input type="hidden" name="ID" id="BETTING_ID" value="${pd.ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">编号:</td>
-								<td><input type="text" name="ID_CODE" id="ID_CODE" value="${pd.ID_CODE}" maxlength="30" placeholder="这里输入编号" title="编号" style="width:98%;"/></td>
+								<td><input type="text" name="ID_CODE" id="ID_CODE" value="${pd.ID_CODE}" maxlength="30" placeholder="这里输入编号" title="编号" onblur="hasIDCode('${pd.ID}')" style="width:98%;"/></td>
 								<td style="width:79px;text-align: right;padding-top: 13px;">营业执照注册号:</td>
 								<td><input type="text" name="LICENSE_NO" id="LICENSE_NO" value="${pd.LICENSE_NO}" maxlength="15" placeholder="这里输入营业执照注册号" title="营业执照注册号" style="width:98%;"/></td>
 							</tr>
@@ -260,7 +260,31 @@
 			$("#zhongxin2").show();
 		}
 		
+		//判断编码是否存在
+		function hasIDCode(ID){
+			var ID_CODE = $("#ID_CODE").val();
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>betting/hasIDCode.do',
+		    	data: {ID_CODE:ID_CODE,ID:ID,tm:new Date().getTime()},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					 if("success" != data.result){
+						 $("#ID_CODE").tips({
+								side:3,
+					            msg:'编号'+ID_CODE+'已存在',
+					            bg:'#AE81FF',
+					            time:3
+					        });
+						 $('#ID_CODE').val('');
+					 }
+				}
+			});
+		}
+		
 		$(function() {
+			
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
 		});

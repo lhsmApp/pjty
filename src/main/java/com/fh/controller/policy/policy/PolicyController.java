@@ -184,7 +184,7 @@ public class PolicyController extends BaseController {
 		
 		page.setPd(pd);
 		List<PageData>	policyTypeList = policyService.poliyTypeList(page);
-		map.put("list", policyTypeList);
+		map.put("policyTypeList", policyTypeList);
 		return AppUtil.returnObject(pd, map);
 	}
 	

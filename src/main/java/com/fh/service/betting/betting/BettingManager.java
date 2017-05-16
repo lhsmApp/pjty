@@ -60,5 +60,11 @@ public interface BettingManager{
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
 	
+	/**通过编号获取数据
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public PageData findByIDCode(PageData pd)throws Exception;
 }
 

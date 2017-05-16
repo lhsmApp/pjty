@@ -283,4 +283,25 @@ public class BettingController extends BaseController {
 		map.put("result", errInfo);				//返回结果
 		return AppUtil.returnObject(new PageData(), map);
 	}
+	
+	/**判断编码是否存在
+	 * @return
+	 */
+	@RequestMapping(value="/hasIDCode")
+	@ResponseBody
+	public Object hasIDCode(){
+		Map<String,String> map = new HashMap<String,String>();
+		String errInfo = "success";
+		PageData pd = new PageData();
+		try{
+			pd = this.getPageData();
+			if(bettingService.findByIDCode(pd)!= null){
+				errInfo = "error";
+			}
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		map.put("result", errInfo);				//返回结果
+		return AppUtil.returnObject(new PageData(), map);
+	}
 }

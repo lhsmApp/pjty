@@ -20,7 +20,42 @@
 		BETT_INTR,	
 		GEOG_COOR,	
 		REMARK,	
+		ID_CODE,
+		ID
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field1">
+		LICENSE_NO,	
+		USER_NAME,	
+		MOBILE_TEL,	
+		OFFICE_TEL,	
+		FAX,	
+		BELONG_AREA,	
+		BETT_ADDR,	
+		BETT_AREA,	
+		BETT_INTR,	
+		GEOG_COOR,	
+		REMARK,	
 		ID_CODE
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field2">
+		B.LICENSE_NO,	
+		B.USER_NAME,	
+		B.MOBILE_TEL,	
+		B.OFFICE_TEL,	
+		B.FAX,	
+		B.BELONG_AREA,	
+		B.BETT_ADDR,	
+		B.BETT_AREA,	
+		B.BETT_INTR,	
+		B.GEOG_COOR,	
+		B.REMARK,	
+		B.ID_CODE,
+		B.ID,
+		D.NAME
 	</sql>
 	
 	<!-- 字段值 -->
@@ -44,7 +79,7 @@
 		insert into 
 	<include refid="tableName"></include>
 		(
-	<include refid="Field"></include>
+	<include refid="Field1"></include>
 		) values (
 	<include refid="FieldValue"></include>
 		)
@@ -55,7 +90,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			ID_CODE = #{ID_CODE}
+			ID = #{ID}
 	</delete>
 	
 	<!-- 修改 -->
@@ -63,6 +98,7 @@
 		update
 		<include refid="tableName"></include>
 		set 
+			ID_CODE = #{ID_CODE},
 			LICENSE_NO = #{LICENSE_NO},
 			USER_NAME = #{USER_NAME},
 			MOBILE_TEL = #{MOBILE_TEL},
@@ -75,7 +111,7 @@
 			GEOG_COOR = #{GEOG_COOR},
 			REMARK = #{REMARK}
 		where 
-		ID_CODE = #{ID_CODE}
+		ID = #{ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -85,26 +121,31 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			ID_CODE = #{ID_CODE}
+			ID = #{ID}
 	</select>
 	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
-		<include refid="Field"></include>
+		<include refid="Field2"></include>
 		from 
-		<include refid="tableName"></include>
-		where 1=1
-		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+		<include refid="tableName"></include> B left join sys_dictionaries D
+		on B.belong_area=D.BIANMA
+		<where >
+			<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
-				<!--	根据需求自己加检索条件
-					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-					 or 
-					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
-				-->
+					bett_addr LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					or
+					license_no LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					or
+					user_name LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				)
-		</if>
+			</if>
+			<if test="pd.BELONG_AREA != null and pd.BELONG_AREA != ''"><!-- 所在区域 -->
+				and BELONG_AREA=#{pd.BELONG_AREA} 
+			</if>
+		</where>
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -118,9 +159,10 @@
 	<!-- 列表(全部)根据条件搜索 -->
 	<select id="listAllByCondition" parameterType="pd" resultType="pd">
 		select
-		<include refid="Field"></include>
+		<include refid="Field2"></include>
 		from 
-		<include refid="tableName"></include>
+		<include refid="tableName"></include> B left join sys_dictionaries D
+		on B.belong_area=D.BIANMA
 		<where >
 			<if test="keywords!= null and keywords != ''"><!-- 关键词检索 -->
 			and
@@ -143,11 +185,22 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			ID_CODE in
+			ID in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>
 	</delete>
 	
-	<!-- fh313596790qq(青苔) -->
+	<!-- 通过编号获取数据 -->
+	<select id="findByIDCode" parameterType="pd" resultType="pd">
+		select 
+			1
+		from 
+			<include refid="tableName"></include>
+		where 
+			ID_CODE = #{ID_CODE}
+		<if test="ID != null and ID != ''">
+			and ID != #{ID} 
+		</if>
+	</select>
 </mapper>

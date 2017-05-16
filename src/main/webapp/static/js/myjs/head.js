@@ -30,6 +30,7 @@ function siMenu(id,fid,MENU_NAME,MENU_URL){
 
 $(function(){
 	getHeadMsg();	//初始页面最顶部信息
+
 });
 
 //初始页面信息
@@ -197,10 +198,23 @@ function fhsms(){
 	 if(user=="Guest"){
 		 $("#mainFrame").attr("src",locat+"/policyCustom/listCustom.do");
 		 $("#subTitle").text("政策法规浏览");
+		 $("#title").text("政策法规浏览");
 	 }
 	 else
 		 //siMenu('118','117','政策法规','policy/list.do');
 		 siMenu('10000','1000','政策法规浏览','policyCustom/listCustom.do');
+}
+
+//组织机构
+function instframe(){
+	console.log(user);
+	 if(user=="Guest"){
+		 $("#mainFrame").attr("src",locat+"/instframe/getInstframeGuest.do");
+		 $("#subTitle").text("组织机构浏览");
+		 $("#title").text("组织机构浏览");
+	 }
+	 else
+		 siMenu('10000','1000','组织机构浏览','instframe/getInstframeGuest.do');
 }
 
 //切换菜单

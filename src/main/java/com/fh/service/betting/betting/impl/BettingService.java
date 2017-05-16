@@ -87,5 +87,14 @@ public class BettingService implements BettingManager{
 		dao.delete("BettingMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
+
+	/**通过编号获取数据
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public PageData findByIDCode(PageData pd)throws Exception{
+		return (PageData)dao.findForObject("BettingMapper.findByIDCode", pd);
+	}
 }
 

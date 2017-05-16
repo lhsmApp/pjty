@@ -261,4 +261,16 @@ public class InstframeController extends BaseController {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,true));
 	}
+	
+	@RequestMapping(value="/getInstframeGuest")
+	public ModelAndView getInstframeGuest() throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"列表InstframeGuest");
+		ModelAndView mv = this.getModelAndView();
+		
+		//List<PageData>	varList = instframeService.list(page);			//列出Instframe列表
+		mv.setViewName("instframe/instframe/instframe_guest");
+		//mv.addObject("varList", varList);
+		mv.addObject("QX",Jurisdiction.getHC());								//按钮权限
+		return mv;
+	}
 }

@@ -90,7 +90,7 @@
 							<!-- <li>
 								<a href="#">Tables</a>
 							</li> -->
-							<li class="active">工作面板</li>
+							<li class="active"><span id="subTitle">工作面板</span></li>
 						</ul><!-- /.breadcrumb -->
 					</div>
 	
@@ -188,17 +188,17 @@
 					<c:if test="${pd.USERNAME=='Guest'}">
 						<div class="page-header">
 							<h1>
-								首页
-								<small>
+								<span id="title">工作面板</span>
+								<!-- <small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
 									静态  &amp; <span id="subTitle">工作面板</span>
-								</small>
+								</small> -->
 							</h1>
 						</div>
 						<!-- /.page-header -->
 					</c:if>
 					
-					<div class="row">
+					<div  class="row">
 						<c:choose>
 							<c:when test="${pd.USERNAME=='Guest'}">
 								<div>
@@ -327,5 +327,16 @@
 
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+	
+	<!-- <script>
+		window.onload=function(){
+			console.log($("#mainFrame").css("height"));
+			var source=$("#mainFrame").css("height").toString().replace("px","");
+			console.log(source);
+			var a=source-102;
+			console.log(a);
+			$("#mainFrame").css("height",a+"px");
+		}
+	</script> -->
 </body>
 </html>

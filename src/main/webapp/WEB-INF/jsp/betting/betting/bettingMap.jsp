@@ -124,7 +124,7 @@ body, html, #allmap {
 						</p>
 						<p>
 							<span class="muted">所属区域：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BELONG_AREA}</c:if></span>
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].NAME}</c:if></span>
 						</p>
 						<p>
 							<span class="muted">投注站地址：</span><span class="text-info"><c:if
@@ -141,25 +141,26 @@ body, html, #allmap {
 						</p>
 					</div>
 					<div class="form-inline has-feedback">
-						<select class="chosen-select form-control" name="BELONG_AREA"
+						<select class=" form-control" name="BELONG_AREA"
 							id="belong_area" data-placeholder="请选择所属区域"
-							style="vertical-align: top; width: 120px;" onchange="change(this.value)">
-							<option value=""></option>
+							style="vertical-align: top; width: 225px;" onchange="change(this.value)">
+							<!-- <option value=""></option> -->
 							<option value="">全部</option>
 							<c:forEach items="${areaList}" var="area">
 								<option value="${area.BIANMA }"
-									<c:if test="${pd.BELONG_AREA==area.BIANMA}">selected</c:if>>${area.NAME }</option>
+									<c:if test='${pd.BELONG_AREA==area.BIANMA}'>selected</c:if>>${area.NAME }</option>
 							</c:forEach>
 						</select>
 					</div>
 					<div class="form-inline has-feedback">
-						<select class="chosen-select form-control" name="ID_CODE"
+					<!-- chosen-select -->
+						<select class=" form-control" name="ID_CODE"
 							id="id_code" data-placeholder="请选择投注站"
-							style="vertical-align: top; width: 120px;">
-							<option value=""></option>
+							style="vertical-align: top; width: 225px;">
+							<!-- <option value=""></option> -->
 							<option value="">全部</option>
 							<c:forEach items="${varList}" var="bet">
-								<option value="${bet.ID_CODE}" <c:if test="${pd.ID_CODE==bet.ID_CODE}">selected</c:if>>${bet.LICENSE_NO }</option>
+								<option value="${bet.ID_CODE}" <c:if test="${pd.ID_CODE==bet.ID_CODE}">selected</c:if>>${bet.ID_CODE }</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -190,7 +191,7 @@ body, html, #allmap {
 		 */
 		$(function() {
 			//下拉框
-			if (!ace.vars['touch']) {
+			/* if (!ace.vars['touch']) {
 				$('.chosen-select').chosen({
 					allow_single_deselect : true
 				});
@@ -225,8 +226,9 @@ body, html, #allmap {
 								$('#form-field-select-4').removeClass(
 										'tag-input-style');
 						});
-			}
-
+			} */
+			
+			change($("#belong_area").val());
 			initPlases();
 		});
 
@@ -338,8 +340,6 @@ body, html, #allmap {
 		 * 第一级值改变事件(初始第二级)
 		 */
 		function change(value){
-			
-			console.log("deleteCom");
 			$.ajax({
 				type: "POST",
 				url: '<%=basePath%>betting/getBettingByBelongarea.do',
@@ -347,14 +347,21 @@ body, html, #allmap {
 				dataType:'json',
 				cache: false,
 				success: function(data){
-					console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
-					console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
-					$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
+					//console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
+					//console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
+					//$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
+				
 					
-					/* $("#id_code").html("<option value=''></option><option>全部</option>");
-					 $.each(data.list, function(i, bet){
-							$("#id_code").append("<option value="+bet.ID_CODE+">"+bet.LICENSE_NO+"</option>");
-					 }); */
+					//$("#id_code").html("<option value=''></option><option>全部</option>");
+					$("#id_code").html("<option value=''>全部</option>");
+					$.each(data.list, function(i, bet){
+						console.log("ccc"+"${pd.ID_CODE}");
+						//$("#id_code").append("<option value="+bet.ID_CODE+" <c:if test='${pd.ID_CODE=="+bet.ID_CODE+"}'> selected</c:if>>"+bet.ID_CODE+"</option>");
+						if("${pd.ID_CODE}"==bet.ID_CODE)
+							$("#id_code").append("<option value="+bet.ID_CODE+" selected>"+bet.ID_CODE+"</option>");
+						else
+							$("#id_code").append("<option value="+bet.ID_CODE+">"+bet.ID_CODE+"</option>");
+					});  
 				}
 			});
 		}

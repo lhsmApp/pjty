@@ -132,12 +132,12 @@ body, html, #allmap {
 						</select>
 					</div>
 					<div class="form-inline has-feedback">
-						<select class="chosen-select form-control" name="PESO_NAME" id="PESO_NAME" data-placeholder="请选择协会"
+						<select class="chosen-select form-control" name="ID" id="ID" data-placeholder="请选择协会"
 							style="vertical-align: top; width: 120px;">
 							<option value=""></option>
 							<option value="">全部</option>
 							<c:forEach items="${dicList }" var="each">
-                                  <option value="${each.PESO_NAME }" <c:if test="${each.PESO_NAME== pd.PESO_NAME}">selected</c:if>>${each.PESO_NAME}</option>
+                                  <option value="${each.ID }" <c:if test="${each.ID== pd.PESO_NAME}">selected</c:if>>${each.PESO_NAME}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -292,9 +292,9 @@ body, html, #allmap {
 				dataType:'json',
 				cache: false,
 				success: function(data){
-					//console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
-					//console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
-					//$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
+					console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
+					console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
+					$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
 				}
 			}); 
 		}

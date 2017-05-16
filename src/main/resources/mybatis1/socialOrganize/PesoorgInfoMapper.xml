@@ -17,15 +17,22 @@
 		REMARK
 	</sql>
 	<sql id="SelectField">
+	    ID,
 		PESO_NAME,	
+		PESO_SHOW,	
 		STAFF_JOB,	
 		LEADER_NAME,	
 		STAFF_SEX,	
 		MOBILE_TEL,	
-		REMARK,	
-		PESO_NAME as PESOORG_PESO_NAME,
-		STAFF_JOB as PESOORG_STAFF_JOB,
-		LEADER_NAME as PESOORG_LEADER_NAME
+		REMARK
+	</sql>
+	<sql id="SelectFrom">
+	    (select org.ID, org.PESO_NAME, org.STAFF_JOB, org.LEADER_NAME, 
+	            org.STAFF_SEX, org.MOBILE_TEL, org.REMARK,
+	            IFNULL(info.PESO_NAME, '') PESO_SHOW
+	     from tb_pesoorg_info org
+         left join tb_peso_info info on org.PESO_NAME = info.ID
+	     ) as total
 	</sql>
 	
 	<!-- 字段值 -->
@@ -54,11 +61,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOORG_PESO_NAME}
-	    and
-			STAFF_JOB = #{PESOORG_STAFF_JOB}
-		and
-			LEADER_NAME = #{PESOORG_LEADER_NAME}
+			ID = #{ID}
 	</delete>
 	
 	<!-- 修改 -->
@@ -73,11 +76,7 @@
 			MOBILE_TEL = #{MOBILE_TEL},
 			REMARK = #{REMARK}
 		where 
-			PESO_NAME = #{PESOORG_PESO_NAME}
-	    and
-			STAFF_JOB = #{PESOORG_STAFF_JOB}
-		and
-			LEADER_NAME = #{PESOORG_LEADER_NAME}
+			ID = #{ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -85,13 +84,9 @@
 		select 
 		<include refid="SelectField"></include>
 		from 
-		<include refid="tableName"></include>
+		<include refid="SelectFrom"></include>
 		where 
-			PESO_NAME = #{PESOORG_PESO_NAME}
-	    and
-			STAFF_JOB = #{PESOORG_STAFF_JOB}
-		and
-			LEADER_NAME = #{PESOORG_LEADER_NAME}
+			ID = #{ID}
 	</select>
 	
 	<!-- 列表 -->
@@ -99,12 +94,16 @@
 		select
 		<include refid="SelectField"></include>
 		from 
-		<include refid="tableName"></include>
+		<include refid="SelectFrom"></include>
 		where 1=1
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
+					ID LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
 					PESO_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					PESO_SHOW LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 
 					STAFF_JOB LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
 					 or 
@@ -120,6 +119,7 @@
         <if test="pd.PESO_NAME!=null and pd.PESO_NAME!=''">
             and PESO_NAME = #{pd.PESO_NAME}
         </if>
+		order by ID DESC
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -127,12 +127,29 @@
 		select
 		<include refid="SelectField"></include>
 		from 
-		<include refid="tableName"></include>
+		<include refid="SelectFrom"></include>
+		order by ID DESC
+	</select>
+	
+	<!-- 通过编码获取数据 -->
+	<select id="hasDuplicateRecord" parameterType="pd" resultType="pd">
+		select 
+		<include refid="SelectField"></include>
+		from 
+		<include refid="SelectFrom"></include>
+		where 
+			ID != #{ID}
+	    and 
+			PESO_NAME = #{PESO_NAME}
+	    and 
+			STAFF_JOB = #{STAFF_JOB}
+	    and 
+			LEADER_NAME = #{LEADER_NAME}
 	</select>
 	
 	<!-- 获取tb_peso_info社会组织名称(PESO_NAME)作为下拉列表选项 -->
 	<select id="pesoNameList" resultType="pd">
-	    select PESO_NAME from tb_peso_info
+	    select ID, PESO_NAME from tb_peso_info
 	</select>
 	
 	<!-- 批量删除 -->
@@ -140,7 +157,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME in
+			ID in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>

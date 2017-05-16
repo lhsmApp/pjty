@@ -16,13 +16,20 @@
 		REMARK
 	</sql>
 	<sql id="SelectField">
+	    ID,
 		PESO_NAME,	
+		PESO_SHOW,	
 		ACT_NAME,	
 		CAPI_SITU,	
 		EFFECT,	
-		REMARK,	
-		PESO_NAME as PESOACT_PESO_NAME,	
-		ACT_NAME as PESOACT_ACT_NAME
+		REMARK
+	</sql>
+	<sql id="SelectFrom">
+	    (select act.ID, act.PESO_NAME, act.ACT_NAME, act.CAPI_SITU, act.EFFECT, act.REMARK,
+	            IFNULL(info.PESO_NAME, '') PESO_SHOW
+	     from tb_pesoact_info act
+         left join tb_peso_info info on act.PESO_NAME = info.ID
+	     ) as total
 	</sql>
 	
 	<!-- 字段值 -->
@@ -50,9 +57,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESO_NAME = #{PESOACT_PESO_NAME}
-		and 
-		    ACT_NAME = #{PESOACT_ACT_NAME}
+			ID = #{ID}
 	</delete>
 	
 	<!-- 修改 -->
@@ -66,9 +71,7 @@
 			EFFECT = #{EFFECT},
 			REMARK = #{REMARK}
 		where 
-			PESO_NAME = #{PESOACT_PESO_NAME}
-		and 
-		    ACT_NAME = #{PESOACT_ACT_NAME}
+			ID = #{ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -76,11 +79,9 @@
 		select 
 		<include refid="SelectField"></include>
 		from 
-		<include refid="tableName"></include>
+		<include refid="SelectFrom"></include>
 		where 
-			PESO_NAME = #{PESOACT_PESO_NAME}
-		and 
-		    ACT_NAME = #{PESOACT_ACT_NAME}
+			ID = #{ID}
 	</select>
 	
 	<!-- 列表 -->
@@ -88,12 +89,16 @@
 		select
 		<include refid="SelectField"></include>
 		from 
-		<include refid="tableName"></include>
+		<include refid="SelectFrom"></include>
 		where 1=1
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
+					ID LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
 					PESO_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					PESO_SHOW LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 
 					ACT_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
 					 or 
@@ -107,7 +112,7 @@
 		<if test="pd.PESO_NAME!=null and pd.PESO_NAME!=''">
 		    and PESO_NAME = #{pd.PESO_NAME}
 		</if>
-		order by PESO_NAME, ACT_NAME
+		order by ID DESC
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -115,12 +120,27 @@
 		select
 		<include refid="SelectField"></include>
 		from 
-		<include refid="tableName"></include>
+		<include refid="SelectFrom"></include>
+		order by ID DESC
+	</select>
+	
+	<!-- 通过编码获取数据 -->
+	<select id="hasDuplicateRecord" parameterType="pd" resultType="pd">
+		select 
+		<include refid="SelectField"></include>
+		from 
+		<include refid="SelectFrom"></include>
+		where 
+			ID != #{ID}
+	    and 
+			PESO_NAME = #{PESO_NAME}
+	    and 
+			ACT_NAME = #{ACT_NAME}
 	</select>
 	
 	<!-- 获取tb_peso_info社会组织名称(PESO_NAME)作为下拉列表选项 -->
 	<select id="pesoNameList" resultType="pd">
-	    select PESO_NAME from tb_peso_info
+	    select ID, PESO_NAME from tb_peso_info
 	</select>
 	
 	<!-- 批量删除 -->
@@ -128,19 +148,11 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			PESOACTINFO_ID in
+			ID in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
-		</foreach>
+		</foreach>;
 	</delete>
-	<!-- <delete id="deleteAll" parameterType="pd">
-		delete from
-		<include refid="tableName"></include>
-		where 
-        <foreach collection="list" item="item" open="" close="" separator="OR">  
-            (PESO_NAME = #{item.PESOACT_PESO_NAME} and ACT_NAME = #{item.PESOACT_ACT_NAME})
-        </foreach> 
-	</delete> -->
 	
 	<!-- fh313596790qq(青苔) -->
 </mapper>

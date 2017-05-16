@@ -28,7 +28,7 @@
 					<div class="col-xs-12">
 					
 					<form action="pesoinfo/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="PESOINFO_ID" id="PESOINFO_ID" value="${pd.PESOINFO_ID}"/>
+						<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
@@ -253,6 +253,28 @@
     			return false;
     			}
             }
+			var ID = $("#ID").val();
+			var PESO_NAME = $("#PESO_NAME").val();
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>pesoinfo/hasDuplicateRecord.do',
+		    	data: {ID:ID,PESO_NAME:PESO_NAME,tm:new Date().getTime()},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					 if("success" == data.result){
+					 }else{
+						$("#PESO_NAME").tips({
+							side:1,
+				            msg:'组织名称:'+PESO_NAME+'\n 已存在,重新输入',
+				            bg:'#AE81FF',
+				            time:5
+				        });
+						$("#PESO_NAME").focus();
+		    			return false;
+					 }
+				}
+			});
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();

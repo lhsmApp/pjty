@@ -228,6 +228,27 @@ public class PesoorgInfoController extends BaseController {
 		mv = new ModelAndView(erv,dataMap);
 		return mv;
 	}
+
+	/**判断重复记录是否存在
+	 * @return
+	 */
+	@RequestMapping(value="/hasDuplicateRecord")
+	@ResponseBody
+	public Object hasDuplicateRecord(){
+		Map<String,String> map = new HashMap<String,String>();
+		String errInfo = "success";
+		PageData pd = new PageData();
+		try{
+			pd = this.getPageData();
+			if(pesoorginfoService.hasDuplicateRecord(pd) != null){
+				errInfo = "error";
+			}
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		map.put("result", errInfo);				//返回结果
+		return AppUtil.returnObject(new PageData(), map);
+	}
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder){

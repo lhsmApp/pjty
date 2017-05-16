@@ -165,7 +165,7 @@ public class PesoactInfoController extends BaseController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		pd = this.getPageData();
 		List<PageData> pdList = new ArrayList<PageData>();
-		/*String DATA_IDS = pd.getString("DATA_IDS");
+		String DATA_IDS = pd.getString("DATA_IDS");
 		if(null != DATA_IDS && !"".equals(DATA_IDS)){
 			String ArrayDATA_IDS[] = DATA_IDS.split(",");
 			pesoactinfoService.deleteAll(ArrayDATA_IDS);
@@ -174,7 +174,7 @@ public class PesoactInfoController extends BaseController {
 			pd.put("msg", "no");
 		}
 		pdList.add(pd);
-		map.put("list", pdList);*/
+		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
 	}
 	
@@ -212,6 +212,27 @@ public class PesoactInfoController extends BaseController {
 		ObjectExcelView erv = new ObjectExcelView();
 		mv = new ModelAndView(erv,dataMap);
 		return mv;
+	}
+
+	/**判断重复记录是否存在
+	 * @return
+	 */
+	@RequestMapping(value="/hasDuplicateRecord")
+	@ResponseBody
+	public Object hasDuplicateRecord(){
+		Map<String,String> map = new HashMap<String,String>();
+		String errInfo = "success";
+		PageData pd = new PageData();
+		try{
+			pd = this.getPageData();
+			if(pesoactinfoService.hasDuplicateRecord(pd) != null){
+				errInfo = "error";
+			}
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		map.put("result", errInfo);				//返回结果
+		return AppUtil.returnObject(new PageData(), map);
 	}
 	
 	@InitBinder

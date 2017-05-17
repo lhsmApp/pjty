@@ -70,8 +70,8 @@ public class InstframeService implements InstframeManager{
 	public PageData findById(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("InstframeMapper.findById", pd);
 	}
-	public PageData findByInstCode(PageData pd)throws Exception{
-		return (PageData)dao.findForObject("InstframeMapper.findByInstCode", pd);
+	public List<PageData> findByInstCode(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("InstframeMapper.findByInstCode", pd);
 	}
 
 	/**

@@ -57,7 +57,7 @@
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">姓名:</td>
-								<td><input type="text" name="LEADER_NAME" id="LEADER_NAME" value="${pd.LEADER_NAME}" maxlength="20" placeholder="这里输入姓名" title="姓名" style="width:98%;"/></td>
+								<td><input type="text" name="LEADER_NAME" id="LEADER_NAME" value="${pd.LEADER_NAME}" onblur="hasDuplicateRecord()" maxlength="20" placeholder="这里输入姓名" title="姓名" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">性别:</td>
@@ -164,13 +164,48 @@
 					 }else if("error" == data.result){
 						$("#LEADER_NAME").tips({
 							side:3,
-				            msg:'组织名称:'+PESO_NAME_SHOW+'\n组织领导职务:'+STAFF_JOB_SHOW+'\n姓名:'+LEADER_NAME+'\n 已存在,重新输入',
+				            msg:'组织名称:'+PESO_NAME_SHOW+' 组织领导职务:'+STAFF_JOB_SHOW+' 姓名:'+LEADER_NAME+' 已存在,重新输入',
 				            bg:'#AE81FF',
 				            time:2
 				        });
 						$("#LEADER_NAME").focus();
+						return false;
 					 }else{
 						 alert(data.result);  
+							return false;
+					 }
+				}
+			});
+		}
+		
+		function hasDuplicateRecord(){
+			var ID = $("#ID").val();
+			var PESO_NAME = $("#PESO_NAME").val();
+			var PESO_NAME_SHOW = $("#PESO_NAME").find("option:selected").text();
+			var STAFF_JOB = $("#STAFF_JOB").val();
+			var STAFF_JOB_SHOW = $("#STAFF_JOB").find("option:selected").text();
+			var LEADER_NAME = $("#LEADER_NAME").val();
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>pesoorginfo/hasDuplicateRecord.do',
+		    	data: {ID:ID,PESO_NAME:PESO_NAME,STAFF_JOB:STAFF_JOB,LEADER_NAME:LEADER_NAME,tm:new Date().getTime()},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					 if("success" == data.result){
+						 return true;
+					 }else if("error" == data.result){
+						$("#LEADER_NAME").tips({
+							side:3,
+				            msg:'组织名称:'+PESO_NAME_SHOW+' 组织领导职务:'+STAFF_JOB_SHOW+' 姓名:'+LEADER_NAME+' 已存在,重新输入',
+				            bg:'#AE81FF',
+				            time:2
+				        });
+						$("#LEADER_NAME").focus();
+						return false;
+					 }else{
+						 alert(data.result);  
+							return false;
 					 }
 				}
 			});

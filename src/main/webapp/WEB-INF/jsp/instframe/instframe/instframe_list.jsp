@@ -256,8 +256,8 @@
 			 diag.Drag=true;
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>instframe/goAdd.do?INSTFRAME_ID='+INSTFRAME_ID;
-			 diag.Width = 800;
-			 diag.Height = 600;
+			 diag.Width = 700;
+			 diag.Height = 550;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮
@@ -319,8 +319,8 @@
 			 diag.Drag=true;
 			 diag.Title ="编辑";
 			 diag.URL = '<%=basePath%>instframe/goEdit.do?INSTFRAME_ID='+Id;
-			 diag.Width = 800;
-			 diag.Height = 600;
+			 diag.Width = 600;
+			 diag.Height = 500;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮

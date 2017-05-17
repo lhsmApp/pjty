@@ -33,7 +33,7 @@
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">社会组织名称:</td>
-								<td colspan="3"><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td>
+								<td colspan="3"><input type="text" name="PESO_NAME" id="PESO_NAME" value="${pd.PESO_NAME}" onblur="hasDuplicateRecord()" maxlength="300" placeholder="这里输入社会组织名称" title="社会组织名称" style="width:98%;"/></td>
 							</tr>
 							<tr>
 							    <td style="width:79px;text-align: right;padding-top: 13px;">成立时间:</td>
@@ -269,18 +269,46 @@
 					 }else if("error" == data.result){
 						$("#PESO_NAME").tips({
 							side:3,
-				            msg:'组织名称:'+PESO_NAME+'\n 已存在,重新输入',
+				            msg:'组织名称:'+PESO_NAME+' 已存在,重新输入',
 				            bg:'#AE81FF',
 				            time:2
 				        });
 						$("#PESO_NAME").focus();
+						return false;
 					 }else{
 						 alert(data.result);  
+							return false;
 					 }
-				},
-	            error: function() {  
-	                //alert('对不起失败了');  
-	            }  
+				}
+			});
+		}
+		
+		function hasDuplicateRecord(){
+			var ID = $("#ID").val();
+			var PESO_NAME = $("#PESO_NAME").val();
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>pesoinfo/hasDuplicateRecord.do',
+		    	data: {ID:ID,PESO_NAME:PESO_NAME,tm:new Date().getTime()},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					 if("success" == data.result){
+						 return true;
+					 }else if("error" == data.result){
+						$("#PESO_NAME").tips({
+							side:3,
+				            msg:'组织名称:'+PESO_NAME+' 已存在,重新输入',
+				            bg:'#AE81FF',
+				            time:2
+				        });
+						$("#PESO_NAME").focus();
+						return false;
+					 }else{
+						 alert(data.result);  
+							return false;
+					 }
+				}
 			});
 		}
 		

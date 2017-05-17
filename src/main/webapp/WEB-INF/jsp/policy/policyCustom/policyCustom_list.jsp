@@ -74,7 +74,7 @@
 							<div class="widget-main no-padding">
 								<table class="table table-striped table-bordered table-hover">
 
-									<tbody>
+									<tbody id="ttt">
 
 										<!-- 开始循环 -->
 										<c:choose>
@@ -286,15 +286,23 @@
 					console.log("fdsfsf"); 
 					
 					console.log(data); 
+					/* StringBuffer strRow = new StringBuffer(); */
 					 $.each(data.list, function(i, list){
 						 
 					 console.log(list.list[i].TITLE);
 						 console.log(i); 
 						 
+					  strRow.append("<tr><td class=\"center\"><a href=\"static/html_UI/html/policy.html\">"+list.list[i].TITLE +"</a></td><td class=\"center\">"+list.list[i].TITLE +"</td></tr>");
+
+								
+					  console.log(strRow); 
+						 
+						 
 					 
-					 
-						/* 	nextPage(${page.currentPage}); */
+						 
+							/* nextPage(${page.currentPage}); */
 					 }); 
+					 $("#ttt").html(strRow); 
 				}
 			}); 
 		}

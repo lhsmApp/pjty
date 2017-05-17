@@ -96,8 +96,8 @@ public class PolicyService implements PolicyManager{
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<PageData> policyTitlelistPage(String str) throws Exception {
-		return (List<PageData>)dao.findForList("PolicyMapper.policyTitleList", str);
+	public List<PageData> policyTitlelistPage(Page page) throws Exception {
+		return (List<PageData>)dao.findForList("PolicyMapper.policyTitlelistPage", page);
 	}
 	
 }

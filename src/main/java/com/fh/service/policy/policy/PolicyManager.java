@@ -67,7 +67,7 @@ public interface PolicyManager{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<PageData> policyTitlelistPage(String str) throws Exception;
+	public List<PageData> policyTitlelistPage(Page page) throws Exception;
 	
 }
 

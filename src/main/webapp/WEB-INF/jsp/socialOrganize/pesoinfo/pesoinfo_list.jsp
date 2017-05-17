@@ -134,7 +134,7 @@
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.ID}','${var.PESO_NAME}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -157,7 +157,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.ID}','${var.PESO_NAME}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
@@ -315,7 +315,8 @@
 		}
 		
 		//删除
-		function del(Id){
+		function del(Id, name){
+			
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
@@ -373,6 +374,7 @@
 				        });
 						return;
 					}else{
+						
 						if(msg == '确定要删除选中的数据吗?'){
 							top.jzts();
 							$.ajax({

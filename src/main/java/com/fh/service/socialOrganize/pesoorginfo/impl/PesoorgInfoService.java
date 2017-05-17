@@ -77,8 +77,8 @@ public class PesoorgInfoService implements PesoorgInfoManager{
 	public PageData findById(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("PesoorgInfoMapper.findById", pd);
 	}
-	public PageData hasDuplicateRecord(PageData pd)throws Exception{
-		return (PageData)dao.findForObject("PesoorgInfoMapper.hasDuplicateRecord", pd);
+	public List<PageData> hasDuplicateRecord(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("PesoorgInfoMapper.hasDuplicateRecord", pd);
 	}
 	
 	/**批量删除

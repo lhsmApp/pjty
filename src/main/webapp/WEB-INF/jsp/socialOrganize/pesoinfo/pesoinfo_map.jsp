@@ -103,8 +103,14 @@ body, html, #allmap {
 									test="${getList!=null&&getList.size()>0}">${getList[0].PESO_NAME}</c:if></strong>
 						</p>
 						<p>
-							<span class="muted">所属区域：</span><span class="text-info"><c:if
-									test="${getList!=null&&getList.size()>0}">${getList[0].BELONG_AREA}</c:if></span>
+							<span class="muted">所属区域：</span>
+							<span class="text-info">
+							    <c:if test="${getList!=null&&getList.size()>0}">
+							        <c:forEach items="${areaList}" var="area">
+								        <c:if test="${getList[0].BELONG_AREA==area.BIANMA}">${area.NAME }</c:if>
+							        </c:forEach>
+							    </c:if>
+							</span>
 						</p>
 						<p>
 							<span class="muted">办公地址：</span><span class="text-info"><c:if
@@ -122,8 +128,7 @@ body, html, #allmap {
 					<div class="form-inline has-feedback">
 						<select class="chosen-select form-control" name="BELONG_AREA"
 							id="belong_area" data-placeholder="请选择所属区域"
-							style="vertical-align: top; width: 120px;" onchange="change(this.value)">
-							<option value=""></option>
+							style="vertical-align: top; width: 225px;" onchange="change(this.value)">
 							<option value="">全部</option>
 							<c:forEach items="${areaList}" var="area">
 								<option value="${area.BIANMA }"
@@ -133,8 +138,7 @@ body, html, #allmap {
 					</div>
 					<div class="form-inline has-feedback">
 						<select class="chosen-select form-control" name="ID" id="ID" data-placeholder="请选择协会"
-							style="vertical-align: top; width: 120px;">
-							<option value=""></option>
+							style="vertical-align: top; width: 225px;">
 							<option value="">全部</option>
 							<c:forEach items="${dicList }" var="each">
                                   <option value="${each.ID }" <c:if test="${each.ID== pd.PESO_NAME}">selected</c:if>>${each.PESO_NAME}</option>
@@ -167,43 +171,7 @@ body, html, #allmap {
 		 * 控件及数据初始化
 		 */
 		$(function() {
-			//下拉框
-			if (!ace.vars['touch']) {
-				$('.chosen-select').chosen({
-					allow_single_deselect : true
-				});
-				$(window).off('resize.chosen').on('resize.chosen', function() {
-					$('.chosen-select').each(function() {
-						var $this = $(this);
-						$this.next().css({
-							'width' : $this.parent().width()
-						});
-					});
-				}).trigger('resize.chosen');
-				$(document).on('settings.ace.chosen',
-						function(e, event_name, event_val) {
-							if (event_name != 'sidebar_collapsed')
-								return;
-							$('.chosen-select').each(function() {
-								var $this = $(this);
-								$this.next().css({
-									'width' : $this.parent().width()
-								});
-							});
-						});
-				$('#chosen-multiple-style .btn').on(
-						'click',
-						function(e) {
-							var target = $(this).find('input[type=radio]');
-							var which = parseInt(target.val());
-							if (which == 2)
-								$('#form-field-select-4').addClass(
-										'tag-input-style');
-							else
-								$('#form-field-select-4').removeClass(
-										'tag-input-style');
-						});
-			}
+			change($("#belong_area").val());
 			initPlases();
 
 		});
@@ -283,7 +251,6 @@ body, html, #allmap {
 		 * 第一级值改变事件(初始第二级)
 		 */
 		function change(value){
-			
 			console.log("deleteCom");
 		    $.ajax({
 				type: "POST",
@@ -292,10 +259,17 @@ body, html, #allmap {
 				dataType:'json',
 				cache: false,
 				success: function(data){
-					console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
-					console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
-					$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
-				}
+					$("#ID").html("<option value=''>全部</option>");
+					$.each(data.list, function(i, each){
+						if("${pd.ID}"==each.ID)
+							$("#ID").append("<option value="+each.ID+" selected>"+each.PESO_NAME+"</option>");
+						else
+							$("#ID").append("<option value="+each.ID+">"+each.PESO_NAME+"</option>");
+					});  
+				},
+	            error: function() {  
+	                //alert('对不起失败了');  
+	            }  
 			}); 
 		}
 	</script>

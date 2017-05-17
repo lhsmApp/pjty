@@ -45,7 +45,7 @@
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">活动名称:</td>
-								<td><input type="text" name="ACT_NAME" id="ACT_NAME" value="${pd.ACT_NAME}" maxlength="300" placeholder="这里输入活动名称" title="活动名称" style="width:98%;"/></td>
+								<td><input type="text" name="ACT_NAME" id="ACT_NAME" value="${pd.ACT_NAME}" onblur="hasDuplicateRecord()" maxlength="300" placeholder="这里输入活动名称" title="活动名称" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">资金落实情况:</td>
@@ -126,21 +126,55 @@
 				cache: false,
 				success: function(data){
 					 if("success" == data.result){
-					 }else{
+							$("#Form").submit();
+							$("#zhongxin").hide();
+							$("#zhongxin2").show();
+					 }else if("error" == data.result){
 						$("#ACT_NAME").tips({
-							side:1,
-				            msg:'组织名称:'+PESO_NAME_SHOW+'\n活动名称:'+ACT_NAME+'\n 已存在,重新输入',
+							side:3,
+				            msg:'组织名称:'+PESO_NAME_SHOW+' 活动名称:'+ACT_NAME+' 已存在,重新输入',
 				            bg:'#AE81FF',
-				            time:5
+				            time:2
 				        });
 						$("#ACT_NAME").focus();
-		    			return false;
+						return false;
+					 }else{
+						 alert(data.result);
+							return false;
 					 }
 				}
 			});
-			$("#Form").submit();
-			$("#zhongxin").hide();
-			$("#zhongxin2").show();
+		}
+		
+		function hasDuplicateRecord(){
+			var ID = $("#ID").val();
+			var PESO_NAME = $("#PESO_NAME").val();
+			var PESO_NAME_SHOW = $("#PESO_NAME").find("option:selected").text();
+			var ACT_NAME = $("#ACT_NAME").val();
+			$.ajax({
+				type: "POST",
+				url: '<%=basePath%>pesoactinfo/hasDuplicateRecord.do',
+		    	data: {ID:ID,PESO_NAME:PESO_NAME,ACT_NAME:ACT_NAME,tm:new Date().getTime()},
+				dataType:'json',
+				cache: false,
+				success: function(data){
+					 if("success" == data.result){
+						 return true;
+					 }else if("error" == data.result){
+						$("#ACT_NAME").tips({
+							side:3,
+				            msg:'组织名称:'+PESO_NAME_SHOW+' 活动名称:'+ACT_NAME+' 已存在,重新输入',
+				            bg:'#AE81FF',
+				            time:2
+				        });
+						$("#ACT_NAME").focus();
+						return false;
+					 }else{
+						 alert(data.result);
+							return false;
+					 }
+				}
+			});
 		}
 		
 		$(function() {

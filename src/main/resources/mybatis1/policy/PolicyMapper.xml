@@ -13,6 +13,16 @@
 		TITLE,	
 		PUB_DATE,	
 		PUB_USER,	
+		TITL_CONT,
+		ID
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field1">
+		POLI_TYPE,	
+		TITLE,	
+		PUB_DATE,	
+		PUB_USER,	
 		TITL_CONT
 	</sql>
 	
@@ -30,7 +40,7 @@
 		insert into 
 	<include refid="tableName"></include>
 		(
-	<include refid="Field"></include>
+	<include refid="Field1"></include>
 		) values (
 	<include refid="FieldValue"></include>
 		)
@@ -41,7 +51,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			TITLE = #{TITLE}
+			ID = #{ID}
 	</delete>
 	
 	<!-- 修改 -->
@@ -53,9 +63,10 @@
 			TITLE = #{TITLE},
 			PUB_DATE = #{PUB_DATE},
 			PUB_USER = #{PUB_USER},
-			TITL_CONT = #{TITL_CONT}
+			TITL_CONT = #{TITL_CONT},
+			TITLE = #{TITLE}
 		where 
-		TITLE = #{TITLE}
+		ID = #{ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -65,7 +76,7 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			TITLE = #{TITLE}
+			ID = #{ID}
 	</select>
 	
 	<!-- 列表 -->
@@ -74,18 +85,24 @@
 		<include refid="Field"></include>
 		from 
 		<include refid="tableName"></include>
-		where 1=1
-		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
-			and
-				(
-				TITLE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-				<!--	根据需求自己加检索条件
-					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-					 or 
-					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
-				-->
-				)
-		</if>
+		<where>
+			<if test="pd.keywords != null and pd.keywords!= ''"><!-- 关键词检索 -->
+				and (
+					POLI_TYPE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					or
+					TITLE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					or
+					PUB_USER LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					)
+			</if>
+			<if test="pd.pubDateStart!=null and pd.pubDateStart!=''"><!-- 发布时间检索 -->
+				and PUB_DATE &gt;= #{pd.pubDateStart} 
+			</if>
+			<if test="pd.pubDateEnd!=null and pd.pubDateEnd!=''"><!-- 发布时间检索 -->
+				and PUB_DATE &lt;= #{pd.pubDateEnd} 
+			</if>
+		</where>
+		order by PUB_DATE desc
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -101,7 +118,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			TITLE in
+			ID in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>

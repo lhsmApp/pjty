@@ -144,14 +144,23 @@ function saveEmail(){
 
 //ueditor纯文本
 function getContentTxt() {
+	console.log("getContentTxt");
     var arr = [];
     arr.push(UE.getEditor('editor').getContentTxt());
+    
+    //console.log(UE.getEditor('editor').getContentTxt());
+    //console.log(arr);
     return arr.join("");
 }
 //ueditor有标签文本
 function getContent() {
+	
+	console.log("getContent");
     var arr = [];
     arr.push(UE.getEditor('editor').getContent());
+    
+    //console.log(UE.getEditor('editor').getContent());
+    //console.log(arr);
     return arr.join("");
 }
 

@@ -240,11 +240,13 @@ public class PesoorgInfoController extends BaseController {
 		PageData pd = new PageData();
 		try{
 			pd = this.getPageData();
-			if(pesoorginfoService.hasDuplicateRecord(pd) != null){
+			List<PageData> list = pesoorginfoService.hasDuplicateRecord(pd);
+			if(list != null&&list.size()>0){
 				errInfo = "error";
 			}
 		} catch(Exception e){
 			logger.error(e.toString(), e);
+			errInfo = "出错："+e.toString();
 		}
 		map.put("result", errInfo);				//返回结果
 		return AppUtil.returnObject(new PageData(), map);

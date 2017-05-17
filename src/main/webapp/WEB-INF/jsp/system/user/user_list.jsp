@@ -74,7 +74,7 @@
 									<th class="center">用户名</th>
 									<th class="center">姓名</th>
 									<th class="center">角色</th>
-									<th class="center"><i class="ace-icon fa fa-envelope-o"></i>邮箱</th>
+									<!-- <th class="center"><i class="ace-icon fa fa-envelope-o"></i>邮箱</th> -->
 									<th class="center"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>最近登录</th>
 									<th class="center">上次登录IP</th>
 									<th class="center">操作</th>
@@ -99,7 +99,7 @@
 											<td class="center"><a onclick="viewUser('${user.USERNAME}')" style="cursor:pointer;">${user.USERNAME }</a></td>
 											<td class="center">${user.NAME }</td>
 											<td class="center">${user.ROLE_NAME }</td>
-											<td class="center"><a title="发送电子邮件" style="text-decoration:none;cursor:pointer;" <c:if test="${QX.email == 1 }">onclick="sendEmail('${user.EMAIL }');"</c:if>>${user.EMAIL }&nbsp;<i class="ace-icon fa fa-envelope-o"></i></a></td>
+											<%-- <td class="center"><a title="发送电子邮件" style="text-decoration:none;cursor:pointer;" <c:if test="${QX.email == 1 }">onclick="sendEmail('${user.EMAIL }');"</c:if>>${user.EMAIL }&nbsp;<i class="ace-icon fa fa-envelope-o"></i></a></td> --%>
 											<td class="center">${user.LAST_LOGIN}</td>
 											<td class="center">${user.IP}</td>
 											<td class="center">
@@ -107,7 +107,7 @@
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
-													<c:if test="${QX.FHSMS == 1 }">
+													<%-- <c:if test="${QX.FHSMS == 1 }">
 													<a class="btn btn-xs btn-info" title='发送站内信' onclick="sendFhsms('${user.USERNAME }');">
 														<i class="ace-icon fa fa-envelope-o bigger-120" title="发送站内信"></i>
 													</a>
@@ -116,7 +116,7 @@
 													<a class="btn btn-xs btn-warning" title='发送短信' onclick="sendSms('${user.PHONE }');">
 														<i class="ace-icon fa fa-envelope-o bigger-120" title="发送短信"></i>
 													</a>
-													</c:if>
+													</c:if> --%>
 													<c:if test="${QX.edit == 1 }">
 													<a class="btn btn-xs btn-success" title="编辑" onclick="editUser('${user.USER_ID}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
@@ -134,7 +134,7 @@
 															<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
 														</button>
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-															<c:if test="${QX.FHSMS == 1 }">
+															<%-- <c:if test="${QX.FHSMS == 1 }">
 															<li>
 																<a style="cursor:pointer;" onclick="sendFhsms('${user.USERNAME }');" class="tooltip-info" data-rel="tooltip" title="发送站内信">
 																	<span class="blue">
@@ -151,7 +151,7 @@
 																	</span>
 																</a>
 															</li>
-															</c:if>
+															</c:if> --%>
 															<c:if test="${QX.edit == 1 }">
 															<li>
 																<a style="cursor:pointer;" onclick="editUser('${user.USER_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
@@ -200,9 +200,9 @@
 								<c:if test="${QX.add == 1 }">
 								<a class="btn btn-mini btn-success" onclick="add();">新增</a>
 								</c:if>
-								<c:if test="${QX.FHSMS == 1 }"><a title="批量发送站内信" class="btn btn-mini btn-info" onclick="makeAll('确定要给选中的用户发送站内信吗?');"><i class="ace-icon fa fa-envelope-o bigger-120"></i></a></c:if>
-								<c:if test="${QX.email == 1 }"><a title="批量发送电子邮件" class="btn btn-mini btn-primary" onclick="makeAll('确定要给选中的用户发送邮件吗?');"><i class="ace-icon fa fa-envelope bigger-120"></i></a></c:if>
-								<c:if test="${QX.sms == 1 }"><a title="批量发送短信" class="btn btn-mini btn-warning" onclick="makeAll('确定要给选中的用户发送短信吗?');"><i class="ace-icon fa fa-envelope-o bigger-120"></i></a></c:if>
+								<%-- <c:if test="${QX.FHSMS == 1 }"><a title="批量发送站内信" class="btn btn-mini btn-info" onclick="makeAll('确定要给选中的用户发送站内信吗?');"><i class="ace-icon fa fa-envelope-o bigger-120"></i></a></c:if>
+								<c:if test="${QX.email == 1 }"><a title="批量发送电子邮件" class="btn btn-mini btn-primary" onclick="makeAll('确定要给选中的用户发送邮件吗?');"><i class="ace-icon fa fa-envelope bigger-120"></i></a></c:if> 
+								<c:if test="${QX.sms == 1 }"><a title="批量发送短信" class="btn btn-mini btn-warning" onclick="makeAll('确定要给选中的用户发送短信吗?');"><i class="ace-icon fa fa-envelope-o bigger-120"></i></a></c:if>--%>
 								<c:if test="${QX.del == 1 }">
 								<a title="批量删除" class="btn btn-mini btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
 								</c:if>

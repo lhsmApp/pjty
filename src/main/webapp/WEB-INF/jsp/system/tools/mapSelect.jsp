@@ -63,7 +63,7 @@ body, html {
 						style="border: 1px solid #C0C0C0; width: 150px; height: auto;">
 					</div> -->
 
-					<div class="input-group" style="width: 250px;">
+					<div class="input-group" style="width: 250px;margin-right:5px;">
 						<span class="input-group-addon"> <i
 							class="ace-icon fa fa-check"></i>
 						</span> <input id="suggestId" type="text" value=""

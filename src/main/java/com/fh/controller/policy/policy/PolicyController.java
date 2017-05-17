@@ -213,7 +213,7 @@ public class PolicyController extends BaseController {
 			PageData vpd = new PageData();
 			vpd.put("var1", varOList.get(i).getString("POLI_TYPE"));	    //1
 			vpd.put("var2", varOList.get(i).getString("TITLE"));	    //2
-			vpd.put("var3", varOList.get(i).getString("PUB_DATE"));	    //3
+			vpd.put("var3", varOList.get(i).get("PUB_DATE").toString());	    //3
 			vpd.put("var4", varOList.get(i).getString("PUB_USER"));	    //4
 			vpd.put("var5", varOList.get(i).getString("TITL_CONT"));	    //5
 			varList.add(vpd);

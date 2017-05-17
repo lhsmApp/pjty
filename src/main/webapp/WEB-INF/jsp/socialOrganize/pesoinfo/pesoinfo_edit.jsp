@@ -263,21 +263,25 @@
 				cache: false,
 				success: function(data){
 					 if("success" == data.result){
-					 }else{
+							$("#Form").submit();
+							$("#zhongxin").hide();
+							$("#zhongxin2").show();
+					 }else if("error" == data.result){
 						$("#PESO_NAME").tips({
-							side:1,
+							side:3,
 				            msg:'组织名称:'+PESO_NAME+'\n 已存在,重新输入',
 				            bg:'#AE81FF',
-				            time:5
+				            time:2
 				        });
 						$("#PESO_NAME").focus();
-		    			return false;
+					 }else{
+						 alert(data.result);  
 					 }
-				}
+				},
+	            error: function() {  
+	                //alert('对不起失败了');  
+	            }  
 			});
-			$("#Form").submit();
-			$("#zhongxin").hide();
-			$("#zhongxin2").show();
 		}
 		
 		$(function() {

@@ -283,7 +283,6 @@ body, html, #allmap {
 		 * 第一级值改变事件(初始第二级)
 		 */
 		function change(value){
-			
 			console.log("deleteCom");
 		    $.ajax({
 				type: "POST",
@@ -292,10 +291,19 @@ body, html, #allmap {
 				dataType:'json',
 				cache: false,
 				success: function(data){
-					console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
-					console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
-					$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
-				}
+	                alert(data.list.length);  
+					$("#ID").empty();
+					$("#ID").html("<option value=''>全部</option>");
+					$.each(data.list, function(i, bet){
+						if("${pd.ID}"==bet.ID_CODE)
+							$("#ID").append("<option value="+bet.ID+" selected>"+bet.PESO_NAME+"</option>");
+						else
+							$("#ID").append("<option value="+bet.ID+">"+bet.PESO_NAME+"</option>");
+					});  
+				},
+	            error: function() {  
+	                //alert('对不起失败了');  
+	            }  
 			}); 
 		}
 	</script>

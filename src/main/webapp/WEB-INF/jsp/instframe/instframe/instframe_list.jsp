@@ -203,8 +203,8 @@
 		$(top.hangge());//关闭加载状态
 		//检索
 		function tosearch(){
-			//top.jzts();
-			//$("#Form").submit();
+			top.jzts();
+			$("#Form").submit();
 		}
 		
 		//去此ID下子级列表

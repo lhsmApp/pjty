@@ -158,21 +158,22 @@
 				cache: false,
 				success: function(data){
 					 if("success" == data.result){
-					 }else{
+							$("#Form").submit();
+							$("#zhongxin").hide();
+							$("#zhongxin2").show();
+					 }else if("error" == data.result){
 						$("#LEADER_NAME").tips({
-							side:1,
+							side:3,
 				            msg:'组织名称:'+PESO_NAME_SHOW+'\n组织领导职务:'+STAFF_JOB_SHOW+'\n姓名:'+LEADER_NAME+'\n 已存在,重新输入',
 				            bg:'#AE81FF',
-				            time:5
+				            time:2
 				        });
 						$("#LEADER_NAME").focus();
-		    			return false;
+					 }else{
+						 alert(data.result);  
 					 }
 				}
 			});
-			$("#Form").submit();
-			$("#zhongxin").hide();
-			$("#zhongxin2").show();
 		}
 		
 		$(function() {

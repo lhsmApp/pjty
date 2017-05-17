@@ -44,7 +44,7 @@
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">编码:</td>
 								<td>
-								    <input type="text" name="INST_CODE" id="INST_CODE" value="${pd.INST_CODE}" maxlength="10" placeholder="这里输入组织机构编码" title="组织机构编码" style="width:98%;" onblur="hasInstCode();" <c:if test="${null != pd.INST_CODE}">readonly="readonly"</c:if>/>
+								    <input type="text" name="INST_CODE" id="INST_CODE" value="${pd.INST_CODE}" maxlength="10" placeholder="这里输入组织机构编码" title="组织机构编码" style="width:98%;" <c:if test="${null != pd.INST_CODE}">readonly="readonly"</c:if>/>
 								</td>
 							</tr>
 							<tr>
@@ -142,13 +142,8 @@
 				return false;
 				}
 			}
-			$("#Form").submit();
-			$("#zhongxin").hide();
-			$("#zhongxin2").show();
-		}
-		
-		//判断编码是否存在
-		function hasInstCode(){
+
+			//判断编码是否存在
 			var INST_CODE = $.trim($("#INST_CODE").val());
 			if("" == INST_CODE)return;
 			$.ajax({
@@ -159,14 +154,19 @@
 				cache: false,
 				success: function(data){
 					 if("success" == data.result){
-					 }else{
+							$("#Form").submit();
+							$("#zhongxin").hide();
+							$("#zhongxin2").show();
+					 }else if("error" == data.result){
 						$("#INST_CODE").tips({
-							side:1,
+							side:3,
 				            msg:'编码'+INST_CODE+'已存在,重新输入',
 				            bg:'#AE81FF',
-				            time:5
+				            time:2
 				        });
-						$('#INST_CODE').val('');
+						$('#INST_CODE').focus();
+					 }else{
+						 alert(data.result);  
 					 }
 				}
 			});

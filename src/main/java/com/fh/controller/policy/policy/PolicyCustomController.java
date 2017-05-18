@@ -56,12 +56,20 @@ public class PolicyCustomController extends BaseController{
 		page.setPd(pd);
 		List<PageData>	varList = policyService.list(page);	//列出Policy列表
 		List<PageData> policyTypeList = policyService.poliyTypeList(page);//政策分类列表
-		List<PageData> policyTitleList = policyService.policyTitlelistPage(policyTypeList.get(0).getString("POLI_TYPE"));//政策分类列表
+		List<PageData> policyTitleList = policyService.policyTitlelistPage(page);//政策分类列表
+		String POLI_TYPE = pd.getString("POLI_TYPE");
+		if(null != POLI_TYPE && !"".equals(POLI_TYPE)){
+			pd.put("msg", "ok");
+			mv.addObject("varList", policyTitleList);
+		}else{
+			pd.put("msg", "no");
+			mv.addObject("varList", varList);
+		}
 		
 		mv.setViewName("policy/policyCustom/policyCustom_list");
-		mv.addObject("varList", varList);
+//		mv.addObject("varList", varList);
 		mv.addObject("policyTypeList", policyTypeList);
-		mv.addObject("policyTitleList", policyTitleList);
+//		mv.addObject("policyTitleList", policyTitleList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		return mv;
@@ -91,15 +99,16 @@ public class PolicyCustomController extends BaseController{
 	 */
 	@RequestMapping(value="/policyTitlelistPage")
 	@ResponseBody
-	public Object policyTitlelistPage(String str) throws Exception{
+	public Object policyTitlelistPage(Page page) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"根据政策分类查询政策");
 		PageData pd = new PageData();		
 		Map<String,Object> map = new HashMap<String,Object>();
 		pd = this.getPageData();
+		page.setPd(pd);
 		List<PageData> pdList = new ArrayList<PageData>();
 		String POLI_TYPE = pd.getString("POLI_TYPE");
 		if(null != POLI_TYPE && !"".equals(POLI_TYPE)){
-			pd.put("list", policyService.policyTitlelistPage(POLI_TYPE));
+			pd.put("policyTitleList", policyService.policyTitlelistPage(page));
 			pd.put("msg", "ok");
 		}else{
 			pd.put("msg", "no");
@@ -110,26 +119,47 @@ public class PolicyCustomController extends BaseController{
 	}
 	
 	/**
-	 * 显示列表ztree
+	 * 显示列表树
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/listAllDepartment")
-	public ModelAndView listAllDepartment(Model model,String DEPARTMENT_ID)throws Exception{
+	@RequestMapping(value="/listAllPolicyType")
+	public ModelAndView listAllPolicyType(Page page, Model model,String POLI_TYPE)throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		try{
-			JSONArray arr = JSONArray.fromObject(departmentService.listAllDepartment("0"));
-			String json = arr.toString();
-			json = json.replaceAll("DEPARTMENT_ID", "id").replaceAll("PARENT_ID", "pId").replaceAll("NAME", "name").replaceAll("subDepartment", "nodes").replaceAll("hasDepartment", "checked").replaceAll("treeurl", "url");
-			model.addAttribute("zTreeNodes", json);
-			mv.addObject("DEPARTMENT_ID",DEPARTMENT_ID);
+		page.setPd(pd);
+		List<PageData> policyTypeList = policyService.poliyTypeList(page);//政策分类列表
+
+			mv.addObject("POLI_TYPE",POLI_TYPE);
 			mv.addObject("pd", pd);	
-			mv.setViewName("fhoa/department/department_ztree");
-		} catch(Exception e){
-			logger.error(e.toString(), e);
-		}
+			mv.addObject("policyTypeList", policyTypeList);
+			mv.setViewName("policy/policyCustom/policyCustom_tree");
+		
+		return mv;
+	}
+	
+	/**列表
+	 * @param page
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/listContent")
+	public ModelAndView listContent(Page page) throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"列表内容");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		page.setPd(pd);
+		List<PageData>	varList = policyService.list(page);	//列出Policy列表
+		List<PageData> policyTypeList = policyService.poliyTypeList(page);//政策分类列表
+		List<PageData> policyTitleList = policyService.policyTitlelistPage(page);//政策分类列表
+		
+		mv.setViewName("policy/policyCustom/policyCustom_list");
+		mv.addObject("varList", varList);
+		mv.addObject("policyTypeList", policyTypeList);
+		mv.addObject("policyTitleList", policyTitleList);
+		mv.addObject("pd", pd);
+		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		return mv;
 	}
 	

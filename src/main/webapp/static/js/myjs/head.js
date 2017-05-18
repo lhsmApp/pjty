@@ -196,13 +196,13 @@ function fhsms(){
 	 diag.show();*/
 	console.log(user);
 	 if(user=="Guest"){
-		 $("#mainFrame").attr("src",locat+"/policyCustom/listCustom.do");
+		 $("#mainFrame").attr("src",locat+"/policyCustom/listAllPolicyType.do");
 		 $("#subTitle").text("政策法规浏览");
 		 $("#title").text("政策法规浏览");
 	 }
 	 else
 		 //siMenu('118','117','政策法规','policy/list.do');
-		 siMenu('10000','1000','政策法规浏览','policyCustom/listCustom.do');
+		 siMenu('10000','1000','政策法规浏览','policyCustom/listAllPolicyType.do');
 }
 
 //组织机构

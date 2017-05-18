@@ -31,7 +31,7 @@
 									<div id="zhongxin" style="padding-top: 13px;">
 									<table id="table_report" class="table table-striped table-bordered table-hover">
 										<c:if test="${fx != 'head'}">
-										<tr>
+										<%-- <tr>
 											<td style="width:79px;text-align: right;padding-top: 13px;">角色:</td>
 											<td id="juese">
 											<select class="chosen-select form-control" name="ROLE_ID" id="role_id" data-placeholder="请选择角色" style="vertical-align:top;" style="width:98%;" >
@@ -41,8 +41,10 @@
 											</c:forEach>
 											</select>
 											</td>
-										</tr>
+										</tr> --%>
+											<input name="ROLE_ID" id="role_id" value="68a2eb8394484984bb78338c05807533" type="hidden" />
 										</c:if>
+										
 										<c:if test="${fx == 'head'}">
 											<input name="ROLE_ID" id="role_id" value="${pd.ROLE_ID }" type="hidden" />
 										</c:if>
@@ -120,7 +122,7 @@
 	});
 	//保存
 	function save(){
-		if($("#role_id").val()==""){
+		/* if($("#role_id").val()==""){
 			$("#juese").tips({
 				side:3,
 	            msg:'选择角色',
@@ -129,7 +131,7 @@
 	        });
 			$("#role_id").focus();
 			return false;
-		}
+		} */
 		if($("#loginname").val()=="" || $("#loginname").val()=="此用户名已存在!"){
 			$("#loginname").tips({
 				side:3,

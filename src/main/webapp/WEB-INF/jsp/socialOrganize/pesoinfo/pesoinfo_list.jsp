@@ -335,8 +335,8 @@
 			 diag.Drag=true;
 			 diag.Title ="编辑";
 			 diag.URL = '<%=basePath%>pesoinfo/goEdit.do?ID='+Id;
-			 diag.Width = 550;
-			 diag.Height = 355;
+			 diag.Width = 750;
+			 diag.Height = 455;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮 

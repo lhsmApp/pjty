@@ -229,4 +229,24 @@ public class PolicyController extends BaseController {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,true));
 	}
+	
+	/**政策内容
+	 * @param page
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/content")
+	public ModelAndView content(Page page) throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"Policy内容");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		pd = policyService.findById(pd);	//根据ID读取
+		
+		
+		mv.setViewName("policy/policyCustom/policy_content");
+		mv.addObject("pd", pd);
+		return mv;
+	}
+	
 }

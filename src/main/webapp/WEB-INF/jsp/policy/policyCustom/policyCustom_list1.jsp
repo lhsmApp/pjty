@@ -20,123 +20,101 @@
 </head>
 <body class="no-skin">
 
+	<!-- /section:basics/navbar.layout -->
+	<div class="main-container" id="main-container">
+		<!-- /section:basics/sidebar -->
+		<div class="main-content">
+			<div class="main-content-inner">
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-12">
 
-	<table style="width: 100%;" border="0">
-		<tr>
-			<td style="width: 25%;"valign="top" >
 
-				<div class="col-sm-6" style="width: 300px;" >
+							<div class="col-xs-12 col-sm-12 widget-container-col">
+								<div class="widget-box widget-color-blue">
+									<!-- #section:custom/widget-box.options -->
+									<div class="widget-header">
+										<h5 class="widget-title bigger lighter">政策法规</h5>
 
-					<div class="widget-box widget-color-blue" >
-						<div class="widget-header">
-							<h6 class="widget-title lighter smaller">政策分类</h6>
-							</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<!-- PAGE CONTENT BEGINS -->
-									<div class="row">
-										<div class="col-sm-12"> 
-											<div class="dd" id="nestable">
-												<ol class="dd-list">
-													<li class="dd-item" data-id="1">
-														<c:choose>
-															<c:when test="${not empty policyTypeList}">
-																<c:forEach items="${policyTypeList}" var="policyType" varStatus="vs">
-																	<div style="cursor:pointer" class="dd-handle" onclick="policyDetail('${policyType.POLI_TYPE}')">${policyType.POLI_TYPE}</div>
+
+									</div>
+
+									<!-- /section:custom/widget-box.options -->
+									<div class="widget-body">
+										<div class="widget-main no-padding">
+										<form action="policyCustom/listCustom.do?POLI_TYPE=${'' == POLI_TYPE?'':INSTFRAME_ID}"}&currentPage=${null == pd.dnowPage || '' == pd.dnowPage?'1':pd.dnowPage}" style="margin:0 auto;width:100%;height:100%;" method="post" name="Form" id="Form">
+											<table class="table table-striped table-bordered table-hover">
+
+												<tbody>
+
+													<!-- 开始循环 -->
+													<c:choose>
+														<c:when test="${not empty varList}">
+															<c:if test="${QX.cha == 1 }">
+																<c:forEach items="${varList}" var="var" varStatus="vs">
+																	<tr>
+
+																		<td class='center'><a onclick="viewContent('${var.ID}')">${var.TITLE}</a></td>
+																		<td class='center'>${var.PUB_DATE}</td>
+
+																	</tr>
+
 																</c:forEach>
-															</c:when>
-														</c:choose>
-													</li>
-												</ol>
-											</div>
+															</c:if>
+															<c:if test="${QX.cha == 0 }">
+																<tr>
+																	<td colspan="100" class="center">您无权查看</td>
+																</tr>
+															</c:if>
+														</c:when>
+														<c:otherwise>
+															<tr class="main_info">
+																<td colspan="100" class="center">没有相关数据</td>
+															</tr>
+														</c:otherwise>
+													</c:choose>
+
+												</tbody>
+											</table>
+											</form>
 										</div>
 									</div>
 								</div>
-							
-
-					
-						
-					</div>
-					</div>
-				
-					
-			</td>
-		
-			
-			<td style="width:75%;" valign="top">
-			<iframe  name="treeFrame" id="treeFrame" frameborder="0" src="<%=basePath%>/policyCustom/listCustom.do?POLI_TYPE=${'' == POLI_TYPE?'':POLI_TYPE}"}"></iframe>
-		</td>
-			
-			<%-- <td style="width: 75%;" valign="top">
-
-
-				<div class="col-xs-12 col-sm-12 widget-container-col">
-					<div class="widget-box widget-color-blue">
-						<!-- #section:custom/widget-box.options -->
-						<div class="widget-header">
-							<h5 class="widget-title bigger lighter">政策法规</h5>
-
-
-						</div>
-
-						<!-- /section:custom/widget-box.options -->
-						<div class="widget-body">
-							<div class="widget-main no-padding">
-								<table class="table table-striped table-bordered table-hover">
-
-									<tbody id="ttt">
-
-										<!-- 开始循环 -->
-										<c:choose>
-											<c:when test="${not empty policyTitleList}">
-												<c:if test="${QX.cha == 1 }">
-													<c:forEach items="${policyTitleList}" var="var" varStatus="vs">
-														<tr>
-
-															<td class='center'><a
-																href="static/html_UI/html/policy.html" >${var.TITLE}</a></td>
-															<td class='center'>${var.PUB_DATE}</td>
-
-														</tr>
-
-													</c:forEach>
-												</c:if>
-												<c:if test="${QX.cha == 0 }">
-													<tr>
-														<td colspan="100" class="center">您无权查看</td>
-													</tr>
-												</c:if>
-											</c:when>
-											<c:otherwise>
-												<tr class="main_info">
-													<td colspan="100" class="center">没有相关数据</td>
-												</tr>
-											</c:otherwise>
-										</c:choose>
-
-									</tbody>
-								</table>
 							</div>
+							<!-- /.span -->
 						</div>
+						<!-- /.row -->
+						<!-- /section:basics/navbar.layout -->
+
+						</table>
+						<div class="page-header position-relative">
+							<table style="width: 100%;">
+								<tr>
+									<td style="vertical-align: top;"><div class="pagination"
+											style="float: right; padding-top: 0px; margin-top: 0px;">${page.pageStr}</div></td>
+								</tr>
+							</table>
+						</div>
+						</form>
+
 					</div>
-				</div> <!-- /.span -->
-				</div> <!-- /.row --> <!-- /section:basics/navbar.layout -->
-				
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.page-content -->
+		</div>
+	</div>
+	<!-- /.main-content -->
 
-					<!-- 返回顶部 -->
-					<a href="#" id="btn-scroll-up"
-						class="btn-scroll-up btn btn-sm btn-inverse"> <i
-						class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-					</a>
+	<!-- 返回顶部 -->
+	<a href="#" id="btn-scroll-up"
+		class="btn-scroll-up btn btn-sm btn-inverse"> <i
+		class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+	</a>
 
-				</div> <!-- /.main-container -->
-			</td> --%>
-		</tr>
-	</table>
-
-
-
+	</div>
+	<!-- /.main-container -->
 
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
@@ -152,21 +130,6 @@
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
 	<script type="text/javascript">
-	
-	function treeFrameT(){
-		var hmainT = document.getElementById("treeFrame");
-		var bheightT = document.documentElement.clientHeight;
-		hmainT .style.width = '100%';
-		hmainT .style.height = (bheightT-26) + 'px';
-	}
-	treeFrameT();
-	window.onresize=function(){  
-		treeFrameT();
-	};
-	
-	
-	
-		console.log("${policyTypeList}");
 		$(top.hangge());//关闭加载状态
 		//检索
 		function tosearch(){
@@ -227,8 +190,8 @@
 			 diag.Drag=true;
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>policy/goAdd.do';
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.Width = 650;
+			 diag.Height = 455;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮
@@ -251,52 +214,12 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>policy/delete.do?POLICY_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>policy/delete.do?TITLE="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
 				}
 			});
-		}
-		
-		//根据分类确定政策
-		function policyDetail(str) {
-			top.jzts();
-			
-			
-			treeFrame.location.href="<%=basePath%>/policyCustom/listCustom.do?POLI_TYPE="+str+"&tm="+new Date().getTime();
-		/* 	
-			ModelAndView mv = this.getModelAndView(); */
-		/* 	mv.setViewName("policy/policyCustom/policyCustom_list"); */
-			
-			
-			
-			<%-- /* top.jzts(); */
-			$.ajax({
-				type: "POST",
-				url: '<%=basePath%>policyCustom/policyTitlelistPage.do',
-		    	data: {POLI_TYPE:str}, 
-				dataType:'json',
-				//beforeSend: validateData,
-				cache: false,
-				success: function(data){
-					console.log("fdsfsf"); 
-					
-					console.log(data); 
-					
-					
-					console.log(data.list[0].policyTitleList.length);
-					var strSum;
-					 $.each(data.list[0].policyTitleList, function(i, policyTitleItem){
-						 
-					
-					 var strRow="<tr><td class=\"center\"><a href=\"static/html_UI/html/policy.html\">"+policyTitleItem.TITLE +"</a></td><td class=\"center\">"+policyTitleItem.PUB_DATE +"</td></tr>";
-					strSum+=strRow;	
-					 /* nextPage(${page.currentPage}); */
-					 }); 
-					 $("#ttt").html(strSum); 
-				}
-			});  --%>
 		}
 		
 		//修改
@@ -305,7 +228,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>policy/goEdit.do?POLICY_ID='+Id;
+			 diag.URL = '<%=basePath%>policy/goEdit.do?TITLE='+Id;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.Modal = true;				//有无遮罩窗口
@@ -370,6 +293,13 @@
 		function toExcel(){
 			window.location.href='<%=basePath%>policy/excel.do';
 		}
+		
+		//查看详情
+		function viewContent(Id){
+			console.log(Id+"h哈哈");
+			self.location.href="<%=basePath%>/policy/content.do?ID="+Id+"&tm="+new Date().getTime();
+		}
+		
 	</script>
 
 

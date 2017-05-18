@@ -92,7 +92,7 @@
 											<td class='center'>${var.PUB_DATE}</td>
 											<td class='center'>${var.PUB_USER}</td>
 											<%-- document.getElementById("aContent").innerHTML='${var.TITL_CONT}'.substr(0,10) --%>
-											<td class='center'><a onclick="viewContent('${pd.TITL_CONT}')">内容详情</a></td>
+											<td class='center'><a onclick="viewContent('${var.ID}')">内容详情</a></td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -370,8 +370,9 @@
 		}
 		
 		//查看详情
-		function viewContent(content){
-			
+		function viewContent(Id){
+			console.log(Id+"h哈哈");
+			self.location.href="<%=basePath%>/policy/content.do?ID="+Id+"&tm="+new Date().getTime();
 		}
 	</script>
 

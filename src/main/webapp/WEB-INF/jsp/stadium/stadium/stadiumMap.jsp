@@ -118,13 +118,9 @@ body, html, #allmap {
 				<form action="stadium/mapQuery.do" method="post" name="Form"
 					id="Form">
 					<div id="detail" style="margin-bottom: 20px;">
-						<%-- <p class="text-info">
-							<strong>营业执照注册号：<c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].LICENSE_NO}</c:if></strong>
-						</p> --%>
 						<p>
 							<span class="muted">所属区域：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BELONG_AREA}</c:if></span>
+									test="${searchList!=null&&searchList.size()>0}">${searchList[0].NAME}</c:if></span>
 						</p>
 						<p>
 							<span class="muted">场馆地址：</span><span class="text-info"><c:if

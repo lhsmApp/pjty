@@ -73,7 +73,7 @@
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">职能简介:</td>
-								<td colspan=3><input type="text" name="PESO_INTR" id="PESO_INTR" value="${pd.PESO_INTR}" maxlength="1000" placeholder="这里输入职能简介" title="职能简介" style="width:98%;"/></td>
+								<td colspan=3><textarea name="PESO_INTR" id="PESO_INTR" rows="3" maxlength="1000" placeholder="这里输入职能简介" title="职能简介" style="width:98%;">${pd.PESO_INTR}</textarea></td>
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">注册资金:</td>

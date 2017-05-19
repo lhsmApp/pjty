@@ -30,18 +30,23 @@
 						<div class="col-xs-12">
 							
 						<!-- 表单  -->
-						<form action="policy/list.do" method="post" name="Form" id="Form">
+						<form action="policyCustom/listCustom.do" method="post" name="Form" id="Form">
 						
 						<!-- 表单  -->
 						
 						<div class="widget-header">
-										<h5 class="widget-title bigger lighter">政策法规</h5>
+										<h5 class="widget-title bigger lighter"><i class="ace-icon fa fa-table"></i>政策法规</h5>
 
 
 									</div>
 						
 						<table class="table table-striped table-bordered table-hover" style="margin-top:5px;">
-
+							<thead>
+								<tr>
+									<th class="center">标题</th>
+									<th class="center">发布时间</th>
+								</tr>
+							</thead>
 												<tbody>
 
 													<!-- 开始循环 -->
@@ -120,14 +125,7 @@
 		$(top.hangge());//关闭加载状态
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		//查看详情
 		function viewContent(Id){

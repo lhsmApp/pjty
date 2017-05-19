@@ -92,7 +92,7 @@
 											<td class='center'>${var.PUB_DATE}</td>
 											<td class='center'>${var.PUB_USER}</td>
 											<%-- document.getElementById("aContent").innerHTML='${var.TITL_CONT}'.substr(0,10) --%>
-											<td class='center'><a onclick="viewContent('${var.ID}')">内容详情</a></td>
+											<td class='center'><a style="cursor: pointer;" onclick="viewContent('${var.ID}')">内容详情</a></td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>

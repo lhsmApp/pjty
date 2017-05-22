@@ -185,7 +185,7 @@
 					</div>
 					<!-- /section:settings.box -->
 					
-					<c:if test="${pd.USERNAME=='Guest'}">
+					<%-- <c:if test="${pd.USERNAME=='Guest'}">
 						<div class="page-header">
 							<h1>
 								<span id="title">工作面板</span>
@@ -195,10 +195,9 @@
 								</small> -->
 							</h1>
 						</div>
-						<!-- /.page-header -->
-					</c:if>
+					</c:if> --%>
 					
-					<div  class="row">
+					<div class="row">
 						<c:choose>
 							<c:when test="${pd.USERNAME=='Guest'}">
 								<div>

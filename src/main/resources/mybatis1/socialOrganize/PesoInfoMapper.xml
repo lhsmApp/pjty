@@ -43,24 +43,6 @@
 		GEOG_COOR,	
 		REMARK
 	</sql>
-	<sql id="SelectQueryField">
-	    ID,
-		PESO_NAME,	
-		DATE_FORMAT(esta_time, '%Y-%m-%d') ESTA_TIME,	
-		BELONG_AREA,	
-		USCC,	
-		HEAD_NAME,	
-		HEAD_TEL,	
-		E_MAIL,	
-		OFFICE_TEL,	
-		OFFICE_ADDR,	
-		FAX,	
-		PESO_INTR,	
-		REGI_CAPI,	
-		STATE,	
-		GEOG_COOR,	
-		REMARK
-	</sql>
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
@@ -156,12 +138,6 @@
 				OFFICE_ADDR LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				)
 		</if>
-		<if test="pd.lastStart!=null and pd.lastStart!=''"><!-- 成立时间检索 -->
-			and ESTA_TIME &gt;= #{pd.lastStart} 
-		</if>
-		<if test="pd.lastEnd!=null and pd.lastEnd!=''"><!-- 成立时间检索 -->
-			and ESTA_TIME &lt;= #{pd.lastEnd} 
-		</if>
 		<if test="pd.STATE != null and pd.STATE != ''"><!-- 状态检索 -->
 			and STATE = #{pd.STATE} 
 		</if>
@@ -204,7 +180,7 @@
 	<!-- 列表(第一条)根据条件搜索 -->
 	<select id="queryListByCondition" parameterType="pd" resultType="pd">
 		select
-		<include refid="SelectQueryField"></include>
+		<include refid="SelectField"></include>
 		from 
 		<include refid="tableName"></include>
 		<where >

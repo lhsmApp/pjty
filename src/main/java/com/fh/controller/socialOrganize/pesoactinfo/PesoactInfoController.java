@@ -201,7 +201,7 @@ public class PesoactInfoController extends BaseController {
 		List<PageData> varList = new ArrayList<PageData>();
 		for(int i=0;i<varOList.size();i++){
 			PageData vpd = new PageData();
-			vpd.put("var1", varOList.get(i).getString("PESO_NAME"));	    //1
+			vpd.put("var1", varOList.get(i).getString("PESO_SHOW"));	    //1
 			vpd.put("var2", varOList.get(i).getString("ACT_NAME"));	    //2
 			vpd.put("var3", varOList.get(i).get("CAPI_SITU").toString());	//3
 			vpd.put("var4", varOList.get(i).getString("EFFECT"));	    //4

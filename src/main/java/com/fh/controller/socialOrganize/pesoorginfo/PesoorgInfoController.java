@@ -215,7 +215,7 @@ public class PesoorgInfoController extends BaseController {
 		List<PageData> varList = new ArrayList<PageData>();
 		for(int i=0;i<varOList.size();i++){
 			PageData vpd = new PageData();
-			vpd.put("var1", varOList.get(i).getString("PESO_NAME"));	    //1
+			vpd.put("var1", varOList.get(i).getString("PESO_SHOW"));	    //1
 			vpd.put("var2", varOList.get(i).getString("STAFF_JOB"));	    //2
 			vpd.put("var3", varOList.get(i).getString("LEADER_NAME"));	    //3
 			vpd.put("var4", varOList.get(i).getString("STAFF_SEX"));	    //4
@@ -261,11 +261,11 @@ public class PesoorgInfoController extends BaseController {
 	private List<PageData> getSexList(){
 		List<PageData> list=new ArrayList<PageData>();
 		PageData pd0=new PageData();
-		pd0.put("SEX_ID","0");
+		pd0.put("SEX_ID","1");
 		pd0.put("SEX_NAME","男");
 		list.add(pd0);
 		PageData pd1=new PageData();
-		pd1.put("SEX_ID","1");
+		pd1.put("SEX_ID","2");
 		pd1.put("SEX_NAME","女");
 		list.add(pd1);
 		return list;

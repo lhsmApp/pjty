@@ -19,55 +19,41 @@
 <link rel="stylesheet" href="static/ace/css/datepicker.css" />
 </head>
 <body class="no-skin">
-
-
 	<table style="width: 100%;" border="0">
 		<tr>
-			<td style="width: 25%;"valign="top" >
-
-				<div class="col-sm-6" style="width: 300px;" >
-
-					<div class="widget-box widget-color-blue" >
+			<td style="width: 20%;" valign="top">
+				<div style="width: 90%; margin: 10px auto;">
+					<div class="widget-box widget-color-blue">
 						<div class="widget-header">
 							<h6 class="widget-title lighter smaller">政策分类</h6>
-							</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<!-- PAGE CONTENT BEGINS -->
-									<div class="row">
-										<div class="col-sm-12"> 
-											<div class="dd" id="nestable">
-												<ol class="dd-list">
-													<li class="dd-item" data-id="1">
-														<c:choose>
-															<c:when test="${not empty policyTypeList}">
-																<c:forEach items="${policyTypeList}" var="policyType" varStatus="vs">
-																	<div style="cursor:pointer" class="dd-handle" onclick="policyDetail('${policyType.POLI_TYPE}')">${policyType.POLI_TYPE}</div>
-																</c:forEach>
-															</c:when>
-														</c:choose>
-													</li>
-												</ol>
-											</div>
-										</div>
-									</div>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<div class="dd" id="nestable">
+									<ol class="dd-list">
+										<li class="dd-item" data-id="1"><c:choose>
+												<c:when test="${not empty policyTypeList}">
+													<c:forEach items="${policyTypeList}" var="policyType"
+														varStatus="vs">
+														<div style="cursor: pointer" class="dd-handle"
+															onclick="policyDetail('${policyType.POLI_TYPE}')">${policyType.POLI_TYPE}</div>
+													</c:forEach>
+												</c:when>
+											</c:choose></li>
+									</ol>
 								</div>
-							
-
-					
-						
+							</div>
+						</div>
 					</div>
-					</div>
-				
-					
+				</div>
 			</td>
-		
-			
-			<td style="width:75%;" valign="top">
-			<iframe  name="treeFrame" id="treeFrame" frameborder="0" src="<%=basePath%>/policyCustom/listCustom.do?POLI_TYPE=${'' == POLI_TYPE?'':POLI_TYPE}"}"></iframe>
-		</td>
-			
+
+
+			<td style="width: 80%;" valign="top"><iframe name="treeFrame"
+					id="treeFrame" frameborder="0"
+					src="<%=basePath%>/policyCustom/listCustom.do?POLI_TYPE=${'' == POLI_TYPE?'':POLI_TYPE}"}"></iframe>
+			</td>
+
 			<%-- <td style="width: 75%;" valign="top">
 
 

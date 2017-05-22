@@ -261,11 +261,11 @@ public class PesoorgInfoController extends BaseController {
 	private List<PageData> getSexList(){
 		List<PageData> list=new ArrayList<PageData>();
 		PageData pd0=new PageData();
-		pd0.put("SEX_ID","0");
+		pd0.put("SEX_ID","1");
 		pd0.put("SEX_NAME","男");
 		list.add(pd0);
 		PageData pd1=new PageData();
-		pd1.put("SEX_ID","1");
+		pd1.put("SEX_ID","2");
 		pd1.put("SEX_NAME","女");
 		list.add(pd1);
 		return list;

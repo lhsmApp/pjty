@@ -37,7 +37,7 @@
 							</tr>
 							<tr>
 							    <td style="width:79px;text-align: right;padding-top: 13px;">成立时间:</td>
-								<td><input class="span10 date-picker" name="ESTA_TIME" id="ESTA_TIME" value="${pd.ESTA_TIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="成立时间" title="成立时间" style="width:98%;"/></td>
+								<td><input type="text" name="ESTA_TIME" id="ESTA_TIME" value="${pd.ESTA_TIME}" maxlength="20" placeholder="成立时间" title="成立时间" style="width:98%;"/></td>
 								<td style="width:79px;text-align: right;padding-top: 13px;">所属区域:</td>
 								<!--<td><input type="text" name="BELONG_AREA" id="BELONG_AREA" value="${pd.BELONG_AREA}" maxlength="4" placeholder="这里输入所属区域" title="所属区域" style="width:98%;"/></td>-->
 								<td>

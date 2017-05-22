@@ -19,13 +19,14 @@
 	<!-- #section:custom/widget-box -->
 	<div class="widget-box">
 		<div class="widget-header">
-			<h5 class="widget-title">Default Widget Box</h5>
+			<h5 class="widget-title">${pd.TITLE}</h5>
 
 			<!-- #section:custom/widget-box.toolbar -->
 			<div class="widget-toolbar">
-				<a href="#" data-action="collapse"> <i
-					class="ace-icon fa fa-chevron-up"></i>
-				</a> 
+				<a href="JavaScript:history.back(-1)" class="btn-back-message-list">
+					<i class="ace-icon fa fa-arrow-left blue bigger-110 middle"></i> <b
+					class="bigger-110 middle">返回</b>
+				</a>
 			</div>
 
 			<!-- /section:custom/widget-box.toolbar -->

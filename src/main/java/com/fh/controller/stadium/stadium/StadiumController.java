@@ -74,7 +74,7 @@ public class StadiumController extends BaseController {
 		PageData pd = new PageData();
 		try{
 			pd = this.getPageData();
-			if(stadiumService.findById(pd) != null){
+			if(stadiumService.findByStaName(pd) != null){
 				errInfo = "error";
 			}
 		} catch(Exception e){

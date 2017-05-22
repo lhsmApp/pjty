@@ -137,10 +137,9 @@ body, html, #allmap {
 						</p>
 					</div>
 					<div class="form-inline has-feedback">
-						<select class="chosen-select form-control" name="BELONG_AREA"
+						<select class="form-control" name="BELONG_AREA"
 							id="belong_area" data-placeholder="请选择所属区域"
-							style="vertical-align: top; width: 120px;" onchange="change(this.value)">
-							<option value=""></option>
+							style="vertical-align: top; width: 225px;" onchange="change(this.value)">
 							<option value="">全部</option>
 							<c:forEach items="${areaList}" var="area">
 								<option value="${area.BIANMA }"
@@ -149,10 +148,9 @@ body, html, #allmap {
 						</select>
 					</div>
 					<div class="form-inline has-feedback">
-						<select class="chosen-select form-control" name="STAD_NAME"
+						<select class="form-control" name="STAD_NAME"
 							id="STAD_NAME" data-placeholder="请选择体育场馆"
-							style="vertical-align: top; width: 120px;">
-							<option value=""></option>
+							style="vertical-align: top; width: 225px;">
 							<option value="">全部</option>
 							<c:forEach items="${varList}" var="stadium">
 								<option value="${stadium.STAD_NAME}" <c:if test="${pd.STAD_NAME==stadium.STAD_NAME}">selected</c:if>>${stadium.STAD_NAME }</option>
@@ -185,46 +183,8 @@ body, html, #allmap {
 		 * 控件及数据初始化
 		 */
 		$(function() {
-			//下拉框
-			if (!ace.vars['touch']) {
-				$('.chosen-select').chosen({
-					allow_single_deselect : true
-				});
-				$(window).off('resize.chosen').on('resize.chosen', function() {
-					$('.chosen-select').each(function() {
-						var $this = $(this);
-						$this.next().css({
-							'width' : $this.parent().width()
-						});
-					});
-				}).trigger('resize.chosen');
-				$(document).on('settings.ace.chosen',
-						function(e, event_name, event_val) {
-							if (event_name != 'sidebar_collapsed')
-								return;
-							$('.chosen-select').each(function() {
-								var $this = $(this);
-								$this.next().css({
-									'width' : $this.parent().width()
-								});
-							});
-						});
-				$('#chosen-multiple-style .btn').on(
-						'click',
-						function(e) {
-							var target = $(this).find('input[type=radio]');
-							var which = parseInt(target.val());
-							if (which == 2)
-								$('#form-field-select-4').addClass(
-										'tag-input-style');
-							else
-								$('#form-field-select-4').removeClass(
-										'tag-input-style');
-						});
-			}
-
+			change($("#belong_area").val());
 			initPlases();
-
 		});
 
 		var map = new BMap.Map("allmap");
@@ -242,39 +202,15 @@ body, html, #allmap {
 		map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 		map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
 
-		/* var ac = new BMap.Autocomplete( //建立一个自动完成的对象
-		{
-			"input" : "suggestId",
-			"location" : map
-		});
-
-		ac.addEventListener("onconfirm", function(e) { //鼠标点击下拉列表后的事件
-			var _value = e.item.value;
-			myValue = _value.province + _value.city + _value.district
-					+ _value.street + _value.business;
-			setPlace(myValue);
-		});
-		//map.addEventListener("click", showInfo);
-		$("#suggestId").keydown(function(event) {
-			if (event.keyCode == 13) {
-				var addr = $("#suggestId").val();
-				if (addr != null && addr != "")
-					setPlace(addr);
-			}
-		}); */
-
 		/**
 		 * 根据搜索的条件设置地图坐标
 		 */
 		function initPlases() {
-			//var bettingList=eval("("+bettingStr+")");
-			//var bettingList=$.parseJSON(bettingStr);
-			//var bettingStr = JSON.stringify("${varList}") 
 
-			var stadiumList = ${searchJson};
+			var bettingList = ${searchJson};
 			map.clearOverlays(); //清除地图上所有覆盖物
-			for (var i = 0; i < stadiumList.length; i++) {
-				var addr = stadiumList[i].GEOG_COOR;
+			for (var i = 0; i < bettingList.length; i++) {
+				var addr = bettingList[i].GEOG_COOR;
 				setPlaceByGeog(addr);
 			}
 		}
@@ -326,18 +262,12 @@ body, html, #allmap {
 			top.jzts();
 			$("#Form").submit();
 
-			/* var addr = $("#suggestId").val();
-			if (addr != null && addr != "")
-				setPlace(addr); */
 		}
 		
 		/**
 		 * 第一级值改变事件(初始第二级)
 		 */
 		function change(value){
-			console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
-			console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
-			$('#id_code_chosen ul.chosen-results li').remove();
 			$.ajax({
 				type: "POST",
 				url: '<%=basePath%>stadium/getStadiumByBelongarea.do',
@@ -345,16 +275,24 @@ body, html, #allmap {
 				dataType:'json',
 				cache: false,
 				success: function(data){
-					$(".chosen-results").html();
-					//console.log($('#id_code_chosen');
-					
-					$("#STAD_NAME").html("<option value=''></option><option>全部</option>");
-					 $.each(data.list, function(i, bet){
+					$("#STAD_NAME").html("<option value=''>全部</option>");
+					$.each(data.list, function(i, stadium){
+						console.log("ccc"+"${pd.STAD_NAME}");
+						//$("#id_code").append("<option value="+bet.ID_CODE+" <c:if test='${pd.ID_CODE=="+bet.ID_CODE+"}'> selected</c:if>>"+bet.ID_CODE+"</option>");
+						if("${pd.STAD_NAME}"==stadium.STAD_NAME)
+							$("#STAD_NAME").append("<option value="+stadium.STAD_NAME+" selected>"+stadium.STAD_NAME+"</option>");
+						else
 							$("#STAD_NAME").append("<option value="+stadium.STAD_NAME+">"+stadium.STAD_NAME+"</option>");
-					 });
-
+					});  
 				}
 			});
+		}
+		
+		function changeEmpty(){
+			console.log($("#id_code_chosen .chosen-drop ul.chosen-results"));
+			console.log($("#id_code_chosen .chosen-drop ul.chosen-results").children());
+			console.log($("#id_code_chosen .chosen-drop ul.chosen-results li"));
+			$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
 		}
 	</script>
 </body>

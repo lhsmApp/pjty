@@ -175,6 +175,19 @@
 			#{item}
 		</foreach>
 	</delete>
+	
+	<!-- 通过编号获取数据 -->
+	<select id="findByStaName" parameterType="pd" resultType="pd">
+		select 
+			1
+		from 
+			<include refid="tableName"></include>
+		where 
+			STAD_NAME = #{STAD_NAME}
+		<if test="ID != null and ID != ''">
+			and ID != #{ID} 
+		</if>
+	</select>
 
 	<!-- fh313596790qq(青苔) -->
 </mapper>

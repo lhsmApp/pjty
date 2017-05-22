@@ -88,6 +88,11 @@ public class StadiumService implements StadiumManager{
 		// TODO Auto-generated method stub
 		return (List<PageData>)dao.findForList("StadiumMapper.listAllByCondition", pd);
 	}
+
+	@Override
+	public PageData findByStaName(PageData pd) throws Exception {
+		return (PageData)dao.findForObject("StadiumMapper.findByStaName", pd);
+	}
 	
 }
 

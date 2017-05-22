@@ -25,12 +25,13 @@
 							<!-- 表单  -->
 							<form action="policyCustom/listCustom.do" method="post"
 								name="Form" id="Form">
+								<input type="hidden" name="POLI_TYPE" id="POLI_TYPE" value="${pd.POLI_TYPE}"/>
 								<div class="col-xs-12 col-sm-12 widget-container-col">
-									<div class="widget-box widget-color-blue">
+									<div class="widget-box widget-color-blue2">
 										<!-- #section:custom/widget-box.options -->
 										<div class="widget-header">
 											<h5 class="widget-title bigger lighter">
-												<i class="ace-icon fa fa-table"></i> Tables & Colors
+												<i class="ace-icon fa fa-table"></i> 政策法规
 											</h5>
 										</div>
 										<!-- /section:custom/widget-box.options -->
@@ -40,8 +41,10 @@
 													class="table table-striped table-bordered table-hover">
 													<thead class="thin-border-bottom">
 														<tr>
+															<th class="center">政策分类</th>
 															<th class="center">标题</th>
 															<th class="center">发布时间</th>
+															<th class="center">发布人</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -50,8 +53,11 @@
 															<c:when test="${not empty varList}">
 																<c:forEach items="${varList}" var="var" varStatus="vs">
 																	<tr>
-																		<td class='center'><a href="#">${var.TITLE}</a></td>
+																		<td class='center'>${var.POLI_TYPE}</td>
+																		<td class='center'><a style="cursor: pointer;"
+																			onclick="viewContent('${var.ID}')">${var.TITLE}</a></td>
 																		<td class='center'>${var.PUB_DATE}</td>
+																		<td class='center'>${var.PUB_USER}</td>
 																	</tr>
 																</c:forEach>
 															</c:when>
@@ -63,19 +69,21 @@
 														</c:choose>
 													</tbody>
 												</table>
+												<div class="page-header position-relative">
+													<table style="width: 100%;">
+														<tr>
+															<td style="vertical-align: top;"><div
+																	class="pagination"
+																	style="float: right; padding-top: 0px; margin-top: 0px;">${page.pageStr}</div></td>
+														</tr>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<!-- /.span -->
-								<div class="page-header position-relative">
-									<table style="width: 100%;">
-										<tr>
-											<td style="vertical-align: top;"><div class="pagination"
-													style="float: right; padding-top: 0px; margin-top: 0px;">${page.pageStr}</div></td>
-										</tr>
-									</table>
-								</div>
+
 							</form>
 						</div>
 					</div>
@@ -106,8 +114,7 @@
 	
 		//查看详情
 		function viewContent(Id){
-			<%-- console.log(Id+"h哈哈");
-			self.location.href="<%=basePath%>/policy/content.do?ID=" + Id+ "&tm=" + new Date().getTime(); --%>
+			self.location.href="<%=basePath%>/policy/content.do?ID=" + Id+ "&tm=" + new Date().getTime();
 		}
 	</script>
 </body>

@@ -373,7 +373,7 @@
 		function viewContent(Id){
 			console.log(Id+"h哈哈");
 			self.location.href="<%=basePath%>/policy/content.do?ID="+Id+"&tm="+new Date().getTime();
-		}
+		};
 	</script>
 
 

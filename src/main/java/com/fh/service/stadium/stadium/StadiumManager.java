@@ -60,5 +60,12 @@ public interface StadiumManager{
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
 	
+	/**通过名字获取数据
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public PageData findByStaName(PageData pd)throws Exception;
+	
 }
 

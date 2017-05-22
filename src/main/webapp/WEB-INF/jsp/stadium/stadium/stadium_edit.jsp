@@ -42,7 +42,7 @@
 												style="width: 75px; text-align: right; padding-top: 13px;">场馆名称:</td>
 											<td><input type="text" name="STAD_NAME" id="STAD_NAME"
 												value="${pd.STAD_NAME}" maxlength="100"
-												placeholder="这里输入场馆名称" title="场馆名称" style="width: 98%;" /></td>
+												placeholder="这里输入场馆名称" title="场馆名称"  onblur="hasStaName('${pd.ID}')" style="width: 98%;" /></td>
 											<td
 												style="width: 75px; text-align: right; padding-top: 13px;">场馆地址:</td>
 											<td><input type="text" name="STADI_ADDR" id="STADI_ADDR"
@@ -237,13 +237,11 @@
 				$("#REMARK").focus();
 				return false;
 			}
-			if($("#ID").val()==""){
-				hasStaName();
-			}else{
+			
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
-			}
+			
 		}
 
 		$(function() {
@@ -255,22 +253,23 @@
 		});
 		
 		//判断场馆名是否存在
-		function hasStaName(){
+		function hasStaName(ID){
 			var STAD_NAME = $.trim($("#STAD_NAME").val());
 			$.ajax({
 				type: "POST",
 				url: '<%=basePath%>stadium/hasStaName.do',
-		    	data: {STAD_NAME:STAD_NAME,tm:new Date().getTime()},
+		    	data: {STAD_NAME:STAD_NAME,ID:ID,tm:new Date().getTime()},
 				dataType:'json',
 				cache: false,
 				success: function(data){
-					 if("success" == data.result){
-						 $("#Form").submit();
-							$("#zhongxin").hide();
-							$("#zhongxin2").show();
-					 }else{
-						$("#STAD_NAME").css("background-color","#D16E6C");
-						setTimeout("$('#STAD_NAME').val('此场馆名称已存在!')",500);
+					if("success" != data.result){
+						 $("#STAD_NAME").tips({
+								side:3,
+					            msg:'体育场馆'+STAD_NAME+'已存在',
+					            bg:'#AE81FF',
+					            time:3
+					        });
+						 $('#STAD_NAME').val('');
 					 }
 				}
 			});

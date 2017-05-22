@@ -21,13 +21,13 @@
 			<div class="main-content-inner">
 				<div class="page-content">
 					<div class="row">
-						<div class="col-xs-12">
+						<div >
 							<!-- 表单  -->
 							<form action="policyCustom/listCustom.do" method="post"
 								name="Form" id="Form">
 								<input type="hidden" name="POLI_TYPE" id="POLI_TYPE" value="${pd.POLI_TYPE}"/>
-								<div class="col-xs-12 col-sm-12 widget-container-col">
-									<div class="widget-box widget-color-blue2">
+								<div ">
+									<div class="widget-box ">
 										<!-- #section:custom/widget-box.options -->
 										<div class="widget-header">
 											<h5 class="widget-title bigger lighter">

@@ -215,7 +215,7 @@ public class PesoorgInfoController extends BaseController {
 		List<PageData> varList = new ArrayList<PageData>();
 		for(int i=0;i<varOList.size();i++){
 			PageData vpd = new PageData();
-			vpd.put("var1", varOList.get(i).getString("PESO_NAME"));	    //1
+			vpd.put("var1", varOList.get(i).getString("PESO_SHOW"));	    //1
 			vpd.put("var2", varOList.get(i).getString("STAFF_JOB"));	    //2
 			vpd.put("var3", varOList.get(i).getString("LEADER_NAME"));	    //3
 			vpd.put("var4", varOList.get(i).getString("STAFF_SEX"));	    //4

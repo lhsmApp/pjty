@@ -214,7 +214,7 @@ function instframe(){
 		 $("#title").text("组织机构浏览");
 	 }
 	 else
-		 siMenu('10000','1000','组织机构浏览','instframe/getInstframeGuest.do');
+		 siMenu('10001','1000','组织机构浏览','instframe/getInstframeGuest.do');
 }
 
 //切换菜单

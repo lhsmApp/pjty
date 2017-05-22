@@ -54,15 +54,13 @@ public class PolicyCustomController extends BaseController{
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		page.setPd(pd);
-		List<PageData>	varList = policyService.list(page);	//列出Policy列表
 		List<PageData> policyTypeList = policyService.poliyTypeList(page);//政策分类列表
-		List<PageData> policyTitleList = policyService.policyTitlelistPage(page);//政策分类列表
 		String POLI_TYPE = pd.getString("POLI_TYPE");
 		if(null != POLI_TYPE && !"".equals(POLI_TYPE)){
-			pd.put("msg", "ok");
+			List<PageData> policyTitleList = policyService.policyTitlelistPage(page);//政策分类列表
 			mv.addObject("varList", policyTitleList);
 		}else{
-			pd.put("msg", "no");
+			List<PageData>	varList = policyService.list(page);	//列出Policy列表
 			mv.addObject("varList", varList);
 		}
 		

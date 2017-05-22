@@ -79,7 +79,7 @@
   content: "";
   display: block;
   position: absolute;
-  height: 160px;
+  height: 180px;
   width: 0px;
   border-left: 2px solid orange;
   margin-left: 49%;
@@ -129,7 +129,7 @@
   border-top: 2px solid orange;
   border-left: 2px solid orange;
   border-right: 2px solid orange;
-  margin: 0 auto;
+  margin: 20px auto 0px;
   top: 0px;
 }
 .org-chart ul.columnTwo1:before {

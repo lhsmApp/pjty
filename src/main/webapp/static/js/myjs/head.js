@@ -23,6 +23,7 @@ function siMenu(id,fid,MENU_NAME,MENU_URL){
 	$("#"+fid).attr("class","active open");
 	$("#"+id).attr("class","active");
 	top.mainFrame.tabAddHandler(id,MENU_NAME,MENU_URL);
+	//console.log(id);
 	if(MENU_URL != "druid/index.html"){
 		jzts();
 	}
@@ -215,6 +216,17 @@ function instframe(){
 	 }
 	 else
 		 siMenu('10001','1000','组织机构浏览','instframe/getInstframeGuest.do');
+}
+
+//信息查询
+function infoMapQuery(title,url,id,parentId){
+	 if(user=="Guest"){
+		 $("#mainFrame").attr("src",locat+"/"+url);
+		 $("#subTitle").text(title);
+		 $("#title").text(title);
+	 }
+	 else
+		 siMenu(id,parentId,title,url);
 }
 
 //切换菜单

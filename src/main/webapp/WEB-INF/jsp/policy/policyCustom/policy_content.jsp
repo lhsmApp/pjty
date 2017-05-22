@@ -59,14 +59,24 @@
 <body class="no-skin" bgcolor="white">
 
 
-
-	<div class="messagebar-item-left"
-		style="background-color: #D2E9FF; height: 40px;">
-		<a href="javascript:history.back();" class="btn-back-message-list">
-			<i class="ace-icon fa fa-arrow-left blue bigger-110 middle"></i> <b
-			class="bigger-110 middle">Back</b>
+<table style="width: 100%;background-color: #D2E9FF;" border="0">
+		<tr>
+			<td style="width: 85%;"valign="top" ><div >
+			<h3 class="widget-title lighter middle">${pd.TITLE}</h3>
+			</div></td>
+			<td style="width: 15%;"valign="middle" ><div >
+			<a href="javascript:history.back();" class="btn-back-message-list"> <i
+			class="ace-icon fa fa-arrow-left blue bigger-110 middle"></i> <b
+			class="bigger-110 middle" >Back</b>
 		</a>
-	</div>
+		</div></td>
+			</tr>
+			</table>
+
+	
+	
+
+	
 
 	<div>${pd.TITL_CONT}</div>
 

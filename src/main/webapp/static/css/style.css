@@ -57,13 +57,13 @@
   overflow: hidden;
   text-decoration: none;
   color: black;
-  font-size: 12px;
+  font-size: 14px;
   box-shadow: 4px 4px 9px -4px rgba(0, 0, 0, 0.4);
   -webkit-transition: all linear .1s;
   -moz-transition: all linear .1s;
   transition: all linear .1s;
   background: #92D4A8;
-  padding: 4px;
+  padding: 20px 4px;
 }
 .org-chart .lvl-b {
   background: green;

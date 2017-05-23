@@ -36,7 +36,7 @@
 													<c:forEach items="${policyTypeList}" var="policyType"
 														varStatus="vs">
 														<div style="cursor: pointer" class="dd-handle"
-															onclick="policyDetail('${policyType.POLI_TYPE}')">${policyType.POLI_TYPE}</div>
+															onclick="policyDetail('${policyType.POLI_TYPE}')"><i class="ace-icon fa fa-bars smaller-90">&nbsp;&nbsp;&nbsp;</i>${policyType.POLI_TYPE}</div>
 													</c:forEach>
 												</c:when>
 											</c:choose></li>

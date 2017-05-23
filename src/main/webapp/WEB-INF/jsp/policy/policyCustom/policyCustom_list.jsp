@@ -20,19 +20,19 @@
 		<div class="main-content">
 			<div class="main-content-inner">
 				<div class="page-content">
-					<div class="row">
+					<div class="row" >
 						<div >
 							<!-- 表单  -->
 							<form action="policyCustom/listCustom.do" method="post"
 								name="Form" id="Form">
 								<input type="hidden" name="POLI_TYPE" id="POLI_TYPE" value="${pd.POLI_TYPE}"/>
-								<div ">
-									<div class="widget-box ">
+								<div >
+									<div class="widget-box" style="margin: 0px 0px;">
 										<!-- #section:custom/widget-box.options -->
-										<div class="widget-header">
-											<h5 class="widget-title bigger lighter">
+										<div class="widget-header" >
+											<div class="widget-title bigger lighter">
 												<i class="ace-icon fa fa-table"></i> 政策法规
-											</h5>
+											</div>
 										</div>
 										<!-- /section:custom/widget-box.options -->
 										<div class="widget-body">
@@ -69,7 +69,13 @@
 														</c:choose>
 													</tbody>
 												</table>
-												<div class="page-header position-relative">
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /.span -->
+<div class="page-header position-relative">
 													<table style="width: 100%;">
 														<tr>
 															<td style="vertical-align: top;"><div
@@ -78,12 +84,6 @@
 														</tr>
 													</table>
 												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- /.span -->
-
 							</form>
 						</div>
 					</div>

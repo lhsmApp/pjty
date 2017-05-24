@@ -17,7 +17,7 @@
 </head>
 <body class="no-skin" bgcolor="white">
 	<!-- #section:custom/widget-box -->
-	<div class="widget-box">
+	<div class="widget-box" style="margin: 0px 0px;">
 		<div class="widget-header">
 			<h5 class="widget-title">${pd.TITLE}</h5>
 

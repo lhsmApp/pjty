@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,19 +18,19 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.fh.controller.base.BaseController;
 import com.fh.controller.common.DictsUtil;
+import com.fh.entity.Nature;
 import com.fh.entity.Page;
-import com.fh.util.AppUtil;
-import com.fh.util.ObjectExcelView;
-import com.fh.util.PageData;
-import com.fh.util.Jurisdiction;
-import com.fh.util.Tools;
-
-import net.sf.json.JSONArray;
-
 import com.fh.service.stadium.stadium.StadiumManager;
 import com.fh.service.system.dictionaries.DictionariesManager;
+import com.fh.util.AppUtil;
+import com.fh.util.Jurisdiction;
+import com.fh.util.ObjectExcelView;
+import com.fh.util.PageData;
+
+import net.sf.json.JSONArray;
 
 /** 
  * 说明：体育场馆管理
@@ -60,6 +62,8 @@ public class StadiumController extends BaseController {
 		stadiumService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
+		
+		
 		return mv;
 	}
 	
@@ -140,6 +144,7 @@ public class StadiumController extends BaseController {
 		
 		DictsUtil dictUtil=new DictsUtil(dictionariesService);
 		mv.addObject("areaList", dictUtil.getDictsByParentBianma("001"));
+		mv.addObject("natureList", Nature.values());
 		
 		return mv;
 	}
@@ -155,10 +160,10 @@ public class StadiumController extends BaseController {
 		pd = this.getPageData();
 		mv.setViewName("stadium/stadium/stadium_edit");
 		mv.addObject("msg", "save");
-		mv.addObject("pd", pd);
-		
+		mv.addObject("pd", pd);	
 		DictsUtil dictUtil=new DictsUtil(dictionariesService);
 		mv.addObject("areaList", dictUtil.getDictsByParentBianma("001"));
+		mv.addObject("natureList", Nature.values());
 		
 		return mv;
 	}	
@@ -179,6 +184,9 @@ public class StadiumController extends BaseController {
 		
 		DictsUtil dictUtil=new DictsUtil(dictionariesService);
 		mv.addObject("areaList", dictUtil.getDictsByParentBianma("001"));
+		mv.addObject("natureList", Nature.values());
+		
+		
 		return mv;
 	}	
 	

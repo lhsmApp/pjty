@@ -31,9 +31,8 @@
 						<div class="col-xs-12">
 
 							<form action="stadium/${msg }.do" name="Form" id="Form"
-								method="post">
-								<input type="hidden" name="ID" id="ID"
-									value="${pd.ID}" />
+								method="post" enctype="multipart/form-data" >
+								<input type="hidden" name="ID" id="ID" value="${pd.ID}" />
 								<div id="zhongxin" style="padding-top: 13px;">
 									<table id="table_report"
 										class="table table-striped table-bordered table-hover">
@@ -42,7 +41,8 @@
 												style="width: 75px; text-align: right; padding-top: 13px;">场馆名称:</td>
 											<td><input type="text" name="STAD_NAME" id="STAD_NAME"
 												value="${pd.STAD_NAME}" maxlength="100"
-												placeholder="这里输入场馆名称" title="场馆名称"  onblur="hasStaName('${pd.ID}')" style="width: 98%;" /></td>
+												placeholder="这里输入场馆名称" title="场馆名称"
+												onblur="hasStaName('${pd.ID}')" style="width: 98%;" /></td>
 											<td
 												style="width: 75px; text-align: right; padding-top: 13px;">场馆地址:</td>
 											<td><input type="text" name="STADI_ADDR" id="STADI_ADDR"
@@ -62,50 +62,74 @@
 												placeholder="这里输入负责人电话" title="负责人电话" style="width: 98%;" /></td>
 										</tr>
 
-
 										<tr>
 											<td
 												style="width: 75px; text-align: right; padding-top: 13px;">所属区域:</td>
 											<%-- <td><input type="text" name="BELONG_AREA"
 												id="BELONG_AREA" value="${pd.BELONG_AREA}" maxlength="4"
 												placeholder="这里输入所属区域" title="所属区域" style="width: 98%;" /></td> --%>
-											<td id="ssqy">
-									<select class="chosen-select form-control" name="BELONG_AREA" id="BELONG_AREA" data-placeholder="请选择所属区域" style="vertical-align:top;" title="所属区域" style="width:98%;">
-									<option value=""></option>
-									<c:forEach items="${areaList}" var="area">
-											<option value="${area.BIANMA }" <c:if test="${area.BIANMA == pd.BELONG_AREA }">selected</c:if>>${area.NAME }</option>
-									</c:forEach>
-								  	</select>
-								  	
-							
-								</td>
+											<td id="ssqy"><select class="chosen-select form-control"
+												name="BELONG_AREA" id="BELONG_AREA"
+												data-placeholder="请选择所属区域" style="vertical-align: top;"
+												title="所属区域" style="width:98%;">
+													<option value=""></option>
+													<c:forEach items="${areaList}" var="area">
+														<option value="${area.BIANMA }"
+															<c:if test="${area.BIANMA == pd.BELONG_AREA }">selected</c:if>>${area.NAME }</option>
+													</c:forEach>
+											</select></td>
 											<td
 												style="width: 75px; text-align: right; padding-top: 13px;">运营性质:</td>
-											<td><input type="text" name="OPER_NATURE"
-												id="OPER_NATURE" value="${pd.OPER_NATURE}" maxlength="4"
-												placeholder="这里输入运营性质" title="运营性质" style="width: 98%;" /></td>
+											<td><select class="chosen-select form-control"
+												name="OPER_NATURE" id="OPER_NATURE"
+												data-placeholder="请选择运营性质" style="vertical-align: top;"
+												title="运营性质" style="width:98%;">
+													<option value=""></option>
+													<c:forEach items="${natureList}" var="nature">
+														<option value="${nature.nameValue }"
+															<c:if test="${nature.nameValue == pd.OPER_NATURE }">selected</c:if>>${nature.nameValue }</option>
+													</c:forEach>
+											</select></td>
 										</tr>
 
 										<tr>
 											<td
 												style="width: 75px; text-align: right; padding-top: 13px;">场馆基本情况:</td>
-											<td colspan="3"><input type="text" name="STADI_INTR" id="STADI_INTR"
-												value="${pd.STADI_INTR}" maxlength="2000"
+											<td colspan="3"><input type="text" name="STADI_INTR"
+												id="STADI_INTR" value="${pd.STADI_INTR}" maxlength="2000"
 												placeholder="这里输入场馆基本情况" title="场馆基本情况" style="width: 98%;" /></td>
-											</tr>
-											<tr>
-											<td
-												style="width: 75px; text-align: right; padding-top: 13px;">地理坐标:</td>
-											<td colspan="3">
-									<input type="text" readonly name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}" maxlength="20" placeholder="这里输入地理坐标" title="地理坐标" style="width:90%;"/>
-									<a class="btn btn-xs btn-success" title="编辑" onclick="openStadiumMap();" style="width:8%;margin-bottom:3px;">
-										<i class="ace-icon fa fa-globe bigger-120" title="打开地图"></i>
-									</a>
 										</tr>
 										<tr>
-								<td  style="width:79px;text-align: right;padding-top: 13px;">备注:</td>
-								<td colspan="3"><input type="text" name="REMARK" id="REMARK" value="${pd.REMARK}" maxlength="500" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
-							</tr>
+											<td
+												style="width: 75px; text-align: right; padding-top: 13px;">地理坐标:</td>
+											<td colspan="3"><input type="text" readonly
+												name="GEOG_COOR" id="GEOG_COOR" value="${pd.GEOG_COOR}"
+												maxlength="20" placeholder="这里输入地理坐标" title="地理坐标"
+												style="width: 90%;" /> <a class="btn btn-xs btn-success"
+												title="编辑" onclick="openStadiumMap();"
+												style="width: 8%; margin-bottom: 3px;"> <i
+													class="ace-icon fa fa-globe bigger-120" title="打开地图"></i>
+											</a>
+										</tr>
+										<tr>
+											<td
+												style="width: 79px; text-align: right; padding-top: 13px;">备注:</td>
+											<td colspan="3"><input type="text" name="REMARK"
+												id="REMARK" value="${pd.REMARK}" maxlength="500"
+												placeholder="这里输入备注" title="备注" style="width: 98%;" /></td>
+										</tr>
+
+										
+										<tr>
+											<td
+												style="width: 79px; text-align: right; padding-top: 13px;">图片:</td>
+											 <td colspan="3"><input type="file" name="PHOTO_ADDR" id="id-input-file-2" style="width: 98%;"/>
+												
+
+											</td> 
+										
+
+										</tr>
 										<tr>
 											<td style="text-align: center;" colspan="10"><a
 												class="btn btn-mini btn-primary" onclick="save();">保存</a> <a
@@ -237,6 +261,16 @@
 				$("#REMARK").focus();
 				return false;
 			}
+			if($("#PHOTO_ADDR").val()==""){
+				$("#PHOTO_ADDR").tips({
+					side:3,
+		            msg:'请输入备注11',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#PHOTO_ADDR").focus();
+			return false;
+			}
 			
 			$("#Form").submit();
 			$("#zhongxin").hide();
@@ -250,7 +284,9 @@
 				autoclose : true,
 				todayHighlight : true
 			});
+			
 		});
+		
 		
 		//判断场馆名是否存在
 		function hasStaName(ID){
@@ -258,22 +294,27 @@
 			$.ajax({
 				type: "POST",
 				url: '<%=basePath%>stadium/hasStaName.do',
-		    	data: {STAD_NAME:STAD_NAME,ID:ID,tm:new Date().getTime()},
-				dataType:'json',
-				cache: false,
-				success: function(data){
-					if("success" != data.result){
-						 $("#STAD_NAME").tips({
-								side:3,
-					            msg:'体育场馆'+STAD_NAME+'已存在',
-					            bg:'#AE81FF',
-					            time:3
-					        });
-						 $('#STAD_NAME').val('');
-					 }
+				data : {
+					STAD_NAME : STAD_NAME,
+					ID : ID,
+					tm : new Date().getTime()
+				},
+				dataType : 'json',
+				cache : false,
+				success : function(data) {
+					if ("success" != data.result) {
+						$("#STAD_NAME").tips({
+							side : 3,
+							msg : '体育场馆' + STAD_NAME + '已存在',
+							bg : '#AE81FF',
+							time : 3
+						});
+						$('#STAD_NAME').val('');
+					}
 				}
 			});
 		}
+		
 	</script>
 </body>
 </html>

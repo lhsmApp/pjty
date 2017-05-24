@@ -25,7 +25,7 @@
 				<div style="width: 90%; margin: 10px auto;">
 					<div class="widget-box widget-color-blue2">
 						<div class="widget-header">
-							<h6 class="widget-title lighter smaller">政策分类</h6>
+							<h5 class="widget-title">政策分类</h5>
 						</div>
 						<div class="widget-body">
 							<div class="widget-main">

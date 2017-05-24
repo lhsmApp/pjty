@@ -18,6 +18,7 @@
 		STADI_INTR,
 		GEOG_COOR,
 		REMARK,
+		PHOTO_ADDR,
 		ID
 	</sql>
 
@@ -31,7 +32,8 @@
 		OPER_NATURE,
 		STADI_INTR,
 		GEOG_COOR,
-		REMARK
+		REMARK,
+		PHOTO_ADDR
 	</sql>
 	
 	<!-- 字段2 -->
@@ -44,7 +46,8 @@
 		B.OPER_NATURE,	
 		B.STADI_INTR,	
 		B.GEOG_COOR,	
-		B.REMARK,	
+		B.REMARK,
+		B.PHOTO_ADDR,
 		B.ID,
 		D.NAME
 	</sql>
@@ -59,7 +62,8 @@
 		#{OPER_NATURE},
 		#{STADI_INTR},
 		#{GEOG_COOR},
-		#{REMARK}
+		#{REMARK},
+		#{PHOTO_ADDR}
 	</sql>
 
 	<!-- 新增 -->
@@ -94,7 +98,8 @@
 		OPER_NATURE = #{OPER_NATURE},
 		STADI_INTR = #{STADI_INTR},
 		GEOG_COOR = #{GEOG_COOR},
-		REMARK = #{REMARK}
+		REMARK = #{REMARK},
+		PHOTO_ADDR = #{PHOTO_ADDR}
 		where
 		ID = #{ID}
 	</update>

@@ -30,9 +30,7 @@
 									<div class="widget-box" style="margin: 0px 0px;">
 										<!-- #section:custom/widget-box.options -->
 										<div class="widget-header" >
-											<div class="widget-title bigger lighter">
-												<i class="ace-icon fa fa-table"></i> 政策法规
-											</div>
+										<h5 class="widget-title"><i class="ace-icon fa fa-table"></i> 政策法规</h5>
 										</div>
 										<!-- /section:custom/widget-box.options -->
 										<div class="widget-body">

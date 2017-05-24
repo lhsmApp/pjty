@@ -1,8 +1,9 @@
 /* Varaibles - config */
 /* SCSS*/
-/* body {
-  background: #F5EEC9;
-} */
+body {
+  /* background: #F5EEC9; */
+  background: white;
+}
 
 .content {
   font-family: Verdana;
@@ -63,14 +64,14 @@
   -moz-transition: all linear .1s;
   transition: all linear .1s;
   background: #92D4A8;
-  padding: 20px 4px;
+  padding: 10px 4px;
 }
 .org-chart .lvl-b {
   background: green;
   color: #92D4A8;
 }
 .org-chart .board {
-  width: 70%;
+  width: 85%;
   margin: 0 auto;
   display: block;
   position: relative;
@@ -79,12 +80,20 @@
   content: "";
   display: block;
   position: absolute;
-  height: 180px;
+  height: 80px;
   width: 0px;
   border-left: 2px solid orange;
   margin-left: 49%;
   top: 20px;
 }
+
+.org-chart .footer {
+  width: 70%;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+}
+
 .org-chart ul.columnOne {
   height: 90px;
   position: relative;
@@ -95,7 +104,7 @@
 .org-chart ul.columnOne li {
   width: 30%;
   margin: 0px auto;
-  top: 20px;
+  /* top: 20px; */
 }
 .org-chart ul.columnTwo {
   position: relative;
@@ -179,11 +188,56 @@
   display: block;
   position: relative;
   width: 80%;
-  height: 10px;
+  height: 20px;
   border-top: 2px solid orange;
   margin: 0 auto;
   top: 40px;
 }
+
+
+.org-chart ul.columnFour {
+  position: relative;
+  width: 100%;
+  display: block;
+  clear: both;
+}
+.org-chart ul.columnFour li:first-child {
+  width: 15%;
+  float: left;
+  margin-left: 0;
+}
+.org-chart ul.columnFour li {
+  width: 15%;
+  margin-left: 5%;
+  float: left;
+}
+.org-chart ul.columnFour li:last-child {
+  width: 15%;
+  float: right;
+  margin-left: 0;
+}
+
+.org-chart ul.columnFour li.two {
+  margin-left:26%;
+}
+.org-chart ul.columnFour li.three {
+  margin-left:20px;
+  float: right;
+}
+
+.org-chart ul.columnFour:before {
+  content: "";
+  display: block;
+  width: 84.5%;
+  height: 20px;
+  border-top: 2px solid orange;
+  /* border-left: 2px solid orange;
+  border-right: 2px solid orange; */
+  margin: 10px auto 0px;
+  top: 0px;
+}
+
+
 .org-chart .departments {
   width: 100%;
   display: block;
@@ -194,15 +248,23 @@
   display: block;
   width: 85%;
   height: 22px;
-  border-top: 2px solid orange;
+  /* border-top: 2px solid orange; 
   border-left: 2px solid orange;
-  border-right: 2px solid orange;
-  margin: 0 auto;
-  top: 0px;
+  border-right: 2px solid orange;*/
+  margin: 0px auto 20px;
+  position:relative;
+  top: 20px;
 }
+
+.org-chart .departments1:before {
+  content: "";
+  display: block;
+  width: 60%;
+}
+
 .org-chart .department {
   border-left: 2px solid orange;
-  width: 13.2%;
+  width: 15.2%;
   float: left;
   margin: 0px 4px;
 }
@@ -216,12 +278,24 @@
   left: 50%;
   top: -22px;
 }
-.org-chart .department:first-child:after {
+
+.org-chart .department1:after {
+	width: 105%;
+	border-top: 2px solid orange;
+}
+
+.org-chart .department2:after {
+	width: 195px;
+	border-top: 2px solid orange;
+}
+
+
+/* .org-chart .department:first-child:after {
   display: none;
 }
 .org-chart .department:last-child:after {
   display: none;
-}
+} */
 .org-chart .department.central {
   background: #F5EEC9;
 }

@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
+import com.fh.util.Const;
 import com.fh.util.PageData;
+import com.fh.util.StringUtil;
 import com.fh.service.socialOrganize.pesoinfo.PesoInfoManager;
 
 /** 
@@ -50,7 +52,13 @@ public class PesoInfoService implements PesoInfoManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> list(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("PesoInfoMapper.datalistPage", page);
+		List<PageData> listPageData=(List<PageData>)dao.findForList("PesoInfoMapper.datalistPage", page);
+		for(PageData pageData:listPageData){
+			pageData.put("OFFICE_ADDR_CUT", StringUtil.subString(pageData.getString("OFFICE_ADDR"), Const.CUT_STRING_NUM));
+			pageData.put("PESO_INTR_CUT", StringUtil.subString(pageData.getString("PESO_INTR"), Const.CUT_STRING_NUM));
+			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
+		}
+		return listPageData;
 	}
 	
 	/**列表(全部)
@@ -72,7 +80,13 @@ public class PesoInfoService implements PesoInfoManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> queryListByCondition(PageData pd)throws Exception{
-		return (List<PageData>)dao.findForList("PesoInfoMapper.queryListByCondition", pd);
+		List<PageData> listPageData=(List<PageData>)dao.findForList("PesoInfoMapper.queryListByCondition", pd);
+		for(PageData pageData:listPageData){
+			pageData.put("OFFICE_ADDR_CUT", StringUtil.subString(pageData.getString("OFFICE_ADDR"), Const.CUT_STRING_NUM));
+			pageData.put("PESO_INTR_CUT", StringUtil.subString(pageData.getString("PESO_INTR"), Const.CUT_STRING_NUM));
+			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
+		}
+		return listPageData;
 	}
 	
 	/**通过id获取数据
@@ -82,6 +96,7 @@ public class PesoInfoService implements PesoInfoManager{
 	public PageData findById(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("PesoInfoMapper.findById", pd);
 	}
+	@SuppressWarnings("unchecked")
 	public List<PageData> hasDuplicateRecord(PageData pd)throws Exception{
 		return (List<PageData>)dao.findForList("PesoInfoMapper.hasDuplicateRecord", pd);
 	}

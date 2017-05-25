@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
+import com.fh.util.Const;
 import com.fh.util.PageData;
+import com.fh.util.StringUtil;
 import com.fh.service.socialOrganize.pesoorginfo.PesoorgInfoManager;
 
 /** 
@@ -50,7 +52,11 @@ public class PesoorgInfoService implements PesoorgInfoManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> list(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("PesoorgInfoMapper.datalistPage", page);
+		List<PageData> listPageData=(List<PageData>)dao.findForList("PesoorgInfoMapper.datalistPage", page);
+		for (PageData pageData : listPageData) {
+			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
+		}
+		return listPageData;
 	}
 	
 	/**列表(全部)
@@ -77,6 +83,7 @@ public class PesoorgInfoService implements PesoorgInfoManager{
 	public PageData findById(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("PesoorgInfoMapper.findById", pd);
 	}
+	@SuppressWarnings("unchecked")
 	public List<PageData> hasDuplicateRecord(PageData pd)throws Exception{
 		return (List<PageData>)dao.findForList("PesoorgInfoMapper.hasDuplicateRecord", pd);
 	}

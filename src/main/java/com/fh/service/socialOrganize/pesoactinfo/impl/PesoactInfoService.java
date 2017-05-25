@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
+import com.fh.util.Const;
 import com.fh.util.PageData;
+import com.fh.util.StringUtil;
 import com.fh.service.socialOrganize.pesoactinfo.PesoactInfoManager;
 
 /** 
@@ -50,7 +52,12 @@ public class PesoactInfoService implements PesoactInfoManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> list(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("PesoactInfoMapper.datalistPage", page);
+		List<PageData> listPageData=(List<PageData>)dao.findForList("PesoactInfoMapper.datalistPage", page);
+		for(PageData pageData:listPageData){
+			pageData.put("EFFECT_CUT", StringUtil.subString(pageData.getString("EFFECT"), Const.CUT_STRING_NUM));
+			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
+		}
+		return listPageData;
 	}
 	
 	/**列表(全部)
@@ -77,6 +84,7 @@ public class PesoactInfoService implements PesoactInfoManager{
 	public PageData findById(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("PesoactInfoMapper.findById", pd);
 	}
+	@SuppressWarnings("unchecked")
 	public List<PageData> hasDuplicateRecord(PageData pd)throws Exception{
 		return (List<PageData>)dao.findForList("PesoactInfoMapper.hasDuplicateRecord", pd);
 	}

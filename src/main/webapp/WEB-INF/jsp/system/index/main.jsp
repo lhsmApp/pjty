@@ -275,7 +275,7 @@
 	<!-- page specific plugin scripts -->
 
 	<!-- ace scripts -->
-	<script src="static/ace/js/ace/elements.scroller.js"></script>
+	<!-- <script src="static/ace/js/ace/elements.scroller.js"></script>
 	<script src="static/ace/js/ace/elements.colorpicker.js"></script>
 	<script src="static/ace/js/ace/elements.fileinput.js"></script>
 	<script src="static/ace/js/ace/elements.typeahead.js"></script>
@@ -295,7 +295,10 @@
 	<script src="static/ace/js/ace/ace.settings-rtl.js"></script>
 	<script src="static/ace/js/ace/ace.settings-skin.js"></script>
 	<script src="static/ace/js/ace/ace.widget-on-reload.js"></script>
-	<script src="static/ace/js/ace/ace.searchbox-autocomplete.js"></script>
+	<script src="static/ace/js/ace/ace.searchbox-autocomplete.js"></script> -->
+	
+	<script src="static/ace/js/ace.js"></script>
+	<script src="static/ace/js/ace-elements.js"></script>
 	<!-- inline scripts related to this page -->
 
 	<!-- the following scripts are used in demo only for onpage help and you don't need them -->

@@ -137,7 +137,7 @@ body, html, #allmap {
 						</p>
 						<p>
 							<span class="muted">简介：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].BETT_INTR}</c:if></span>
+									test="${searchList!=null&&searchList.size()>0}"><a style="cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="right" data-content="${searchList[0].BETT_INTR}">${searchList[0].BETT_INTR_CUT}</a></c:if></span>
 						</p>
 					</div>
 					<div class="form-inline has-feedback">
@@ -190,6 +190,8 @@ body, html, #allmap {
 		 * 控件及数据初始化
 		 */
 		$(function() {
+			$('[data-rel=popover]').popover({html:true});
+			
 			//下拉框
 			/* if (!ace.vars['touch']) {
 				$('.chosen-select').chosen({

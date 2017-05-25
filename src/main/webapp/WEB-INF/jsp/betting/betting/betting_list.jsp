@@ -18,6 +18,7 @@
 <%@ include file="../../system/index/top.jsp"%>
 <!-- 日期框 -->
 <link rel="stylesheet" href="static/ace/css/datepicker.css" />
+
 </head>
 <body class="no-skin">
 
@@ -102,9 +103,9 @@
 											<td class='center'>${var.OFFICE_TEL}</td>
 											<td class='center'>${var.FAX}</td>
 											<td class='center'>${var.NAME}</td>
-											<td class='center'>${var.BETT_ADDR}</td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.BETT_ADDR}">${var.BETT_ADDR_CUT}</a></td>
 											<td class='center'>${var.BETT_AREA}</td>
-											<td class='center'>${var.BETT_INTR}</td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.BETT_INTR}">${var.BETT_INTR_CUT}</a></td>
 											<%-- <td class='center'>${var.GEOG_COOR}</td> --%>
 											<td class='center'>${var.REMARK}</td>
 											<td class="center">
@@ -218,6 +219,7 @@
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+	<script type="text/javascript" src="static/js/util/Util.js"></script>
 	<script type="text/javascript">
 		$(top.hangge());//关闭加载状态
 		//检索
@@ -226,7 +228,9 @@
 			$("#Form").submit();
 		}
 		$(function() {
-		
+			//console.log(Util.subString("fsafdsagsfgdfgi2q3fsakgsd",10,true));
+			
+			$('[data-rel=popover]').popover({html:true});
 			//日期框
 			$('.date-picker').datepicker({
 				autoclose: true,

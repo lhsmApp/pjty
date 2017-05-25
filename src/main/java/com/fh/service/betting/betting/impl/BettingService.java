@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
+import com.fh.util.Const;
 import com.fh.util.PageData;
+import com.fh.util.StringUtil;
 import com.fh.service.betting.betting.BettingManager;
 
 /** 
@@ -50,7 +52,13 @@ public class BettingService implements BettingManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> list(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("BettingMapper.datalistPage", page);
+		//return (List<PageData>)dao.findForList("BettingMapper.datalistPage", page);
+		List<PageData> listPageData=(List<PageData>)dao.findForList("BettingMapper.datalistPage", page);
+		for (PageData pageData : listPageData) {
+			pageData.put("BETT_ADDR_CUT", StringUtil.subString(pageData.getString("BETT_ADDR"), Const.CUT_STRING_NUM));
+			pageData.put("BETT_INTR_CUT", StringUtil.subString(pageData.getString("BETT_INTR"), Const.CUT_STRING_NUM));
+		}
+		return listPageData;
 	}
 	
 	/**列表(全部)
@@ -68,7 +76,13 @@ public class BettingService implements BettingManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> listAllByCondition(PageData pd)throws Exception{
-		return (List<PageData>)dao.findForList("BettingMapper.listAllByCondition", pd);
+		//return (List<PageData>)dao.findForList("BettingMapper.listAllByCondition", pd);
+		List<PageData> listPageData=(List<PageData>)dao.findForList("BettingMapper.listAllByCondition", pd);
+		for (PageData pageData : listPageData) {
+			//pageData.put("BETT_ADDR_CUT", StringUtil.subString(pageData.getString("BETT_ADDR"), Const.CUT_STRING_NUM));
+			pageData.put("BETT_INTR_CUT", StringUtil.subString(pageData.getString("BETT_INTR"), Const.CUT_STRING_NUM));
+		}
+		return listPageData;
 	}
 	
 	/**通过id获取数据

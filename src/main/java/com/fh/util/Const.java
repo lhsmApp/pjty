@@ -50,4 +50,5 @@ public class Const {
 	public static final String[] APP_GETAPPUSER_PARAM_ARRAY = new String[]{"USERNAME"};
 	public static final String[] APP_GETAPPUSER_VALUE_ARRAY = new String[]{"用户名"};
 	
+	public static final int CUT_STRING_NUM = 15;	//截取的字符串长度
 }

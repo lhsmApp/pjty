@@ -57,6 +57,7 @@ public class BettingService implements BettingManager{
 		for (PageData pageData : listPageData) {
 			pageData.put("BETT_ADDR_CUT", StringUtil.subString(pageData.getString("BETT_ADDR"), Const.CUT_STRING_NUM));
 			pageData.put("BETT_INTR_CUT", StringUtil.subString(pageData.getString("BETT_INTR"), Const.CUT_STRING_NUM));
+			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
 		}
 		return listPageData;
 	}

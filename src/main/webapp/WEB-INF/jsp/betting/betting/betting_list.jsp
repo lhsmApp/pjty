@@ -107,7 +107,7 @@
 											<td class='center'>${var.BETT_AREA}</td>
 											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.BETT_INTR}">${var.BETT_INTR_CUT}</a></td>
 											<%-- <td class='center'>${var.GEOG_COOR}</td> --%>
-											<td class='center'>${var.REMARK}</td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.REMARK}">${var.REMARK_CUT}</a></td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>

@@ -135,6 +135,14 @@ body, html, #allmap {
 							<span class="muted">场馆基本情况：</span><span class="text-info"><c:if
 									test="${searchList!=null&&searchList.size()>0}">${searchList[0].STADI_INTR}</c:if></span>
 						</p>
+						<p>
+							<span class="muted">图片：</span>
+							
+							<img width="150" height="150" alt="150x150" src="/Users/JP/JavaProjects/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/pjty/uploadFiles/uploadImgs/1495678767264盘锦.png" />
+						
+							
+							
+						</p>
 					</div>
 					<div class="form-inline has-feedback">
 						<select class="form-control" name="BELONG_AREA"

@@ -31,7 +31,7 @@
 						<div class="col-xs-12">
 
 							<form action="stadium/${msg }.do" name="Form" id="Form"
-								method="post" enctype="multipart/form-data" >
+								method="post"  enctype="multipart/form-data">
 								<input type="hidden" name="ID" id="ID" value="${pd.ID}" />
 								<div id="zhongxin" style="padding-top: 13px;">
 									<table id="table_report"
@@ -123,7 +123,7 @@
 										<tr>
 											<td
 												style="width: 79px; text-align: right; padding-top: 13px;">图片:</td>
-											 <td colspan="3"><input type="file" name="PHOTO_ADDR" id="id-input-file-2" style="width: 98%;"/>
+											 <td colspan="3"><input type="file" name="fileLogos" id="id-input-file-1" style="width: 98%;"/>
 												
 
 											</td> 
@@ -161,6 +161,10 @@
 	<%@ include file="../../system/index/foot.jsp"%>
 	<!-- 下拉框 -->
 	<script src="static/ace/js/chosen.jquery.js"></script>
+	<!-- 文件搜索 -->
+	<script src="static/ace/js/ace/elements.fileinput.js"></script>
+	<!-- ace核心文件 -->
+	<script src="static/ace/js/ace/ace.js"></script>
 	<!-- 日期框 -->
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
@@ -261,14 +265,14 @@
 				$("#REMARK").focus();
 				return false;
 			}
-			if($("#PHOTO_ADDR").val()==""){
-				$("#PHOTO_ADDR").tips({
+			if($("#fileLogos").val()==""){
+				$("#fileLogos").tips({
 					side:3,
-		            msg:'请输入备注11',
+		            msg:'请选择图片',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#PHOTO_ADDR").focus();
+				$("#fileLogos").focus();
 			return false;
 			}
 			
@@ -284,6 +288,52 @@
 				autoclose : true,
 				todayHighlight : true
 			});
+			
+			$('#id-input-file-1').ace_file_input({
+				no_file:'No File ...',
+				file:'${pd.PHOTO_ADDR}',
+				btn_choose:'Choose',
+				btn_change:'Change',
+				droppable:false,
+				onchange:null,
+				thumbnail:false //| true | large
+				//whitelist:'gif|png|jpg|jpeg'
+				//blacklist:'exe|php'
+				//onchange:''
+				//
+			});
+			
+			$('#id-input-file').ace_file_input({
+				style:'well',
+				btn_choose:'Drop files here or click to choose',
+				btn_change:null,
+				no_icon:'ace-icon fa fa-cloud-upload',
+				droppable:true,
+				thumbnail:'small'//large | fit
+				//,icon_remove:null//set null, to hide remove/reset button
+				/**,before_change:function(files, dropped) {
+					//Check an example below
+					//or examples/file-upload.html
+					return true;
+				}*/
+				/**,before_remove : function() {
+					return true;
+				}*/
+				,
+				preview_error : function(filename, error_code) {
+					//name of the file that failed
+					//error_code values
+					//1 = 'FILE_LOAD_FAILED',
+					//2 = 'IMAGE_LOAD_FAILED',
+					//3 = 'THUMBNAIL_FAILED'
+					//alert(error_code);
+				}
+		
+			}).on('change', function(){
+				//console.log($(this).data('ace_input_files'));
+				//console.log($(this).data('ace_input_method'));
+			});
+			
 			
 		});
 		

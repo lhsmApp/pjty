@@ -1,5 +1,6 @@
 package com.fh.controller.stadium.stadium;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,13 +11,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fh.controller.base.BaseController;
@@ -52,13 +56,65 @@ public class StadiumController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/save")
-	public ModelAndView save() throws Exception{
+	public ModelAndView save(HttpSession httpSession,
+			@RequestParam(value = "STAD_NAME", required = true) String STAD_NAME,
+			@RequestParam(value = "STADI_ADDR", required = true) String STADI_ADDR,
+			@RequestParam(value = "HEAD_NAME", required = true) String HEAD_NAME,
+			@RequestParam(value = "HEAD_TEL", required = true) String HEAD_TEL,
+			@RequestParam(value = "BELONG_AREA", required = true) String BELONG_AREA,
+			@RequestParam(value = "OPER_NATURE", required = true) String OPER_NATURE,
+			@RequestParam(value = "STADI_INTR", required = true) String STADI_INTR,
+			@RequestParam(value = "GEOG_COOR", required = true) String GEOG_COOR,
+			@RequestParam(value = "REMARK", required = true) String REMARK,
+			@RequestParam MultipartFile[] fileLogos) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"新增Stadium");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("STADIUM_ID", this.get32UUID());	//主键
+		
+		pd.put("STAD_NAME", STAD_NAME);
+		pd.put("STADI_ADDR", STADI_ADDR);
+		pd.put("HEAD_NAME", HEAD_NAME);
+		pd.put("HEAD_TEL", HEAD_TEL);
+		pd.put("BELONG_AREA", BELONG_AREA);
+		pd.put("OPER_NATURE", OPER_NATURE);
+		pd.put("STADI_INTR", STADI_INTR);
+		pd.put("GEOG_COOR", GEOG_COOR);
+		pd.put("REMARK", REMARK);
+	
+
+			
+			for (MultipartFile fileLogo : fileLogos) {
+				String path = null;// 文件路径
+				String type = null;// 文件类型
+				String fileName = fileLogo.getOriginalFilename();// 文件原名称
+				System.out.println("上传的文件原名称:" + fileName);
+				// 判断文件类型
+				type = fileName.indexOf(".") != -1
+						? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()) : null;
+				if (type != null) {// 判断文件类型是否为空
+					if ("GIF".equals(type.toUpperCase()) || "PNG".equals(type.toUpperCase())
+							|| "JPG".equals(type.toUpperCase())) {
+						// 项目在容器中实际发布运行的根路径
+						String realPath = httpSession.getServletContext().getRealPath("/") + "uploadFiles/uploadImgs";
+						// 自定义的文件名称
+						String trueFileName = String.valueOf(System.currentTimeMillis()) + fileName;
+						// 设置存放图片文件的路径
+						path = realPath + File.separator + trueFileName;
+						System.out.println("存放图片文件的路径:" + path);
+						pd.put("PHOTO_ADDR", path);
+						// 转存文件到指定的路径
+						fileLogo.transferTo(new File(path));
+						
+					} 
+				} 
+			}
+		
+		
+		
+		
 		stadiumService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");

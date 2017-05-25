@@ -56,7 +56,7 @@ public class StadiumController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/save")
-	public ModelAndView save(HttpSession httpSession,
+	public ModelAndView save(HttpSession httpSession, 
 			@RequestParam(value = "STAD_NAME", required = true) String STAD_NAME,
 			@RequestParam(value = "STADI_ADDR", required = true) String STADI_ADDR,
 			@RequestParam(value = "HEAD_NAME", required = true) String HEAD_NAME,
@@ -104,7 +104,7 @@ public class StadiumController extends BaseController {
 						// 设置存放图片文件的路径
 						path = realPath + File.separator + trueFileName;
 						System.out.println("存放图片文件的路径:" + path);
-						pd.put("PHOTO_ADDR", path);
+						pd.put("PHOTO_ADDR", trueFileName);
 						// 转存文件到指定的路径
 						fileLogo.transferTo(new File(path));
 						

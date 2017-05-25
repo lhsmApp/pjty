@@ -96,9 +96,9 @@
 											<td class='center'>${var.HEAD_TEL}</td>
 											<td class='center'>${var.NAME}</td>
 											<td class='center'>${var.OPER_NATURE}</td>
-											<td class='center'>${var.STADI_INTR}</td>
-											<%-- <td class='center'>${var.GEOG_COOR}</td> --%>
-											<td class='center'>${var.REMARK}</td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.STADI_INTR}">${var.STADI_INTR_CUT}</a></td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.REMARK}">${var.REMARK_CUT}</a></td>
+								
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -210,6 +210,7 @@
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+	<script type="text/javascript" src="static/js/util/Util.js"></script>
 	<script type="text/javascript">
 		$(top.hangge());//关闭加载状态
 		//检索
@@ -219,6 +220,7 @@
 		}
 		$(function() {
 		
+			$('[data-rel=popover]').popover({html:true});
 			//日期框
 			$('.date-picker').datepicker({
 				autoclose: true,
@@ -272,7 +274,7 @@
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>stadium/goAdd.do';
 			 diag.Width = 600;
-			 diag.Height = 400;
+			 diag.Height = 450;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮

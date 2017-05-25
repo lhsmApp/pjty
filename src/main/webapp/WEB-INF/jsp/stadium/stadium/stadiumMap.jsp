@@ -132,16 +132,17 @@ body, html, #allmap {
 									test="${searchList!=null&&searchList.size()>0}">${searchList[0].HEAD_TEL}</c:if></span>
 						</p>
 						<p>
-							<span class="muted">场馆基本情况：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}">${searchList[0].STADI_INTR}</c:if></span>
+							<span class="muted">场馆基本情况：</span>
+							
+							<span class="text-info">
+							<c:if test="${searchList!=null&&searchList.size()>0}">
+							<a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="right" data-content="${searchList[0].STADI_INTR}">${searchList[0].STADI_INTR_CUT}</a>
+							</c:if></span>
 						</p>
 						<p>
-							<span class="muted">图片：</span>
-							
-							<img width="150" height="150" alt="150x150" src="/Users/JP/JavaProjects/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/pjty/uploadFiles/uploadImgs/1495678767264盘锦.png" />
-						
-							
-							
+							<span class="muted"><img width="100" height="100" alt="" src="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" />
+							</span>
+					
 						</p>
 					</div>
 					<div class="form-inline has-feedback">
@@ -184,6 +185,8 @@ body, html, #allmap {
 	<%@ include file="../../system/index/foot.jsp"%>
 	<!-- 下拉框 -->
 	<script src="static/ace/js/chosen.jquery.js"></script>
+	<script type="text/javascript" src="static/js/util/Util.js"></script>
+	
 	<script type="text/javascript">
 		$(top.hangge());
 
@@ -191,6 +194,8 @@ body, html, #allmap {
 		 * 控件及数据初始化
 		 */
 		$(function() {
+			$('[data-rel=popover]').popover({html:true});
+
 			change($("#belong_area").val());
 			initPlases();
 		});

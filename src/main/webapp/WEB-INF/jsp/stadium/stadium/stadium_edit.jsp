@@ -265,16 +265,6 @@
 				$("#REMARK").focus();
 				return false;
 			}
-			if($("#fileLogos").val()==""){
-				$("#fileLogos").tips({
-					side:3,
-		            msg:'请选择图片',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#fileLogos").focus();
-			return false;
-			}
 			
 			$("#Form").submit();
 			$("#zhongxin").hide();

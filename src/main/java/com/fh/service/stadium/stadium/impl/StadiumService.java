@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
+import com.fh.util.Const;
 import com.fh.util.PageData;
+import com.fh.util.StringUtil;
 import com.fh.service.stadium.stadium.StadiumManager;
 
 /** 
@@ -50,7 +52,13 @@ public class StadiumService implements StadiumManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> list(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("StadiumMapper.datalistPage", page);
+		
+		List<PageData> listPageData = (List<PageData>)dao.findForList("StadiumMapper.datalistPage", page);
+		for (PageData pageData : listPageData) {
+			pageData.put("STADI_INTR_CUT", StringUtil.subString(pageData.getString("STADI_INTR"), Const.CUT_STRING_NUM));
+			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
+		}
+		return listPageData;
 	}
 	
 	/**列表(全部)
@@ -85,8 +93,12 @@ public class StadiumService implements StadiumManager{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PageData> listAllByCondition(PageData pd) throws Exception {
-		// TODO Auto-generated method stub
-		return (List<PageData>)dao.findForList("StadiumMapper.listAllByCondition", pd);
+		List<PageData> listPageData = (List<PageData>)dao.findForList("StadiumMapper.listAllByCondition", pd);
+		for (PageData pageData : listPageData) {
+			pageData.put("STADI_INTR_CUT", StringUtil.subString(pageData.getString("STADI_INTR"), Const.CUT_STRING_NUM));
+			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
+		}
+		return listPageData;		
 	}
 
 	@Override

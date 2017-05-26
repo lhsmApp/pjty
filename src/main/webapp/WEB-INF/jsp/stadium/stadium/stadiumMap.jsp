@@ -34,11 +34,13 @@ body, html, #allmap {
 	top: 3%;
 	bottom: 3%;
 	z-index: 100;
+	overflow-y: auto; 
+	overflow-x: hidden; 
 	/*opacity: 0.9;*/
 }
 
 .left-nav .top {
-	
+	height: 22%;
 }
 
 .left-nav .top .header-top {
@@ -46,7 +48,7 @@ body, html, #allmap {
 }
 
 .left-nav .bottom {
-	height: 100%;
+	height: 70%;
 }
 
 .left-nav .header {
@@ -140,7 +142,7 @@ body, html, #allmap {
 							</c:if></span>
 						</p>
 						<p>
-							<span class="muted"><img width="100" height="100" alt="" src="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" />
+							<span class="muted"><img width="200" height="200" alt="" src="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" />
 							</span>
 					
 						</p>

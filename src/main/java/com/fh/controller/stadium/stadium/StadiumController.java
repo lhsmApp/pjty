@@ -158,6 +158,7 @@ public class StadiumController extends BaseController {
 	 */
 	@RequestMapping(value="/edit")
 	public ModelAndView edit(HttpSession httpSession, 
+			@RequestParam(value = "ID", required = true) String ID,
 			@RequestParam(value = "STAD_NAME", required = true) String STAD_NAME,
 			@RequestParam(value = "STADI_ADDR", required = true) String STADI_ADDR,
 			@RequestParam(value = "HEAD_NAME", required = true) String HEAD_NAME,
@@ -173,7 +174,7 @@ public class StadiumController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		
+		pd.put("ID", ID);
 		pd.put("STAD_NAME", STAD_NAME);
 		pd.put("STADI_ADDR", STADI_ADDR);
 		pd.put("HEAD_NAME", HEAD_NAME);

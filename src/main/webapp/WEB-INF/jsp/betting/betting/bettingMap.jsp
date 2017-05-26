@@ -34,11 +34,13 @@ body, html, #allmap {
 	top: 3%;
 	bottom: 3%;
 	z-index: 100;
+	overflow-y: auto; 
+	overflow-x: hidden; 
 	/*opacity: 0.9;*/
 }
 
 .left-nav .top {
-	
+	height: 22%;
 }
 
 .left-nav .top .header-top {
@@ -46,7 +48,7 @@ body, html, #allmap {
 }
 
 .left-nav .bottom {
-	height: 100%;
+	height: 70%;
 }
 
 .left-nav .header {
@@ -137,7 +139,7 @@ body, html, #allmap {
 						</p>
 						<p>
 							<span class="muted">简介：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}"><a style="cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="right" data-content="${searchList[0].BETT_INTR}">${searchList[0].BETT_INTR_CUT}</a></c:if></span>
+									test="${searchList!=null&&searchList.size()>0}"><a style="cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${searchList[0].BETT_INTR}">${searchList[0].BETT_INTR_CUT}</a></c:if></span>
 						</p>
 					</div>
 					<div class="form-inline has-feedback">

@@ -51,7 +51,7 @@
 						        // 指定图表的配置项和数据
 								var option = {
 						            title: {
-						                text: '体育局综合管理平台用户统计'
+						                text: '盘锦市体育局综合管理平台用户统计'
 						            },
 						            tooltip: {},
 						            xAxis: {

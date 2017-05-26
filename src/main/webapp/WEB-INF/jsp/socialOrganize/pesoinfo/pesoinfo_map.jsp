@@ -34,11 +34,13 @@ body, html, #allmap {
 	top: 3%;
 	bottom: 3%;
 	z-index: 100;
+	overflow-y: auto; 
+	overflow-x: hidden; 
 	/*opacity: 0.9;*/
 }
 
 .left-nav .top {
-	
+	height: 22%;
 }
 
 .left-nav .top .header-top {
@@ -46,7 +48,7 @@ body, html, #allmap {
 }
 
 .left-nav .bottom {
-	height: 100%;
+	height: 70%;
 }
 
 .left-nav .header {
@@ -181,6 +183,8 @@ body, html, #allmap {
 		$(function() {
 			
 			$('[data-rel=popover]').popover({html:true});
+			
+			//$('.popover').css('height','50px');
 			
 			change($("#belong_area").val());
 			initPlases();

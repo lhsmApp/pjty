@@ -568,7 +568,7 @@
 				</p>
 				<p style="text-indent: 38px">
 					<img
-						src="/pjty/plugins/ueditor/jsp/upload1/20170523/60731495528184653.png" />
+						src="<%=basePath%>uploadFiles/uploadImgs/zhize.png" />
 				</p>
 				<p style="text-indent: 37px">
 					<span style="font-size: 19px; font-family: 仿宋_GB2312">&nbsp;咨询电话：2333005。监督电话：2333006。</span>

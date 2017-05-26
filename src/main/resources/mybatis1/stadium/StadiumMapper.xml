@@ -133,6 +133,7 @@
 				and BELONG_AREA=#{pd.BELONG_AREA} 
 			</if>
 		</where>
+		order by id
 	</select>
 
 	<!-- 列表(全部) -->

@@ -113,16 +113,24 @@ body, html, #allmap {
 							</span>
 						</p>
 						<p>
-							<span class="muted">办公地址：</span><span class="text-info"><c:if
-									test="${getList!=null&&getList.size()>0}">${getList[0].OFFICE_ADDR}</c:if></span>
+							<span class="muted">办公地址：</span>
+							<span class="text-info">
+							    <c:if test="${getList!=null&&getList.size()>0}">
+							        <a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${getList[0].OFFICE_ADDR}">${getList[0].OFFICE_ADDR_CUT}</a>
+							    </c:if>
+							</span>
 						</p>
 						<p>
 							<span class="muted">统一社会信用代码：</span><span class="text-info"><c:if
 									test="${getList!=null&&getList.size()>0}">${getList[0].USCC}</c:if></span>
 						</p>
 						<p>
-							<span class="muted">职能简介：</span><span class="text-info"><c:if
-									test="${getList!=null&&getList.size()>0}">${getList[0].PESO_INTR}</c:if></span>
+							<span class="muted">职能简介：</span>
+							<span class="text-info">
+							    <c:if test="${getList!=null&&getList.size()>0}">
+							        <a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${getList[0].PESO_INTR}">${getList[0].PESO_INTR_CUT}</a>
+							    </c:if>
+							</span>
 						</p>
 					</div>
 					<div class="form-inline has-feedback">
@@ -171,6 +179,9 @@ body, html, #allmap {
 		 * 控件及数据初始化
 		 */
 		$(function() {
+			
+			$('[data-rel=popover]').popover({html:true});
+			
 			change($("#belong_area").val());
 			initPlases();
 

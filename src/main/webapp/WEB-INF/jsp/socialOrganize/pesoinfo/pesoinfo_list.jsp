@@ -109,18 +109,27 @@
 											<td class='center'>${var.HEAD_TEL}</td>
 											<td class='center'>${var.E_MAIL}</td>
 											<td class='center'>${var.OFFICE_TEL}</td>
-											<td class='center'>${var.OFFICE_ADDR}</td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.OFFICE_ADDR}">${var.OFFICE_ADDR_CUT}</a></td>
 											<td class='center'>${var.FAX}</td>
-											<td class='center'>${var.PESO_INTR}</td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.PESO_INTR}">${var.PESO_INTR_CUT}</a></td>
 											<td class='center'>${var.REGI_CAPI}</td>
 											<!-- <td class='center'>${var.STATE}</td> -->
-											<td class='center'>
+											<td style="width: 60px;" class='center'>
 												<c:forEach items="${stateList}" var="sta">
-													<c:if test="${sta.STATE_ID == var.STATE}">${sta.STATE_NAME}</c:if>
+													<c:if test="${sta.STATE_ID == var.STATE}">
+												        <c:choose>
+												            <c:when test="${var.STATE==1}">
+												                <span class="label label-success arrowed">${sta.STATE_NAME}</span>
+												            </c:when>
+												            <c:otherwise>
+												                <span class="label label-important arrowed-in">${sta.STATE_NAME}</span>
+												            </c:otherwise>
+												        </c:choose>
+													</c:if>
 												</c:forEach>
 										    </td>
 											<!-- <td class='center'>${var.GEOG_COOR}</td> -->
-											<td class='center'>${var.REMARK}</td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.REMARK}">${var.REMARK_CUT}</a></td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -240,6 +249,8 @@
 			$("#Form").submit();
 		}
 		$(function() {
+			
+			$('[data-rel=popover]').popover({html:true});
 		
 			//日期框
 			$('.date-picker').datepicker({

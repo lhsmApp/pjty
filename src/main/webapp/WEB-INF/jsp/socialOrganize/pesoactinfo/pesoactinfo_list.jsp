@@ -89,8 +89,8 @@
 											<td class='center'>${var.PESO_SHOW}</td>
 											<td class='center'>${var.ACT_NAME}</td>
 											<td class='center'>${var.CAPI_SITU}</td>
-											<td class='center'>${var.EFFECT}</td>
-											<td class='center'>${var.REMARK}</td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.EFFECT}">${var.EFFECT_CUT}</a></td>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.REMARK}">${var.REMARK_CUT}</a></td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -210,6 +210,8 @@
 			$("#Form").submit();
 		}
 		$(function() {
+			
+			$('[data-rel=popover]').popover({html:true});
 		
 			//日期框
 			$('.date-picker').datepicker({

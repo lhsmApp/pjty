@@ -138,7 +138,7 @@ body, html, #allmap {
 					<div class="form-inline has-feedback">
 						<select class="chosen-select form-control" name="BELONG_AREA"
 							id="belong_area" data-placeholder="请选择所属区域"
-							style="vertical-align: top; width: 225px;" onchange="change(this.value)">
+							style="vertical-align: top; width: 100%;" onchange="change(this.value)">
 							<option value="">全部</option>
 							<c:forEach items="${areaList}" var="area">
 								<option value="${area.BIANMA }"
@@ -148,7 +148,7 @@ body, html, #allmap {
 					</div>
 					<div class="form-inline has-feedback">
 						<select class="chosen-select form-control" name="ID" id="ID" data-placeholder="请选择协会"
-							style="vertical-align: top; width: 225px;">
+							style="vertical-align: top; width: 100%;">
 							<option value="">全部</option>
 							<c:forEach items="${dicList }" var="each">
                                   <option value="${each.ID }" <c:if test="${each.ID== pd.PESO_NAME}">selected</c:if>>${each.PESO_NAME}</option>

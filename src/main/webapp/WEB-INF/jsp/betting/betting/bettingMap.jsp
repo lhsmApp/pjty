@@ -145,7 +145,7 @@ body, html, #allmap {
 					<div class="form-inline has-feedback">
 						<select class=" form-control" name="BELONG_AREA"
 							id="belong_area" data-placeholder="请选择所属区域"
-							style="vertical-align: top; width: 225px;" onchange="change(this.value)">
+							style="vertical-align: top; width: 100%;" onchange="change(this.value)">
 							<!-- <option value=""></option> -->
 							<option value="">全部</option>
 							<c:forEach items="${areaList}" var="area">
@@ -158,7 +158,7 @@ body, html, #allmap {
 					<!-- chosen-select -->
 						<select class=" form-control" name="ID_CODE"
 							id="id_code" data-placeholder="请选择投注站"
-							style="vertical-align: top; width: 225px;">
+							style="vertical-align: top; width: 100%;">
 							<!-- <option value=""></option> -->
 							<option value="">全部</option>
 							<c:forEach items="${varList}" var="bet">

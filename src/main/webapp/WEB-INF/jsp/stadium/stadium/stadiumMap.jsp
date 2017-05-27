@@ -176,7 +176,7 @@ body, html, #allmap {
 					<div class="form-inline has-feedback">
 						<select class="form-control" name="BELONG_AREA"
 							id="belong_area" data-placeholder="请选择所属区域"
-							style="vertical-align: top; width: 225px;" onchange="change(this.value)">
+							style="vertical-align: top; width: 100%;" onchange="change(this.value)">
 							<option value="">全部</option>
 							<c:forEach items="${areaList}" var="area">
 								<option value="${area.BIANMA }"
@@ -187,7 +187,7 @@ body, html, #allmap {
 					<div class="form-inline has-feedback">
 						<select class="form-control" name="STAD_NAME"
 							id="STAD_NAME" data-placeholder="请选择体育场馆"
-							style="vertical-align: top; width: 225px;">
+							style="vertical-align: top; width: 100%;">
 							<option value="">全部</option>
 							<c:forEach items="${varList}" var="stadium">
 								<option value="${stadium.STAD_NAME}" <c:if test="${pd.STAD_NAME==stadium.STAD_NAME}">selected</c:if>>${stadium.STAD_NAME }</option>

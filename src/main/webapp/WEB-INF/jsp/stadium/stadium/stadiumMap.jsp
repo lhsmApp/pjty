@@ -149,7 +149,7 @@ body, html, #allmap {
 							
 							<span class="text-info">
 							<c:if test="${searchList!=null&&searchList.size()>0}">
-							<a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${searchList[0].STADI_INTR}">${searchList[0].STADI_INTR_CUT}</a>
+							<a style="cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${searchList[0].STADI_INTR}">${searchList[0].STADI_INTR_CUT}</a>
 							</c:if></span>
 						</p>
 						<p>
@@ -157,7 +157,7 @@ body, html, #allmap {
 							
 							<span class="text-info">
 							<c:if test="${searchList!=null&&searchList.size()>0}">
-							<a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${searchList[0].STADI_SPOT}">${searchList[0].STADI_SPOT_CUT}</a>
+							<a style="cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${searchList[0].STADI_SPOT}">${searchList[0].STADI_SPOT_CUT}</a>
 							</c:if></span>
 						</p>
 						<p>

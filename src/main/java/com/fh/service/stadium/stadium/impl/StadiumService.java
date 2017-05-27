@@ -57,6 +57,7 @@ public class StadiumService implements StadiumManager{
 		for (PageData pageData : listPageData) {
 			pageData.put("STADI_INTR_CUT", StringUtil.subString(pageData.getString("STADI_INTR"), Const.CUT_STRING_NUM));
 			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
+			pageData.put("STADI_SPOT_CUT", StringUtil.subString(pageData.getString("STADI_SPOT"), Const.CUT_STRING_NUM));
 		}
 		return listPageData;
 	}
@@ -97,6 +98,7 @@ public class StadiumService implements StadiumManager{
 		for (PageData pageData : listPageData) {
 			pageData.put("STADI_INTR_CUT", StringUtil.subString(pageData.getString("STADI_INTR"), Const.CUT_STRING_NUM));
 			pageData.put("REMARK_CUT", StringUtil.subString(pageData.getString("REMARK"), Const.CUT_STRING_NUM));
+			pageData.put("STADI_SPOT_CUT", StringUtil.subString(pageData.getString("STADI_SPOT"), Const.CUT_STRING_NUM));
 		}
 		return listPageData;		
 	}

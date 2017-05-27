@@ -151,6 +151,14 @@ body, html, #allmap {
 							</c:if></span>
 						</p>
 						<p>
+							<span class="muted">运动项目：</span>
+							
+							<span class="text-info">
+							<c:if test="${searchList!=null&&searchList.size()>0}">
+							<a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${searchList[0].STADI_SPOT}">${searchList[0].STADI_SPOT_CUT}</a>
+							</c:if></span>
+						</p>
+						<p>
 							<span class="muted">
 							
 							    <a href="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" class="bwGal">
@@ -158,6 +166,8 @@ body, html, #allmap {
 							        <img width="200" alt="" src="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" />
 							    </a>
 							</span>
+							<!-- <span class="muted"><img width="200" height="200" alt="" src="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" />
+							</span> -->
 					
 						</p>
 					</div>

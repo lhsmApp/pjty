@@ -71,7 +71,8 @@
 									<th class="center">负责人姓名</th>
 									<th class="center">负责人电话</th>
 									<th class="center">所属区域</th>
-									<th class="center">运营性质</th>
+									<!-- <th class="center">运营性质</th> -->
+									<th class="center">运动项目</th>
 									<th class="center">场馆基本情况</th>
 									<!-- <th class="center">地理坐标</th> -->
 									<th class="center">备注</th>
@@ -95,7 +96,8 @@
 											<td class='center'>${var.HEAD_NAME}</td>
 											<td class='center'>${var.HEAD_TEL}</td>
 											<td class='center'>${var.NAME}</td>
-											<td class='center'>${var.OPER_NATURE}</td>
+										  <%--   <td class='center'>${var.OPER_NATURE}</td> --%>
+											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.STADI_SPOT}">${var.STADI_SPOT_CUT}</a></td>
 											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.STADI_INTR}">${var.STADI_INTR_CUT}</a></td>
 											<td class='center'><a style="color:#000;cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${var.REMARK}">${var.REMARK_CUT}</a></td>
 								

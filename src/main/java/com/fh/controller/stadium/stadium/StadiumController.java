@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.weaver.tools.Trace;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -66,6 +67,7 @@ public class StadiumController extends BaseController {
 			@RequestParam(value = "STADI_INTR", required = true) String STADI_INTR,
 			@RequestParam(value = "GEOG_COOR", required = true) String GEOG_COOR,
 			@RequestParam(value = "REMARK", required = true) String REMARK,
+			@RequestParam(value = "STADI_SPOT", required = true) String STADI_SPOT,
 			@RequestParam MultipartFile[] fileLogos) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"新增Stadium");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
@@ -83,6 +85,7 @@ public class StadiumController extends BaseController {
 		pd.put("STADI_INTR", STADI_INTR);
 		pd.put("GEOG_COOR", GEOG_COOR);
 		pd.put("REMARK", REMARK);
+		pd.put("STADI_SPOT", STADI_SPOT);
 			
 			for (MultipartFile fileLogo : fileLogos) {
 				String path = null;// 文件路径
@@ -168,6 +171,7 @@ public class StadiumController extends BaseController {
 			@RequestParam(value = "STADI_INTR", required = true) String STADI_INTR,
 			@RequestParam(value = "GEOG_COOR", required = true) String GEOG_COOR,
 			@RequestParam(value = "REMARK", required = true) String REMARK,
+			@RequestParam(value = "STADI_SPOT", required = true) String STADI_SPOT,
 			@RequestParam MultipartFile[] fileLogos) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"修改Stadium");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
@@ -184,6 +188,7 @@ public class StadiumController extends BaseController {
 		pd.put("STADI_INTR", STADI_INTR);
 		pd.put("GEOG_COOR", GEOG_COOR);
 		pd.put("REMARK", REMARK);
+		pd.put("STADI_SPOT", STADI_SPOT);
 			
 			for (MultipartFile fileLogo : fileLogos) {
 				String path = null;// 文件路径

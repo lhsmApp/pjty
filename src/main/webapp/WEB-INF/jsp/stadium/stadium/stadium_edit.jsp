@@ -79,8 +79,16 @@
 													</c:forEach>
 											</select></td>
 											<td
-												style="width: 75px; text-align: right; padding-top: 13px;">运营性质:</td>
-											<td><select class="chosen-select form-control"
+												style="width: 75px; text-align: right; padding-top: 13px;">运动项目:</td>
+											<td><input type="text" name="STADI_SPOT" id="STADI_SPOT"
+												value="${pd.STADI_SPOT}" 
+												placeholder="这里输入运动项目" title="运动项目" style="width: 98%;" /></td>
+												
+												
+												<td><input type="hidden" name="OPER_NATURE" id="OPER_NATURE"
+												value="${pd.OPER_NATURE}" maxlength="11"
+												placeholder="这里输入经营性质" title="经营性质" style="width: 98%;" /></td>
+											<%-- <td><select class="chosen-select form-control"
 												name="OPER_NATURE" id="OPER_NATURE"
 												data-placeholder="请选择运营性质" style="vertical-align: top;"
 												title="运营性质" style="width:98%;">
@@ -89,7 +97,7 @@
 														<option value="${nature.nameValue }"
 															<c:if test="${nature.nameValue == pd.OPER_NATURE }">selected</c:if>>${nature.nameValue }</option>
 													</c:forEach>
-											</select></td>
+											</select></td> --%>
 										</tr>
 
 										<tr>
@@ -225,7 +233,7 @@
 				$("#BELONG_AREA").focus();
 				return false;
 			}
-			if ($("#OPER_NATURE").val() == "") {
+			/*  if ($("#OPER_NATURE").val() == "") {
 				$("#OPER_NATURE").tips({
 					side : 3,
 					msg : '请输入运营性质',
@@ -234,7 +242,17 @@
 				});
 				$("#OPER_NATURE").focus();
 				return false;
-			}
+			}  */
+			 if ($("#STADI_SPOT").val() == "") {
+					$("#STADI_SPOT").tips({
+						side : 3,
+						msg : '请输入运动项目',
+						bg : '#AE81FF',
+						time : 2
+					});
+					$("#OPER_NATURE").focus();
+					return false;
+				} 
 			if ($("#STADI_INTR").val() == "") {
 				$("#STADI_INTR").tips({
 					side : 3,

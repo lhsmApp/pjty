@@ -19,6 +19,7 @@
 		GEOG_COOR,
 		REMARK,
 		PHOTO_ADDR,
+		STADI_SPOT,
 		ID
 	</sql>
 
@@ -33,7 +34,8 @@
 		STADI_INTR,
 		GEOG_COOR,
 		REMARK,
-		PHOTO_ADDR
+		PHOTO_ADDR,
+		STADI_SPOT
 	</sql>
 	
 	<!-- 字段2 -->
@@ -48,6 +50,7 @@
 		B.GEOG_COOR,	
 		B.REMARK,
 		B.PHOTO_ADDR,
+		B.STADI_SPOT,
 		B.ID,
 		D.NAME
 	</sql>
@@ -63,7 +66,8 @@
 		#{STADI_INTR},
 		#{GEOG_COOR},
 		#{REMARK},
-		#{PHOTO_ADDR}
+		#{PHOTO_ADDR},
+		#{STADI_SPOT}
 	</sql>
 
 	<!-- 新增 -->
@@ -99,7 +103,8 @@
 		STADI_INTR = #{STADI_INTR},
 		GEOG_COOR = #{GEOG_COOR},
 		REMARK = #{REMARK},
-		PHOTO_ADDR = #{PHOTO_ADDR}
+		PHOTO_ADDR = #{PHOTO_ADDR},
+		STADI_SPOT = #{STADI_SPOT}
 		where
 		ID = #{ID}
 	</update>

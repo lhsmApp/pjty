@@ -11,14 +11,20 @@
 <html lang="en">
 <head>
 <base href="<%=basePath%>">
+<link rel="stylesheet" href="static/ace/css/colorbox.css" />
 <!-- 下拉框 -->
 <link rel="stylesheet" href="static/ace/css/chosen.css" />
 <!-- jsp文件头和头部 -->
 <%@ include file="../../system/index/top.jsp"%>
-<!--查看图片插件 -->
-<link rel="stylesheet" media="screen" type="text/css" href="plugins/zoomimage/css/zoomimage.css" />
-<link rel="stylesheet" media="screen" type="text/css" href="plugins/zoomimage/css/custom.css" />
 
+<!--查看图片插件 -->
+<!-- <link rel="stylesheet" media="screen" type="text/css" href="plugins/zoomimage/css/zoomimage.css" />
+<link rel="stylesheet" media="screen" type="text/css" href="plugins/zoomimage/css/custom.css" />
+<script type="text/javascript" src="plugins/zoomimage/js/jquery.js"></script>
+<script type="text/javascript" src="plugins/zoomimage/js/eye.js"></script>
+<script type="text/javascript" src="plugins/zoomimage/js/utils.js"></script>
+<script type="text/javascript" src="plugins/zoomimage/js/zoomimage.js"></script>
+<script type="text/javascript" src="plugins/zoomimage/js/layout.js"></script> -->
 <!--查看图片插件 -->
 
 <style type="text/css">
@@ -157,7 +163,7 @@ body, html, #allmap {
 						<p>
 							<span class="muted">
 							
-							    <a href="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" class="bwGal">
+							    <a href="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" data-rel="colorbox">
 							
 							        <img width="200" alt="" src="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" />
 							    </a>
@@ -207,17 +213,52 @@ body, html, #allmap {
 	<%@ include file="../../system/index/foot.jsp"%>
 	<!-- ace scripts -->
 	<script src="static/ace/js/ace/ace.js"></script>
+	<script src="static/ace/js/ace/ace.ajax-content.js"></script>
 	<!-- 下拉框 -->
 	<script src="static/ace/js/chosen.jquery.js"></script>
-	<!-- <script type="text/javascript" src="plugins/zoomimage/js/jquery.js"></script> -->
-	<script type="text/javascript" src="plugins/zoomimage/js/eye.js"></script>
-	<script type="text/javascript" src="plugins/zoomimage/js/utils.js"></script>
-	<script type="text/javascript" src="plugins/zoomimage/js/zoomimage.js"></script>
-	<script type="text/javascript" src="plugins/zoomimage/js/layout.js"></script>
+	<script type="text/javascript" src="static/ace/js/jquery.colorbox.js"></script>
 	
 </body>
 <script type="text/javascript">
 		$(top.hangge());
+		var scripts = [null,"static/ace/js/jquery.colorbox.js", null]
+		$('body').ace_ajax('loadScripts', scripts, function() {
+		  //inline scripts related to this page
+			 jQuery(function($) {
+				var $overflow = '';
+				var colorbox_params = {
+					rel: 'colorbox',
+					reposition:true,
+					scalePhotos:true,
+					scrolling:false,
+					previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+					next:'<i class="ace-icon fa fa-arrow-right"></i>',
+					close:'&times;',
+					current:'{current} of {total}',
+					maxWidth:'100%',
+					maxHeight:'100%',
+					onOpen:function(){
+						$overflow = document.body.style.overflow;
+						document.body.style.overflow = 'hidden';
+					},
+					onClosed:function(){
+						document.body.style.overflow = $overflow;
+					},
+					onComplete:function(){
+						$.colorbox.resize();
+					}
+				};
+				
+				$('[data-rel="colorbox"]').colorbox(colorbox_params);
+				$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+				
+				
+				$(document).one('ajaxloadstart.page', function(e) {
+					$('#colorbox, #cboxOverlay').remove();
+			   });
+		
+			 })
+		});
 		/**
 		 * 控件及数据初始化
 		 */
@@ -336,13 +377,6 @@ body, html, #allmap {
 			$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
 		}
 	</script>
-	<style type="text/css">
-	li {list-style-type:none;}
-	</style>
-	<ul class="navigationTabs">
-           <li><a></a></li>
-           <li></li>
-       </ul>
 </html>
 
 

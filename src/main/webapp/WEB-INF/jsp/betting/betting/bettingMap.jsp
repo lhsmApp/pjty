@@ -48,7 +48,7 @@ body, html, #allmap {
 }
 
 .left-nav .bottom {
-	height: 70%;
+	/* height: 70%; */
 }
 
 .left-nav .header {

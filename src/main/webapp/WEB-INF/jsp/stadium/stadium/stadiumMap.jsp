@@ -18,11 +18,7 @@
 <!--查看图片插件 -->
 <link rel="stylesheet" media="screen" type="text/css" href="plugins/zoomimage/css/zoomimage.css" />
 <link rel="stylesheet" media="screen" type="text/css" href="plugins/zoomimage/css/custom.css" />
-<script type="text/javascript" src="plugins/zoomimage/js/jquery.js"></script>
-<script type="text/javascript" src="plugins/zoomimage/js/eye.js"></script>
-<script type="text/javascript" src="plugins/zoomimage/js/utils.js"></script>
-<script type="text/javascript" src="plugins/zoomimage/js/zoomimage.js"></script>
-<script type="text/javascript" src="plugins/zoomimage/js/layout.js"></script>
+
 <!--查看图片插件 -->
 
 <style type="text/css">
@@ -81,7 +77,7 @@ body, html, #allmap {
 }
 
 .left-nav .bottom {
-	padding: 20px 10px 15px 15px;
+	padding: 0px 10px 15px 15px;
 }
 
 .left-nav .has-feedback {
@@ -213,12 +209,15 @@ body, html, #allmap {
 	<script src="static/ace/js/ace/ace.js"></script>
 	<!-- 下拉框 -->
 	<script src="static/ace/js/chosen.jquery.js"></script>
-	<script type="text/javascript" src="static/js/util/Util.js"></script>
+	<!-- <script type="text/javascript" src="plugins/zoomimage/js/jquery.js"></script> -->
+	<script type="text/javascript" src="plugins/zoomimage/js/eye.js"></script>
+	<script type="text/javascript" src="plugins/zoomimage/js/utils.js"></script>
+	<script type="text/javascript" src="plugins/zoomimage/js/zoomimage.js"></script>
+	<script type="text/javascript" src="plugins/zoomimage/js/layout.js"></script>
 	
 </body>
 <script type="text/javascript">
 		$(top.hangge());
-
 		/**
 		 * 控件及数据初始化
 		 */

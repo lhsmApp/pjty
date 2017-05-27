@@ -15,6 +15,15 @@
 <link rel="stylesheet" href="static/ace/css/chosen.css" />
 <!-- jsp文件头和头部 -->
 <%@ include file="../../system/index/top.jsp"%>
+<!--查看图片插件 -->
+<link rel="stylesheet" media="screen" type="text/css" href="plugins/zoomimage/css/zoomimage.css" />
+<link rel="stylesheet" media="screen" type="text/css" href="plugins/zoomimage/css/custom.css" />
+<script type="text/javascript" src="plugins/zoomimage/js/jquery.js"></script>
+<script type="text/javascript" src="plugins/zoomimage/js/eye.js"></script>
+<script type="text/javascript" src="plugins/zoomimage/js/utils.js"></script>
+<script type="text/javascript" src="plugins/zoomimage/js/zoomimage.js"></script>
+<script type="text/javascript" src="plugins/zoomimage/js/layout.js"></script>
+<!--查看图片插件 -->
 
 <style type="text/css">
 body, html, #allmap {
@@ -48,7 +57,7 @@ body, html, #allmap {
 }
 
 .left-nav .bottom {
-	height: 70%;
+	/*height: 70%;*/
 }
 
 .left-nav .header {
@@ -142,7 +151,12 @@ body, html, #allmap {
 							</c:if></span>
 						</p>
 						<p>
-							<span class="muted"><img width="200" height="200" alt="" src="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" />
+							<span class="muted">
+							
+							    <a href="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" class="bwGal">
+							
+							        <img width="200" alt="" src="<%=basePath%>uploadFiles/uploadImgs/${searchList[0].PHOTO_ADDR}" />
+							    </a>
 							</span>
 					
 						</p>
@@ -185,11 +199,14 @@ body, html, #allmap {
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
 	<%@ include file="../../system/index/foot.jsp"%>
+	<!-- ace scripts -->
+	<script src="static/ace/js/ace/ace.js"></script>
 	<!-- 下拉框 -->
 	<script src="static/ace/js/chosen.jquery.js"></script>
 	<script type="text/javascript" src="static/js/util/Util.js"></script>
 	
-	<script type="text/javascript">
+</body>
+<script type="text/javascript">
 		$(top.hangge());
 
 		/**
@@ -310,8 +327,13 @@ body, html, #allmap {
 			$('#id_code_chosen .chosen-drop ul.chosen-results li').remove();
 		}
 	</script>
-</body>
-
+	<style type="text/css">
+	li {list-style-type:none;}
+	</style>
+	<ul class="navigationTabs">
+           <li><a></a></li>
+           <li></li>
+       </ul>
 </html>
 
 

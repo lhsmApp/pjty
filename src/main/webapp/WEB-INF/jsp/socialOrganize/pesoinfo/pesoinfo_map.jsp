@@ -72,7 +72,7 @@ body, html, #allmap {
 }
 
 .left-nav .bottom {
-	padding: 20px 10px 15px 15px;
+	padding: 0px 10px 15px 15px;
 }
 
 .left-nav .has-feedback {

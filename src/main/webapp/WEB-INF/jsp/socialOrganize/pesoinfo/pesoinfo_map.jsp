@@ -118,7 +118,7 @@ body, html, #allmap {
 							<span class="muted">办公地址：</span>
 							<span class="text-info">
 							    <c:if test="${getList!=null&&getList.size()>0}">
-							        <a style="cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${getList[0].OFFICE_ADDR}">${getList[0].OFFICE_ADDR_CUT}</a>
+							        <a style="cursor:pointer;" class="popover-notitle text-info" data-rel="popover" data-placement="bottom" data-content="${getList[0].OFFICE_ADDR}">${getList[0].OFFICE_ADDR_CUT}</a>
 							    </c:if>
 							</span>
 						</p>
@@ -130,7 +130,7 @@ body, html, #allmap {
 							<span class="muted">职能简介：</span>
 							<span class="text-info">
 							    <c:if test="${getList!=null&&getList.size()>0}">
-							        <a style="cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${getList[0].PESO_INTR}">${getList[0].PESO_INTR_CUT}</a>
+							        <a style="cursor:pointer;" class="popover-notitle text-info" data-rel="popover" data-placement="bottom" data-content="${getList[0].PESO_INTR}">${getList[0].PESO_INTR_CUT}</a>
 							    </c:if>
 							</span>
 						</p>

@@ -53,7 +53,7 @@
 										<i class="ace-icon fa fa-bar-chart-o blue"></i>体育场所信息查询 
 								</a></li>
 								<li><a style="cursor:pointer"
-									onclick="infoMapQuery('协会信息查询','betting/mapQuery.do','z120','114')">
+									onclick="infoMapQuery('协会信息查询','pesoinfo/mapQuery.do','z120','114')">
 										<i class="ace-icon fa fa-flag purple"></i>协会信息查询 
 								</a></li>
 							</ul>

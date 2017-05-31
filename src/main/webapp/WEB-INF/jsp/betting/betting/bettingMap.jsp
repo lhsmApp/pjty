@@ -139,7 +139,7 @@ body, html, #allmap {
 						</p>
 						<p>
 							<span class="muted">简介：</span><span class="text-info"><c:if
-									test="${searchList!=null&&searchList.size()>0}"><a style="cursor:pointer;" class="popover-notitle" data-rel="popover" data-placement="bottom" data-content="${searchList[0].BETT_INTR}">${searchList[0].BETT_INTR_CUT}</a></c:if></span>
+									test="${searchList!=null&&searchList.size()>0}"><a style="cursor:pointer;" class="popover-notitle text-info" data-rel="popover" data-placement="bottom" data-content="${searchList[0].BETT_INTR}">${searchList[0].BETT_INTR_CUT}</a></c:if></span>
 						</p>
 					</div>
 					<div class="form-inline has-feedback">

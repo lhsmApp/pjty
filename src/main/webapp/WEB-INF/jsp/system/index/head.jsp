@@ -114,7 +114,10 @@
 									<a onclick="editSys();" style="cursor:pointer;"><i class="ace-icon fa fa-cog"></i>系统设置</a>editSys()在 WebRoot\static\js\myjs\head.js中
 								</li>
 								<li class="divider"></li> -->
-						<li><a href="logout"><i class="ace-icon fa fa-power-off"></i>退出登录</a>
+								<!-- <li>
+									<a onclick="editUserH();" style="cursor:pointer;"><i class="ace-icon fa fa-user"></i>修改资料</a>
+								</li> -->
+						<li><a href="logout"><i class="ace-icon fa fa-user"></i>管理员入口</a>
 						</li>
 					</ul></li>
 

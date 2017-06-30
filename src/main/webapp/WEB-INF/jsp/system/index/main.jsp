@@ -90,7 +90,7 @@
 							<!-- <li>
 								<a href="#">Tables</a>
 							</li> -->
-							<li class="active"><span id="subTitle">工作面板</span></li>
+							<li class="active"><span id="subTitle">主面板</span></li>
 						</ul><!-- /.breadcrumb -->
 					</div>
 	

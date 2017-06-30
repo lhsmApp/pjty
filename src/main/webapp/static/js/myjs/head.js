@@ -221,6 +221,7 @@ function instframe(){
 //信息查询
 function infoMapQuery(title,url,id,parentId){
 	 if(user=="Guest"){
+		 console.log("sdsd");
 		 $("#mainFrame").attr("src",locat+"/"+url);
 		 $("#subTitle").text(title);
 		 $("#title").text(title);

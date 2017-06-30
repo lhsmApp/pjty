@@ -17,8 +17,8 @@
 <base href="<%=basePath%>">
 <!-- jsp文件头和头部 -->
 <%@ include file="../../system/index/top.jsp"%>
-<link rel="stylesheet" href="static/css/style.css" media="screen"
-	type="text/css" />
+<!-- <link rel="stylesheet" href="static/css/style.css" media="screen"
+	type="text/css" /> -->
 
 <script src="static/js/modernizr.js"></script>
 <!-- <link rel="stylesheet" href="static/html_UI/assets/css/jquery-ui.custom.css" />
@@ -41,9 +41,9 @@
 
 		<div class="tab-content">
 			<div id="home3" class="tab-pane in active">
-				<div class="content">
+				<div style="text-align:center;background:white;">
 					<!-- <h1>Responsive Organization Chart (updated)</h1> -->
-					<figure class="org-chart cf">
+					<!-- <figure class="org-chart cf">
 						<div class="board ">
 							<ul class="columnOne">
 								<li><span class="lvl-b"> <strong>局党组书记、局长</strong><br>张密堂<br>办公电话：2937755
@@ -113,7 +113,7 @@
 									<br>办公电话：2839495
 							</span></li>
 						</ul>
-						<!-- <div class="footer">
+						<div class="footer">
 									<ul class="departments departments1">
 										<li class="department">
 							               <span  >
@@ -151,8 +151,10 @@
 							               </span> 
 							            </li>
 									</ul>
-								</div> -->
-					</figure>
+								</div>
+					</figure> -->
+					<img
+						src="<%=basePath%>uploadFiles/uploadImgs/组织机构.png" />
 				</div>
 			</div>
 
